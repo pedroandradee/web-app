@@ -1,0 +1,195 @@
+{
+  "APP": {
+    "TITLE": "Sistema de Monitoramento Tributário de Combustivéis - SMTC"
+  },
+  "AUTH": {
+    "LOGIN": {
+      "HELMET": "[SSM] - Login",
+      "USERNAME": "E-mail",
+      "PASSWORD": "Senha",
+      "ENTER": "Entrar",
+      "FORGOT": "Esqueci minha senha.",
+      "VALIDATORS": {
+        "USERNAME": "Email é obrigatório!",
+        "PASSWORD": "Senha é obrigatória!",
+        "INVALID_EMAIL": "Email com formato inválido!"
+      }
+    },
+    "FORGOT": {
+      "HELMET": "[SSM] - Esqueci minha senha",
+      "TITLE": "Informe seu e-mail",
+      "EMAIL": "E-mail",
+      "RECOVER": "Recuperar",
+      "BACK_LOGIN": "Voltar para o login.",
+      "SUCCESS": {
+        "TITLE": "Enviado com sucesso!",
+        "MESSAGE": "Enviaremos um e-mail com instruções para recuperar sua senha. Se você não receber o email em alguns minutos, por favor, verifique sua caixa de spam ou repita o processo."
+      },
+      "UNDERSTOOD": "Entendido",
+      "VALIDATORS": {
+        "EMAIL": "Informe um endereço de e-mail válido!",
+        "REQUIRED": "E-mail é obrigatório!"
+      }
+    },
+    "CHANGE_PASSWORD": {
+      "HELMET": "[SSM] - Atualização de senha",
+      "LOADING": "Validando, aguarde...",
+      "ERROR_DIALOG": {
+        "TITLE": "Não foi possível recuperar senha!",
+        "MESSAGE": "O Processo de recuperação de senha exige a presença de um token de acesso. Reinicie o processo de recuperação de senha, pois, o token informado encontra-se ausente ou inválido."
+      },
+      "PASSWORD": "Senha",
+      "CONFIRM_PASSWORD": "Confirmação de senha",
+      "PASSWORD_PATTERN": "A senha deve ter no mínimo 4 caracteres 1 maiúscula 1 número e 1 caracter especial (@#$%*!?._-+)",
+      "RESET": "Redefinir",
+      "SNACKBAR": {
+        "TITLE": "Senha atualizada com sucesso!",
+        "MESSAGE": "No próximo login utilize a nova senha."
+      },
+      "VALIDATORS": {
+        "NEW_PASSWORD": {
+          "MIN": "Tamanho mínimo de 4 caracteres!",
+          "MAX": "Tamanho máximo de 30 caracteres!",
+          "INVALID_FORMAT": "Senha com formato inválido!",
+          "REQUIRED": "Senha é obrigatório!",
+          "SAME_OLD_PASSWORD": "A nova senha deve ser diferente da atual!"
+        },
+        "CONFIRM_PASSWORD": {
+          "INCOMPATIBLE": "Senhas incompatíveis!",
+          "PASSWORD_CONFIRM": "Confirmação de senha é obrigatório!"
+        }
+      }
+    }
+  },
+  "APP_BAR": {
+    "PROFILE": "Perfil",
+    "SETTINGS": "Configurações",
+    "EXIT": "Sair"
+  },
+  "BREAD_CRUMB": {
+    "PROFILE": "Meus Dados"
+  },
+  "DRAWER": {
+    "HOME": "Página Inicial"
+  },
+  "DEFAULT": {
+    "LIST_EMPTY": "Nenhum registro encontrado!",
+    "OPTIONS": "Visualizar opções",
+    "YES": "Sim",
+    "NO": "Não",
+    "TODAY": "Hoje",
+    "AND": "e",
+    "VIEW_MORE": "Visualizar mais",
+    "VIEW_DETAILS": "Visualizar detalhes",
+    "ORDINATION_SYMBOL": "ª",
+    "LOADING": "Carregando, aguarde um instante...",
+    "OF": "de",
+    "AVATAR": "Imagem de perfil do usuário",
+    "CHANGE_THEME": "Alterar tema claro/escuro",
+    "PAGINATOR": {
+      "PREV_PAGE": "Página anterior",
+      "NEXT_PAGE": "Próxima página"
+    }
+  },
+  "ERROR": {
+    "TITLE": "Ops... Ocorreu um erro inesperado."
+  },
+  "ESCAPE_PAGE": {
+    "NOT_FOUND": {
+      "TITLE": "Não encontrado!",
+      "DESCRIPTION": "Recurso solicitado encontra-se indisponível ou foi definitivamente removido."
+    },
+    "ACCESS_DENIED": {
+      "TITLE": "Acesso Negado!",
+      "DESCRIPTION": "O usuário possui permissão insuficiente para acessar o recurso solicitado."
+    },
+    "INTERNAL_ERROR": {
+      "TITLE": "Erro Interno!",
+      "DESCRIPTION": "Desculpe, a página que você está procurando está temporariamente indisponível."
+    }
+  },
+  "SNACKBAR": {
+    "CREATE": {
+      "TITLE": "",
+      "MESSAGE": "Dados criados com sucesso!",
+      "MESSAGE_IMG": "Dados e imagem criados com sucesso!"
+    },
+    "UPDATE": {
+      "TITLE": "",
+      "MESSAGE": "Dados atualizados com sucesso!",
+      "MESSAGE_IMG": "Dados e imagem atualizados com sucesso!",
+      "ADDRESS": {
+        "INVALID": "Cep informado não é válido!"
+      }
+    },
+    "REMOVE": {
+      "TITLE": "",
+      "MESSAGE": "Usuário removido com sucesso!",
+      "AVATAR": "Avatar removido com sucesso!"
+    },
+    "HANDLER_ERROR": {
+      "TITLE": {
+        "BAD_REQUEST": "DADOS INCORRETOS",
+        "UNAUTHORIZED": "NÃO AUTENTICADO",
+        "FORBIDDEN": "NÃO AUTORIZADO",
+        "NOT_FOUND": "NÃO ENCONTRADO",
+        "CONFLICT": "DADOS DUPLICADOS",
+        "TOO_MANY_REQUEST": "TENTATIVAS EXCEDIDAS",
+        "INTERNAL_SERVER_ERROR": "ERRO INTERNO DO SERVIDOR",
+        "BAD_GATEWAY": "SERVIÇO INDISPONÍVEL",
+        "OPERATION_FAILED": "FALHA DURANTE A OPERAÇÃO",
+        "NETWORK_ERROR": "FALHA NA CONEXÃO",
+        "INVALID_TOKEN": "TOKEN INVÁLIDO",
+        "PROTECTED_USER": "NÃO PERMITIDO"
+      },
+      "MESSAGE": {
+        "BAD_REQUEST": "Verifique os dados informados e tente novamente.",
+        "UNAUTHORIZED": "Usuário não está devidamente autenticado.",
+        "FORBIDDEN": "Usuário não possui permissão para acessar o recurso solicitado.",
+        "NOT_FOUND": "Recurso solicitado encontra-se indisponível ou inexistente.",
+        "CONFLICT": "Ocorreram conflitos com dados que não pode ser duplicados.",
+        "TOO_MANY_REQUEST": "Aguarde o tempo de 1 hora e tente novamente.",
+        "INTERNAL_SERVER_ERROR": "Ocorreu um erro durante a operação, tente novamente.",
+        "BAD_GATEWAY": "Serviço solicitado encontra-se indisponível, contate o administrador.",
+        "OPERATION_FAILED": "Um erro não esperado ocorreu durante a operação, tente novamente.",
+        "NETWORK_ERROR": "Verifique sua conexão e tente novamente.",
+        "INVALID_TOKEN": "Reinicie o processo de recuperar senha.",
+        "PROTECTED_USER": "O usuário é protegido e não pode ser removido da plataforma.",
+        "USER_TYPE_NOT_ALLOWED": "Apenas pacientes, cuidadores e profissionais de saúde podem entrar na plataforma."
+      }
+    },
+    "PATIENT": {
+      "SUCCESSFULLY_ASSOCIATED": "Paciente associado com sucesso!",
+      "SUCCESSFULLY_DISASSOCIATED": "Paciente dissociado com sucesso!"
+    },
+    "FITBIT": {
+      "PROVIDE": {
+        "ERROR": {
+          "TITLE": "Acesso Negado!",
+          "MESSAGE": "Permissão de acesso aos dados negado."
+        },
+        "SUCCESS": {
+          "TITLE": "Acesso Fornecido!",
+          "MESSAGE": "Em instantes seus dados estaram sincronizados."
+        }
+      },
+      "REVOKE": {
+        "TITLE": "",
+        "MESSAGE": "Acesso revogado com sucesso."
+      }
+    }
+  },
+  "BUTTON": {
+    "YES": "Sim",
+    "ADD": "Adicionar",
+    "SAVE": "Salvar",
+    "CANCEL": "Cancelar",
+    "EDIT": "Editar",
+    "UPDATE": "Atualizar",
+    "REMOVE": "Remover",
+    "HOME_PAGE": "Página Inicial"
+  },
+  "NAVIGATION_TAB": {
+    "HOME": "[SMTC] - Página Inicial"
+  }
+}

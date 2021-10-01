@@ -55,7 +55,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env.dev
+.env
 
 # next.js build output
 .next
@@ -75,9 +75,3 @@ certs
 
 # ESLint Cache
 .eslintcache
-
-# Build files
-build
-/server-http.js
-/.env
-/public/firebase.config.js

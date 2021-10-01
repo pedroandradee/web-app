@@ -1,0 +1,49 @@
+{
+  "extends": [
+    "tslint:latest",
+    "tslint-react",
+    "tslint-eslint-rules",
+    "tslint-config-prettier"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "src/app.tsx",
+      "src/service.worker.registration.ts"
+    ]
+  },
+  "rules": {
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "jsx-wrap-multiline": false,
+    "semicolon": [
+      true,
+      "never"
+    ],
+    "max-line-length": [
+      true,
+      140
+    ],
+    "jsx-key": true,
+    "jsx-no-string-ref": true,
+    "jsx-self-close": true,
+    "jsx-no-lambda": false,
+    "no-submodule-imports": false,
+    "variable-name": {
+      "options": [
+        "ban-keywords",
+        "check-format",
+        "require-const-for-all-caps",
+        "allow-leading-underscore",
+        "allow-snake-case",
+        "allow-pascal-case"
+      ]
+    },
+    "no-console": [
+      true,
+      "log",
+      "info",
+      "warn"
+    ],
+    "interface-name": false
+  }
+}
