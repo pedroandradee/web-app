@@ -1,0 +1,44 @@
+{
+  "opts": {
+    "template": "node_modules/better-docs",
+    "encoding": "utf8",
+    "destination": "docs/",
+    "readme": "README.md",
+    "recurse": true
+  },
+  "tags": {
+    "allowUnknownTags": [
+      "optional",
+      "category",
+      "component"
+    ]
+  },
+  "plugins": [
+    "node_modules/better-docs/typescript",
+    "node_modules/better-docs/category",
+    "node_modules/better-docs/component"
+  ],
+  "source": {
+    "include": [
+      "./src"
+    ],
+    "includePattern": ".[ts|tsx]$",
+    "excludePattern": "(node_modules/|docs)"
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "search": true,
+    "better-docs": {
+      "name": "S.M.T.C - Documentation",
+      "title": "S.M.T.C - Documentation",
+      "hideGenerator": false,
+      "navLinks": [
+        {
+          "label": "Github",
+          "href": "https://github.com/smtc-sefaz-pb/web-app"
+        }
+      ]
+    }
+  }
+}

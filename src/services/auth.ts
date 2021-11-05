@@ -21,7 +21,7 @@ export class AuthService {
     /**
      * Performs the request of access tokens informing the user's credentials
      * @param body, User's credentials
-     * @typeParam {@link IAuth}
+     * {@link IAuth}
      */
     public async login(body: IAuth): Promise<AccessToken> {
         const response = await axiosInstance.post(`${this.apiVersion}/auth`, body)
@@ -35,7 +35,7 @@ export class AuthService {
     /**
      * Run the password recovery request by entering the user's email
      * @param data, User's data
-     * @typeParam {@link IForgot}
+     * {@link IForgot}
      */
     public forgot(data: IForgot): Promise<any> {
         return axiosInstance.post(`${this.apiVersion}/auth/forgot`, data)
@@ -44,7 +44,7 @@ export class AuthService {
     /**
      * Perform the password reset request stating the user's email and new password
      * @param data, User's data
-     * @typeParam {@link IChangePassword}
+     * {@link IChangePassword}
      */
     public changePassword(data: IChangePassword): Promise<any> {
         let options
@@ -96,7 +96,6 @@ export class AuthService {
     /**
      * Decodes jwt token returning the payload
      * @param token, Toke jwt to be decoded
-     * @typeParam string
      * @returns AccessToken or Error with name JsonWebTokenError
      * See more: {@link https://www.npmjs.com/package/jsonwebtoken#errors--codes}
      */
@@ -108,7 +107,6 @@ export class AuthService {
     /**
      * Validation of the signature and issuer of the token
      * @param token, Token jwt to be validated
-     * @typeParam string
      * @returns AccessToken or Error with name JsonWebTokenError
      * See more: {@link https://www.npmjs.com/package/jsonwebtoken#errors--codes}
      */

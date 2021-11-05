@@ -12,7 +12,6 @@ export default class Crypto {
     /**
      * Encrypt a base64 string
      * @param str, String to be encrypted
-     * @typeParam string
      */
     public static encryptKey(str: string): string {
         return btoa(str)
@@ -21,7 +20,6 @@ export default class Crypto {
     /**
      * Encrypts a string using the Crypto.AES algorithm
      * @param str, String to be encrypted
-     * @typeParam string
      */
     public static encryptItem(str: string): string {
         const encrypted = CryptoJS.AES.encrypt(str, LS_SECRET_KEY)
@@ -31,7 +29,6 @@ export default class Crypto {
     /**
      * Decrypts a string using the Crypto.AES algorithm
      * @param encrypted, String to be decrypted
-     * @typeParam string
      */
     public static decryptItem(encrypted: string): string {
         const decrypted = CryptoJS.AES.decrypt(encrypted, LS_SECRET_KEY)

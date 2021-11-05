@@ -81,3 +81,5 @@ build
 /server-http.js
 /.env
 /public/firebase.config.js
+/docs/
+/.cache/

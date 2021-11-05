@@ -5,7 +5,6 @@ class LocalSession {
     /**
      * Retrieves an item saved in sessionStorage
      * @param key, Item identifier
-     * @typeParam string
      */
     public getItem(key: string): string {
         const encryptedKey = Crypto.encryptKey(key)
@@ -16,9 +15,7 @@ class LocalSession {
     /**
      * Method to persist item in sessionStorage
      * @param key, Item identifier
-     * @typeParam string
      * @param item, Item to be persisted
-     * @typeParam string
      */
     public setItem(key: string, item: string): void {
         const encryptedKey = Crypto.encryptKey(key)

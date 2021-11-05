@@ -15,7 +15,7 @@ class RefreshTokenInterceptor {
     /**
      * Check if the error should be intercepted by the RefreshTokenInterceptor
      * @param error
-     * @typeParam {@link AxiosError}
+     * {@link AxiosError}
      */
     private static shouldIntercept(error: AxiosError | any): boolean {
         const { response: { data, status }, config: { url } } = error
@@ -44,7 +44,7 @@ class RefreshTokenInterceptor {
     /**
      * Refresh Token Interceptor
      * @param error
-     * @typeParam {@link AxiosError}
+     * {@link AxiosError}
      */
     public interceptor(error: AxiosError | any): Promise<any> {
 
@@ -92,9 +92,9 @@ class RefreshTokenInterceptor {
     /**
      * Queue to store failed requests and after renewing run them again
      * @param error
-     * @typeParam {@link AxiosError}
+     * {@link AxiosError}
      * @param data
-     * @typeParam {@link RefreshData}
+     * {@link RefreshData}
      */
     private processQueue(error: AxiosError | any, data: RefreshData | null = null) {
         this._failedQueue.forEach((promise) => {

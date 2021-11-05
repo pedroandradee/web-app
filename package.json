@@ -69,7 +69,10 @@
     "@types/react-redux": "^7.1.5",
     "@types/react-router-dom": "^5.1.0",
     "@types/yup": "^0.28.3",
+    "better-docs": "^2.3.2",
     "chokidar-cli": "^2.1.0",
+    "jsdoc": "^3.6.7",
+    "parcel-bundler": "^1.12.5",
     "prettier": "2.0.5",
     "tslint": "^5.20.0",
     "tslint-config-prettier": "^1.18.0",
@@ -87,7 +90,8 @@
     "eject": "react-scripts eject",
     "tslint:dev": "tslint -c tslint.json -p . -q",
     "tslint:prod": "tslint -c tslint-prod.json -p .",
-    "tslint:watch": "chokidar --initial \"src/**/*.tsx\" \"src/**/*.ts\" -c \"npm run tslint:dev -- --force\""
+    "tslint:watch": "chokidar --initial \"src/**/*.tsx\" \"src/**/*.ts\" -c \"npm run tslint:dev -- --force\"",
+    "docs": "jsdoc -c jsdoc.json --private"
   },
   "eslintConfig": {
     "extends": [

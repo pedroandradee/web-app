@@ -8,7 +8,6 @@ class LocalStorage {
     /**
      * Retrieves an item saved in localStorage
      * @param key, Item identifier
-     * @typeParam string
      */
     public getItem(key: string): string {
         const encryptedKey = Crypto.encryptKey(key)
@@ -19,9 +18,7 @@ class LocalStorage {
     /**
      * Method to persist item in localStorage
      * @param key, Item identifier
-     * @typeParam string
      * @param item, Item to be persisted
-     * @typeParam string
      */
     public setItem(key: string, item: string): void {
         const encryptedKey = Crypto.encryptKey(key)
@@ -32,7 +29,6 @@ class LocalStorage {
     /**
      * Method to remove item in localStorage
      * @param key, Item identifier
-     * @typeParam string
      */
     public removeItem(key: string): void {
         const encryptedKey = Crypto.encryptKey(key)
