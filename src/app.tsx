@@ -18,7 +18,7 @@ class App extends Component {
         const style3 = `${commonStyle};font-size: 10px;color: #555;`
         const style4 = `${commonStyle};font-size: 8px;color: #555;`
 
-        console.log(`%cSMTC%cby NUTES/UEPB\n%c${DESCRIPTION}\n%cv${VERSION}`, style1, style2, style3, style4)
+        console.log(`%cSR%cby NUTES/UEPB\n%c${DESCRIPTION}\n%cv${VERSION}`, style1, style2, style3, style4)
 
         return <Provider store={store}>
             <ThemeProviderComponent/>

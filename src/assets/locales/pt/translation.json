@@ -1,10 +1,10 @@
 {
   "APP": {
-    "TITLE": "Sistema de Monitoramento Tributário de Combustivéis - SMTC"
+    "TITLE": "Sistema de Ressarcimento - SR"
   },
   "AUTH": {
     "LOGIN": {
-      "HELMET": "[SSM] - Login",
+      "HELMET": "[SR] - Login",
       "USERNAME": "E-mail",
       "PASSWORD": "Senha",
       "ENTER": "Entrar",
@@ -16,7 +16,7 @@
       }
     },
     "FORGOT": {
-      "HELMET": "[SSM] - Esqueci minha senha",
+      "HELMET": "[SR] - Esqueci minha senha",
       "TITLE": "Informe seu e-mail",
       "EMAIL": "E-mail",
       "RECOVER": "Recuperar",
@@ -32,7 +32,7 @@
       }
     },
     "CHANGE_PASSWORD": {
-      "HELMET": "[SSM] - Atualização de senha",
+      "HELMET": "[SR] - Atualização de senha",
       "LOADING": "Validando, aguarde...",
       "ERROR_DIALOG": {
         "TITLE": "Não foi possível recuperar senha!",
@@ -157,26 +157,6 @@
         "PROTECTED_USER": "O usuário é protegido e não pode ser removido da plataforma.",
         "USER_TYPE_NOT_ALLOWED": "Apenas pacientes, cuidadores e profissionais de saúde podem entrar na plataforma."
       }
-    },
-    "PATIENT": {
-      "SUCCESSFULLY_ASSOCIATED": "Paciente associado com sucesso!",
-      "SUCCESSFULLY_DISASSOCIATED": "Paciente dissociado com sucesso!"
-    },
-    "FITBIT": {
-      "PROVIDE": {
-        "ERROR": {
-          "TITLE": "Acesso Negado!",
-          "MESSAGE": "Permissão de acesso aos dados negado."
-        },
-        "SUCCESS": {
-          "TITLE": "Acesso Fornecido!",
-          "MESSAGE": "Em instantes seus dados estaram sincronizados."
-        }
-      },
-      "REVOKE": {
-        "TITLE": "",
-        "MESSAGE": "Acesso revogado com sucesso."
-      }
     }
   },
   "BUTTON": {
@@ -190,6 +170,6 @@
     "HOME_PAGE": "Página Inicial"
   },
   "NAVIGATION_TAB": {
-    "HOME": "[SMTC] - Página Inicial"
+    "HOME": "[SR] - Página Inicial"
   }
 }

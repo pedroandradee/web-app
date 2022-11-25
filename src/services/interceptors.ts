@@ -3,7 +3,7 @@ import { AxiosError, AxiosRequestConfig } from 'axios'
 import store, { history } from '../store'
 import localStorageService from './local.storage'
 import authService from './auth'
-import { SnackBarMessageType } from '../components/snackbar'
+import { SnackBarMessageType } from '../components/layout/snackbar'
 import { open } from '../store/ducks/snack.bar/actions'
 import { RESET_TOKEN_ERROR } from '../store/application/models/auth/access.token'
 

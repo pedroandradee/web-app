@@ -1,6 +1,6 @@
 {
   "name": "web-app",
-  "description": "Sistema de Monitoramento Tributário de Combustíveis",
+  "description": "Sistema de Ressarcimento",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

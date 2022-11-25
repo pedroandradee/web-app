@@ -4,7 +4,7 @@ import { History } from 'history'
 
 import { Box, Typography, withStyles, WithStyles } from '@material-ui/core'
 
-import settingsLogo from '../../assets/imgs/escape.pages/settings.svg'
+import settingsLogo from '../../../assets/imgs/escape.pages/settings.svg'
 import { Style } from './not.found'
 
 const EscapePage = lazy(() => import('./escape.component'))

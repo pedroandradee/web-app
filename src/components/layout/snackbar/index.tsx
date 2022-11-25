@@ -6,8 +6,8 @@ import { bindActionCreators, Dispatch } from 'redux'
 import { Box, createStyles, Theme, Typography, withStyles, WithStyles } from '@material-ui/core'
 import { connect } from 'react-redux'
 
-import * as SnackBarActions from '../../store/ducks/snack.bar/actions'
-import { IApplicationState } from '../../store'
+import * as SnackBarActions from '../../../store/ducks/snack.bar/actions'
+import { IApplicationState } from '../../../store'
 import { WithTranslation, withTranslation } from 'react-i18next'
 
 function Alert(props: AlertProps) {

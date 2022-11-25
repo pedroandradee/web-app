@@ -3,9 +3,9 @@ import { Helmet } from 'react-helmet'
 import { Box, Container, createStyles, SvgIcon, Theme, withStyles, WithStyles } from '@material-ui/core'
 import clsx from 'clsx'
 import { withTranslation, WithTranslation } from 'react-i18next'
-import { ThemeMode } from '../../material.theme'
-import { ReactComponent as LogoLight } from '../../assets/imgs/logo_light.svg'
-import { ReactComponent as LogoDark } from '../../assets/imgs/logo_dark.svg'
+import { ThemeMode } from '../../../material.theme'
+import { ReactComponent as LogoLight } from '../../../assets/imgs/logo_light.svg'
+import { ReactComponent as LogoDark } from '../../../assets/imgs/logo_dark.svg'
 
 const Footer = lazy(() => import('../footer'))
 

@@ -2,7 +2,7 @@
  * Action types
  */
 
-import { SnackBarMessageType } from '../../../components/snackbar'
+import { SnackBarMessageType } from '../../../components/layout/snackbar'
 import { createTypes } from 'reduxsauce'
 
 export const SnackBarTypes = createTypes(`

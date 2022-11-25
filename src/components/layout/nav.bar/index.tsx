@@ -20,12 +20,13 @@ import {
 } from '@material-ui/core'
 import { Home } from '@material-ui/icons'
 import clsx from 'clsx'
-import { ThemeMode } from '../../material.theme'
-import { ReactComponent as LogoLight } from '../../assets/imgs/logo_light.svg'
-import { ReactComponent as LogoDark } from '../../assets/imgs/logo_dark.svg'
+import { ThemeMode } from '../../../material.theme'
+import { ReactComponent as LogoLight } from '../../../assets/imgs/logo_light.svg'
+import { ReactComponent as LogoDark } from '../../../assets/imgs/logo_dark.svg'
 
 interface Props extends WithStyles<typeof NavBarStyle, true> {
     readonly mobileOpen: boolean
+    readonly desktopOpen: boolean
     readonly themeMode: ThemeMode
 
     drawerToggle(): void
@@ -35,14 +36,15 @@ interface Props extends WithStyles<typeof NavBarStyle, true> {
 
 type IProps = Props & WithTranslation & RouteComponentProps
 
-const drawerWidth = 250
+export const DRAWER_WIDTH = 250
 
 const NavBarStyle = (theme: Theme) => createStyles({
     drawer: {
-        [theme.breakpoints.up('md')]: {
-            width: drawerWidth,
+        [theme.breakpoints.up('lg')]: {
+            width: DRAWER_WIDTH,
             flexShrink: 0
         },
+        transition: '.2s all',
         border: 'none'
     },
     drawerLogo: {
@@ -50,7 +52,8 @@ const NavBarStyle = (theme: Theme) => createStyles({
         padding: theme.spacing(2)
     },
     drawerPaper: {
-        width: drawerWidth,
+        width: DRAWER_WIDTH,
+        transition: '.3s all',
         boxShadow: '2px 50px 10px 0px rgba(0,0,0,0.3)',
         border: 'none'
     },
@@ -92,26 +95,12 @@ const NavBarStyle = (theme: Theme) => createStyles({
     }
 })
 
-interface State {
-    readonly usersCollapse: boolean
-    readonly collapsePatients: boolean
-}
-
-class NavBar extends Component<IProps, State> {
+class NavBar extends Component<IProps> {
 
     constructor(props: IProps) {
         super(props)
         /* Bind Context */
-        this.collapseUsers = this.collapseUsers.bind(this)
-        this.collapsePatients = this.collapsePatients.bind(this)
-        this.verifyUsersActiveRoute = this.verifyUsersActiveRoute.bind(this)
-        this.verifyPatientActiveRoute = this.verifyPatientActiveRoute.bind(this)
         this.colorStyle = this.colorStyle.bind(this)
-        /* Initial Style */
-        this.state = {
-            usersCollapse: false,
-            collapsePatients: false
-        }
     }
 
     public render() {
@@ -120,6 +109,7 @@ class NavBar extends Component<IProps, State> {
             classes,
             drawerToggle,
             mobileOpen,
+            desktopOpen,
             theme,
             closeMobileView,
             themeMode
@@ -162,8 +152,8 @@ class NavBar extends Component<IProps, State> {
             </React.Fragment>
         )
 
-        return <nav className={classes.drawer}>
-            <Hidden mdUp={true} implementation="css">
+        return <nav className={desktopOpen ? classes.drawer : ''}>
+            <Hidden lgUp={true} implementation="css">
                 <Drawer
                     id="drawer_mobile"
                     container={container}
@@ -171,53 +161,22 @@ class NavBar extends Component<IProps, State> {
                     anchor={theme?.direction === 'rtl' ? 'right' : 'left'}
                     open={mobileOpen}
                     onClose={drawerToggle}
-                    classes={{
-                        paper: classes.drawerPaper
-                    }}
-                    ModalProps={{
-                        keepMounted: true
-                    }}>
+                    classes={{ paper: classes.drawerPaper }}
+                    ModalProps={{ keepMounted: true }}>
                     {drawer}
                 </Drawer>
             </Hidden>
 
-            <Hidden smDown={true} implementation="css">
+            <Hidden mdDown={true} implementation="css">
                 <Drawer
                     id="drawer_desktop"
-                    open={true}
-                    variant="permanent"
-                    classes={{
-                        paper: classes.drawerPaper
-                    }}>
+                    open={desktopOpen}
+                    variant="persistent"
+                    classes={{ paper: classes.drawerPaper }}>
                     {drawer}
                 </Drawer>
             </Hidden>
         </nav>
-    }
-
-    private collapseUsers(): void {
-        const { usersCollapse } = this.state
-        this.setState({ usersCollapse: !usersCollapse })
-    }
-
-    private collapsePatients(): void {
-        const { collapsePatients } = this.state
-        this.setState({ collapsePatients: !collapsePatients })
-    }
-
-    private verifyUsersActiveRoute(): boolean {
-        const { location: { pathname } } = this.props
-        const adminRegex = new RegExp('^/app/admins')
-        const hpRegex = new RegExp('^/app/healthprofessionals')
-        const caregiverRegex = new RegExp('^/app/caregivers')
-        return adminRegex.test(pathname) ||
-            hpRegex.test(pathname) ||
-            caregiverRegex.test(pathname)
-    }
-
-    private verifyPatientActiveRoute(): boolean {
-        const { location: { pathname } } = this.props
-        return new RegExp('^/app/patients').test(pathname)
     }
 
     private colorStyle(): { colorStyle: string, borderColorStyle: string } {

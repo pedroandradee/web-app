@@ -3,7 +3,7 @@ import { WithTranslation, withTranslation } from 'react-i18next'
 import { History } from 'history'
 import { WithStyles } from '@material-ui/core'
 
-import protectionLogo from '../../assets/imgs/escape.pages/protection.svg'
+import protectionLogo from '../../../assets/imgs/escape.pages/protection.svg'
 
 const EscapePage = lazy(() => import('./escape.component'))
 

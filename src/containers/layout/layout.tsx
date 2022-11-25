@@ -1,7 +1,16 @@
 import React, { Component, lazy, Suspense } from 'react'
 
 import { WithTranslation, withTranslation } from 'react-i18next'
-import { Container, createStyles, Theme, WithStyles, withStyles } from '@material-ui/core'
+import { 
+    Container, 
+    createStyles, 
+    isWidthDown, 
+    Theme, 
+    WithStyles, 
+    withStyles, 
+    WithWidth, 
+    withWidth 
+} from '@material-ui/core'
 import { RouteComponentProps, Switch, withRouter } from 'react-router-dom'
 import { bindActionCreators, Dispatch } from 'redux'
 import { connect } from 'react-redux'
@@ -12,40 +21,15 @@ import { UnregisterCallback } from 'history'
 import { RouteWithSubRoutes } from '../../routes'
 import localStorageService from '../../services/local.storage'
 import { ThemeMode } from '../../material.theme'
+import { DRAWER_WIDTH } from '../../components/layout/nav.bar'
 
-const Footer = lazy(() => import('../../components/footer'))
-const BreadcrumbsComponent = lazy(() => import('../../components/breadcrumb'))
-const Loading = lazy(() => import('../../components/loading'))
-const AppBar = lazy(() => import('../../components/app.bar'))
-const NavBar = lazy(() => import('../../components/nav.bar'))
+const Footer = lazy(() => import('../../components/layout/footer'))
+const BreadcrumbsComponent = lazy(() => import('../../components/layout/breadcrumb'))
+const Loading = lazy(() => import('../../components/layout/loading'))
+const AppBar = lazy(() => import('../../components/layout/app.bar'))
+const NavBar = lazy(() => import('../../components/layout/nav.bar'))
 
-interface Props extends WithStyles<typeof LayoutStyle, true> {
-    readonly routes: []
-    readonly avatar: string
-    readonly username: string
-    readonly appBarBgColor: string
-    readonly appBarIconColor: string
-    readonly themeMode: ThemeMode
-
-    readonly breadCrumbLast: string
-
-
-    changeAppBarColors(backgroundColor: string, iconColor: string): void
-
-    changeUsername(username: string): void
-
-    changeAvatar(avatar): void
-}
-
-type IProps = Props & WithTranslation & RouteComponentProps
-
-interface IState {
-    readonly mobileOpen: boolean
-}
-
-const contentMaxWidth = 1116
-
-const LayoutStyle = (theme: Theme) => createStyles({
+const Style = (theme: Theme) => createStyles({
     root: {
         display: 'flex',
         minHeight: '100%',
@@ -53,7 +37,7 @@ const LayoutStyle = (theme: Theme) => createStyles({
     },
     content: {
         position: 'relative',
-        maxWidth: contentMaxWidth,
+        maxWidth: 'none',
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
@@ -77,6 +61,35 @@ const LayoutStyle = (theme: Theme) => createStyles({
     }
 })
 
+interface Props extends WithStyles<typeof Style, true> {
+    readonly routes: []
+    readonly avatar: string
+    readonly username: string
+    readonly appBarBgColor: string
+    readonly appBarIconColor: string
+    readonly themeMode: ThemeMode
+
+    readonly breadCrumbLast: string
+
+
+    changeAppBarColors(backgroundColor: string, iconColor: string): void
+
+    changeUsername(username: string): void
+
+    changeAvatar(avatar): void
+}
+
+type IProps = Props & WithTranslation & RouteComponentProps & WithWidth
+
+interface IState {
+    readonly mobileOpen: boolean
+    readonly desktopOpen: boolean
+}
+
+export const MIN_DESKTOP_WIDTH = 1280
+
+
+
 class Layout extends Component<IProps, IState> {
 
     private removeListener: UnregisterCallback
@@ -87,9 +100,12 @@ class Layout extends Component<IProps, IState> {
         this.handleDrawerToggle = this.handleDrawerToggle.bind(this)
         this.verifyActiveRoute = this.verifyActiveRoute.bind(this)
         this.verifyDataInLocalStorage = this.verifyDataInLocalStorage.bind(this)
+        this.handleDrawerToggleDesktop = this.handleDrawerToggleDesktop.bind(this)
+
         /* Initial State  */
         this.state = {
-            mobileOpen: false
+            mobileOpen: false,
+            desktopOpen: window.screen.width > MIN_DESKTOP_WIDTH
         }
         this.removeListener = this.registerListener()
     }
@@ -121,28 +137,37 @@ class Layout extends Component<IProps, IState> {
             username,
             avatar,
             breadCrumbLast,
-            themeMode
+            themeMode,
+            width
         } = this.props
         const {
-            mobileOpen
+            mobileOpen,
+            desktopOpen
         } = this.state
+
+        const downMd = isWidthDown('md', width)
 
         return <div className={classes.root}>
 
             <AppBar
                 theme={theme}
                 avatar={avatar}
+                desktopOpen={desktopOpen}
                 username={username}
+                drawerToggleDesktop={this.handleDrawerToggleDesktop}
                 drawerToggle={this.handleDrawerToggle}/>
 
             <NavBar
                 mobileOpen={mobileOpen}
+                desktopOpen={desktopOpen}
                 drawerToggle={this.handleDrawerToggle}
                 theme={theme}
                 themeMode={themeMode}
                 closeMobileView={() => this.setState({ mobileOpen: false })}/>
 
-            <Container className={classes.content}>
+            <Container 
+                className={classes.content}
+                style={{ width: desktopOpen && !downMd ? `calc(100% - ${DRAWER_WIDTH}px)` : '100%'}}>
 
                 <Container className={classes.contentInside}>
 
@@ -199,6 +224,15 @@ class Layout extends Component<IProps, IState> {
         }
     }
 
+    /**
+     * Function that changes drawer visibility on desktop screens
+     * @returns {*}
+     */
+     private handleDrawerToggleDesktop(): void {
+        const { desktopOpen } = this.state
+        this.setState({ desktopOpen: !desktopOpen })
+    }
+
     private verifyDataInLocalStorage(): void {
         const {
             username,
@@ -230,6 +264,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(LayoutActi
 
 const LayoutWithTranslation = withTranslation()(Layout)
 
-const LayoutWithStyle = withStyles<any>(LayoutStyle, { withTheme: true })(LayoutWithTranslation)
+const LayoutWithWidth = withWidth()(LayoutWithTranslation)
+
+const LayoutWithStyle = withStyles<any>(Style, { withTheme: true })(LayoutWithWidth)
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LayoutWithStyle))

@@ -1,6 +1,6 @@
 import { Reducer } from 'redux'
 import { ISnackBarState, SnackBarTypes } from './types'
-import { SnackBarMessageType } from '../../../components/snackbar'
+import { SnackBarMessageType } from '../../../components/layout/snackbar'
 
 
 const INITIAL_STATE: ISnackBarState = {

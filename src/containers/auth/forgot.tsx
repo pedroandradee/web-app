@@ -26,7 +26,7 @@ import { Field, Form, Formik } from 'formik'
 import { ForgotValidator } from '../../store/application/validators/auth/forgot'
 import CONFIG_THEME, { ThemeMode } from '../../material.theme'
 import { STYLE as SHARED_STYLE } from './shared.style'
-import AuthWrapper from '../../components/escape.pages/wrapper'
+import AuthWrapper from '../../components/layout/escape.pages/wrapper'
 
 const FormErrorMessage = lazy(() => import('../../components/form.error'))
 

@@ -6,7 +6,7 @@ import { ConnectedRouter } from 'connected-react-router'
 import authService from '../services/auth'
 import { ScopesUtil } from '../store/application/utils/scopes.util'
 import { AUTH_ROUTES } from './auth'
-import Loading from '../components/loading'
+import Loading from '../components/layout/loading'
 import { VerifyUserType } from '../components/verify.user.type'
 
 export enum LogicalStrategy {
@@ -102,9 +102,9 @@ export const RouteWithSubRoutes = (route: IPrivateRouteProps) => {
 
 const Layout = lazy(() => import('../containers/layout/layout'))
 const HomePage = lazy(() => import('../containers/home/home'))
-const NotFound = lazy(() => import('../components/escape.pages/not.found'))
-const AccessDenied = lazy(() => import('../components/escape.pages/access.denied'))
-const InternalError = lazy(() => import('../components/escape.pages/internal.error'))
+const NotFound = lazy(() => import('../components/layout/escape.pages/not.found'))
+const AccessDenied = lazy(() => import('../components/layout/escape.pages/access.denied'))
+const InternalError = lazy(() => import('../components/layout/escape.pages/internal.error'))
 
 const ROUTES: IPrivateRouteProps | any = [
     { path: '/', exact: true, redirect: '/app/home' },

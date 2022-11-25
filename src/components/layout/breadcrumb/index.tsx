@@ -2,20 +2,21 @@ import React, { Component } from 'react'
 
 import { Link as RouterLink, RouteComponentProps, withRouter } from 'react-router-dom'
 import { withTranslation, WithTranslation } from 'react-i18next'
-import { Breadcrumbs, createStyles, Hidden, Theme, Typography, WithStyles, withStyles } from '@material-ui/core'
+import { Box, Breadcrumbs, createStyles, Hidden, Theme, Typography, WithStyles, withStyles } from '@material-ui/core'
 
-export const BreadCrumbStyle = (theme: Theme) => createStyles({
+export const Style = (theme: Theme) => createStyles({
     breadcrumbs: {
-        padding: '45px 0px 20px 0px'
+        padding: '35px 0px 10px 0px'
     },
     link: {
         fontWeight: 'bold',
         textDecoration: 'none',
-        color: theme.palette.primary.main
+        color: theme.palette.primary.main,
+        fontSize: 12
     }
 })
 
-interface IProps extends WithStyles<typeof BreadCrumbStyle> {
+interface IProps extends WithStyles<typeof Style> {
     readonly breadCrumbLast: string
 }
 
@@ -78,25 +79,33 @@ class BreadCrumbComponent extends Component<IJoinProps> {
 
         return <React.Fragment>
             <Hidden xsDown={true}>
-                <Breadcrumbs id="breadcrumb" maxItems={4} aria-label="breadcrumb" className={classes.breadcrumbs}>
-                    {
-                        content
-                    }
-                </Breadcrumbs>
+                <Box mt={1}>
+                    <Breadcrumbs 
+                        id="breadcrumb" 
+                        maxItems={4} 
+                        aria-label="breadcrumb" 
+                        className={classes.breadcrumbs}>
+                        {
+                            content
+                        }
+                    </Breadcrumbs>
+                </Box>
             </Hidden>
 
             <Hidden smUp={true}>
-                <Breadcrumbs
-                    id="breadcrumb"
-                    maxItems={3}
-                    itemsAfterCollapse={2}
-                    itemsBeforeCollapse={0}
-                    aria-label="breadcrumb"
-                    className={classes.breadcrumbs}>
-                    {
-                        content
-                    }
-                </Breadcrumbs>
+                <Box mt={2}>
+                    <Breadcrumbs
+                        id="breadcrumb"
+                        maxItems={3}
+                        itemsAfterCollapse={2}
+                        itemsBeforeCollapse={0}
+                        aria-label="breadcrumb"
+                        className={classes.breadcrumbs}>
+                        {
+                            content
+                        }
+                    </Breadcrumbs>
+                </Box>
             </Hidden>
         </React.Fragment>
     }
@@ -104,6 +113,6 @@ class BreadCrumbComponent extends Component<IJoinProps> {
 
 const BreadCrumbWithTranslation = withTranslation()(BreadCrumbComponent)
 
-const BreadCrumbWithStyle = withStyles<any>(BreadCrumbStyle)(BreadCrumbWithTranslation)
+const BreadCrumbWithStyle = withStyles<any>(Style)(BreadCrumbWithTranslation)
 
 export default withRouter(BreadCrumbWithStyle)

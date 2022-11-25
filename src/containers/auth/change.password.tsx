@@ -39,13 +39,13 @@ import { STYLE as SHARED_STYLE } from './shared.style'
 import CONFIG_THEME, { ThemeMode } from '../../material.theme'
 import sessionStorageService from '../../services/session.storage'
 import { IChangePassword } from '../../store/ducks/auth/types'
-import AuthWrapper from '../../components/escape.pages/wrapper'
+import AuthWrapper from '../../components/layout/escape.pages/wrapper'
 import { ReactComponent as LogoLight } from '../../assets/imgs/logo_light.svg'
 import { ReactComponent as LogoDark } from '../../assets/imgs/logo_dark.svg'
 
 const ThemeButton = lazy(() => import('../layout/theme.button'))
 const FormErrorMessage = lazy(() => import('../../components/form.error'))
-const Loading = lazy(() => import('../../components/loading'))
+const Loading = lazy(() => import('../../components/layout/loading'))
 
 const SPLASH_CONTENT_HEIGHT = 180
 

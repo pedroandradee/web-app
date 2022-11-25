@@ -10,9 +10,9 @@ import CONFIG_THEME, { ThemeMode } from './material.theme'
 import { LanguageOptions, MAP_ENUM_TO_LANGUAGE, MAP_ENUM_TO_LOCALE, MAP_STRING_TO_ENUM_LANGUAGE } from './i18n'
 import * as LayoutActions from './store/ducks/layout/actions'
 import { CssBaseline } from '@material-ui/core'
-import SnackbarComponent from './components/snackbar'
+import SnackbarComponent from './components/layout/snackbar'
 import Routes from './routes'
-import ErrorBoundary from './components/error.boundary'
+import ErrorBoundary from './components/layout/error.boundary'
 import localStorageService from './services/local.storage'
 
 interface Props {

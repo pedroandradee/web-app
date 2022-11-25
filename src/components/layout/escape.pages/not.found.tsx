@@ -2,7 +2,7 @@ import React, { Component, lazy } from 'react'
 import { WithTranslation, withTranslation } from 'react-i18next'
 import { Box, createStyles, Typography, withStyles, WithStyles } from '@material-ui/core'
 
-import warningLogo from '../../assets/imgs/escape.pages/warning.svg'
+import warningLogo from '../../../assets/imgs/escape.pages/warning.svg'
 
 const EscapePage = lazy(() => import('./escape.component'))
 

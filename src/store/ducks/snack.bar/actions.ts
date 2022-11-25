@@ -1,6 +1,6 @@
 import { action } from 'typesafe-actions'
 import { SnackBarTypes } from './types'
-import { SnackBarMessageType } from '../../../components/snackbar'
+import { SnackBarMessageType } from '../../../components/layout/snackbar'
 
 export const open = (type: SnackBarMessageType, title: string, message: string) => action(
     SnackBarTypes.OPEN,

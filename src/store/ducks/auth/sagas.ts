@@ -13,7 +13,7 @@ import {
 import { IActionType } from '../root.types'
 import { AuthTypes, IAuth, IChangePassword, IForgot } from './types'
 import { open } from '../snack.bar/actions'
-import { SnackBarMessageType } from '../../../components/snackbar'
+import { SnackBarMessageType } from '../../../components/layout/snackbar'
 
 export function* authenticate(action: IActionType<AxiosResponse<IAuth>>) {
     try {

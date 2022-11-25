@@ -27,9 +27,10 @@ import {
     Menu as MenuIcon
 } from '@material-ui/icons'
 
-import authService from '../../services/auth'
+import authService from '../../../services/auth'
+import { MIN_DESKTOP_WIDTH } from '../../../containers/layout/layout'
 
-const ThemeButton = lazy(() => import('../../containers/layout/theme.button'))
+const ThemeButton = lazy(() => import('../../../containers/layout/theme.button'))
 
 const DRAWER_WIDTH = 250
 
@@ -39,10 +40,14 @@ export const UserButton = withStyles(() => ({
 
 const Style = (theme: Theme) => createStyles({
     appBar: {
-        [theme.breakpoints.up('md')]: {
+        transition: '.2s all'
+    },
+    drawerOpen: {
+        [theme.breakpoints.up('lg')]: {
             width: `calc(100% - ${DRAWER_WIDTH}px)`,
             marginLeft: DRAWER_WIDTH
-        }
+        },
+        transition: '.3s all'
     },
     menuButton: {
         color: 'inherit'
@@ -55,10 +60,13 @@ const Style = (theme: Theme) => createStyles({
 interface Props extends WithStyles<typeof Style, true> {
     readonly avatar: string
     readonly username: string
+    readonly desktopOpen: boolean
 }
 
 interface IDispatchProps extends RouteComponentProps<any> {
     drawerToggle(): void
+
+    drawerToggleDesktop(): void
 }
 
 interface IState {
@@ -87,34 +95,74 @@ class AppBarComponent extends Component<IProps, IState> {
         const {
             classes,
             drawerToggle,
+            drawerToggleDesktop,
             t,
             username,
             avatar,
+            desktopOpen,
             theme
         } = this.props
+
         const {
             anchorEl,
             goingOut
         } = this.state
 
         return <AppBar
-            className={classes.appBar}
-            style={{ background: theme.palette.primary.main, color: theme.palette.background.paper }}>
+            className={
+                desktopOpen ?
+                classes.drawerOpen :
+                classes.appBar
+            }
+            style={{ 
+                background: theme.palette.primary.main, 
+                color: theme.palette.background.paper 
+            }}>
 
             <Toolbar variant="dense">
+                {
+                    window.screen.width <= MIN_DESKTOP_WIDTH ?
+                    <Hidden mdUp={true} implementation="css">
+                        <IconButton
+                            id="btn_toggle_drawer"
+                            color="inherit"
+                            aria-label="open drawer"
+                            edge="start"
+                            onClick={drawerToggle}
+                            className={classes.menuButton}
+                            style={{ color: 'white' }}>
+                            <MenuIcon/>
+                        </IconButton>
+                    </Hidden> :
+                    <Box>
+                        <Hidden lgUp={true} implementation="css">
+                                <IconButton
+                                    id="btn_toggle_drawer"
+                                    color="inherit"
+                                    aria-label="open drawer"
+                                    edge="start"
+                                    onClick={drawerToggle}
+                                    className={classes.menuButton}
+                                    style={{ color: 'white' }}>
+                                    <MenuIcon/>
+                                </IconButton>
+                            </Hidden>
 
-                <Hidden mdUp={true} implementation="css">
-                    <IconButton
-                        id="btn_toggle_drawer"
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="start"
-                        onClick={drawerToggle}
-                        className={classes.menuButton}
-                        style={{ color: 'white' }}>
-                        <MenuIcon/>
-                    </IconButton>
-                </Hidden>
+                            <Hidden mdDown={true} implementation="css">
+                                <IconButton
+                                    id="btn_toggle_drawer"
+                                    color="inherit"
+                                    aria-label="open drawer"
+                                    edge="start"
+                                    onClick={drawerToggleDesktop}
+                                    className={classes.menuButton}
+                                    style={{ color: 'white' }}>
+                                    <MenuIcon/>
+                                </IconButton>
+                            </Hidden>
+                    </Box>
+                }
+
 
                 <Typography variant="h6" className={classes.title} noWrap={true}/>
 
@@ -187,10 +235,9 @@ class AppBarComponent extends Component<IProps, IState> {
     }
 
     private async logout(): Promise<void> {
-        const { history } = this.props
         this.setState({ goingOut: true })
         authService.logout()
-        history.push('/')
+        window.location.reload()
     }
 
     private profile(): void {
