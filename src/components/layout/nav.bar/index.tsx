@@ -18,7 +18,10 @@ import {
     WithStyles,
     withStyles
 } from '@material-ui/core'
-import { Home } from '@material-ui/icons'
+import { 
+    Home,
+    InsertDriveFile
+} from '@material-ui/icons'
 import clsx from 'clsx'
 import { ThemeMode } from '../../../material.theme'
 import { ReactComponent as LogoLight } from '../../../assets/imgs/logo_light.svg'
@@ -146,6 +149,16 @@ class NavBar extends Component<IProps> {
                         activeClassName={clsx(classes.navActive, colorStyle)}>
                         <ListItemIcon><Home/></ListItemIcon>
                         <ListItemText primary={t('DRAWER.HOME')}/>
+                    </ListItem>
+                    <ListItem
+                        id="list_item_home"
+                        button={true}
+                        component={NavLink}
+                        to="/app/archives"
+                        onClick={closeMobileView}
+                        activeClassName={clsx(classes.navActive, colorStyle)}>
+                        <ListItemIcon><InsertDriveFile/></ListItemIcon>
+                        <ListItemText primary={t('DRAWER.ARCHIVE')}/>
                     </ListItem>
 
                 </List>

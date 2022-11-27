@@ -8,6 +8,7 @@ import { ScopesUtil } from '../store/application/utils/scopes.util'
 import { AUTH_ROUTES } from './auth'
 import Loading from '../components/layout/loading'
 import { VerifyUserType } from '../components/verify.user.type'
+import { ARCHIVES_ROUTES } from './archives'
 
 export enum LogicalStrategy {
     OR = 'or',
@@ -121,6 +122,7 @@ const ROUTES: IPrivateRouteProps | any = [
                 exact: true,
                 component: HomePage
             },
+            ...ARCHIVES_ROUTES,
             { path: '*', redirect: '/not_found' }
         ]
     },

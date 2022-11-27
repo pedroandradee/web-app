@@ -10,6 +10,7 @@
     "allowUnknownTags": [
       "optional",
       "category",
+      "subcategory",
       "component"
     ]
   },
@@ -23,16 +24,17 @@
       "./src"
     ],
     "includePattern": ".[ts|tsx]$",
-    "excludePattern": "(node_modules/|docs)"
+    "excludePattern": "(node_modules/|docs|.scss$)"
   },
   "templates": {
     "cleverLinks": false,
     "monospaceLinks": false,
     "search": true,
     "better-docs": {
-      "name": "S.M.T.C - Documentation",
-      "title": "S.M.T.C - Documentation",
+      "name": "S.R - Documentation",
+      "title": "S.R - Documentation",
       "hideGenerator": false,
+      "css": "doc.style.override.css",
       "navLinks": [
         {
           "label": "Github",

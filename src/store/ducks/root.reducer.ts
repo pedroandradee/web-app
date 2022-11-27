@@ -6,12 +6,14 @@ import { History } from 'history'
 import auth from './auth/reducer'
 import layout from './layout/reducer'
 import snackBar from './snack.bar/reducer'
+import archive from './archive/reducer'
 
 const createRootReducer = (history: History) => combineReducers({
+    router: connectRouter(history),
     auth,
     layout,
-    router: connectRouter(history),
-    snackBar
+    snackBar,
+    archive
 })
 
 export default createRootReducer

@@ -33,7 +33,8 @@ class BreadCrumbComponent extends Component<IJoinProps> {
         // }
         return {
             '/app': 'DRAWER.HOME',
-            '/app/myprofile': 'BREAD_CRUMB.PROFILE'
+            '/app/myprofile': 'BREAD_CRUMB.PROFILE',
+            '/app/archives': 'BREAD_CRUMB.ARCHIVE.TITLE'
         }
     }
 
@@ -62,7 +63,7 @@ class BreadCrumbComponent extends Component<IJoinProps> {
                     const last = index === pathnames.length - 1
                     const to = `/${pathnames.slice(0, index + 1).join('/')}`
                     return last ? (
-                        <Typography color="textPrimary" key={to} noWrap={true}>
+                        <Typography color="textPrimary" key={to} noWrap={true} style={{ fontSize: 12 }}>
                             {t(BreadCrumbComponent.getBreadCrumbName(resourceId)[to]) || breadCrumbLast}
                         </Typography>
                     ) : (

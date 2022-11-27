@@ -67,10 +67,14 @@
     "EXIT": "Sair"
   },
   "BREAD_CRUMB": {
-    "PROFILE": "Meus Dados"
+    "PROFILE": "Meus Dados",
+    "ARCHIVE": {
+      "TITLE": "Arquivos"
+    }
   },
   "DRAWER": {
-    "HOME": "Página Inicial"
+    "HOME": "Página Inicial",
+    "ARCHIVE": "Arquivos"
   },
   "DEFAULT": {
     "LIST_EMPTY": "Nenhum registro encontrado!",
@@ -160,16 +164,70 @@
     }
   },
   "BUTTON": {
-    "YES": "Sim",
-    "ADD": "Adicionar",
-    "SAVE": "Salvar",
-    "CANCEL": "Cancelar",
+    "YES": {
+      "TITLE": "SIM",
+      "TOOLTIP": "Clique aqui para confirmar"
+    },
+    "ADD": {
+      "TITLE": "Adicionar",
+      "TOOLTIP": "Clique para adicionar"
+    },
+    "EXPORT": {
+      "TITLE": "Exportar modelo",
+      "TOOLTIP": "Clique para exportar o modelo excel"
+    },
+    "IMPORT": {
+      "TITLE": "Importar modelo",
+      "TOOLTIP": "Clique para importar o arquivo excel"
+    },
+    "SAVE": {
+      "TITLE": "Salvar",
+      "TOOLTIP": "Clique para salvar"
+    },
+    "CANCEL": {
+      "TITLE": "Cancelar",
+      "TOOLTIP": "Clique aqui para cancelar"
+    },
     "EDIT": "Editar",
-    "UPDATE": "Atualizar",
-    "REMOVE": "Remover",
+    "UPDATE": {
+      "TITLE": "Atualizar",
+      "TOOLTIP": "Clique para atualizar"
+    },
+    "DELETE": {
+      "TITLE": "Excluir",
+      "TOOLTIP": "Clique para excluir"
+    },
+    "REMOVE": {
+      "TITLE": "Remover",
+      "SELECT_ALL": "Selecionar todos",
+      "REMOVE_SELECTED": {
+        "TITLE": "Remover selecionados",
+        "TOOLTIP": "Clique para remover os selecionados"
+      }
+    },
     "HOME_PAGE": "Página Inicial"
   },
   "NAVIGATION_TAB": {
     "HOME": "[SR] - Página Inicial"
+  },
+  "TABLE": {
+    "HOLD": "Aguarde...",
+    "LOADING": "Por favor, aguarde enquanto os dados são carregados...",
+    "EMPTY": "Desculpe, nenhum arquivo foi encontrado.",
+    "DEFAULT_EMPTY": "Desculpe, nenhuma informação encontrada."
+  },
+  "ARCHIVES": {
+    "TITLE": "Arquivos",
+    "TABLE_HEAD": {
+      "FILE_NAME": "Nome do arquivo",
+      "ACTIONS": "Ações"
+    }
+  },
+  "FILTERS": {
+    "TITLE": "Filtros",
+    "SEARCH_FOR": "Pesquisar por:",
+    "SEARCH": "Buscar por:",
+    "CLEAR_SEARCH": "Limpar pesquisa",
+    "FILE_NAME": "Nome do arquivo"
   }
 }

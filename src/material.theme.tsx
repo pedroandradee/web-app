@@ -1,3 +1,5 @@
+import { Theme } from "@material-ui/core"
+
 export enum ThemeMode {
     LIGHT = 'light',
     DARK = 'dark'
@@ -17,7 +19,9 @@ const DEFAULT_THEME: any = {
         error: { main: '#A94442' },
         warning: { main: '#FF7043' },
         info: { main: '#165C73' },
-        success: { main: '#50BB98' }
+        success: { main: '#50BB98' },
+
+        backgroundTableHeader: { main: '#FAFAFA' },
     },
     typography: {
         fontFamily: 'Roboto'
@@ -28,6 +32,8 @@ const DARK_THEME: any = {
     ...DEFAULT_THEME,
     palette: {
         ...DEFAULT_THEME.palette,
+
+        backgroundTableHeader: { main: '#303030' },
 
         type: 'dark',
 
@@ -85,6 +91,23 @@ export const ANIMATION = {
     },
     fadeInContent: {
         animation: `$fadeInContent 1.7s`
+    }
+}
+
+export const COL_WIDTH = 44
+
+export const TABLES = (theme: Theme) => {
+    return {
+        tableHeader: {
+            backgroundColor: theme.palette.backgroundTableHeader.main,
+            minWidth: COL_WIDTH * 3,
+            border: '1px solid #e6e6e6'
+        },
+        tableCell: {
+            backgroundColor: theme.palette.background.paper,
+            border: '1px solid #e6e6e6',
+            padding: theme.spacing(0.5)
+        }
     }
 }
 
