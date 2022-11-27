@@ -1,10 +1,8 @@
-import React, { Component, lazy } from 'react'
+import React, { Component } from 'react'
 import { 
     Box,
     Button,
-    Checkbox,
     createStyles, 
-    FormControlLabel, 
     Paper, 
     Table, 
     TableBody, 
@@ -26,9 +24,6 @@ import Cell from '../table.utils/cell'
 import TableLoading from '../table.utils/loading'
 import TableEmpty from '../table.utils/table.empty'
 import { ReactComponent as DocNotFound } from '../../assets/imgs/icons/custom/doc-not-found.svg'
-
-const Search = lazy(() => import('../filters/search'))
-
 
 const Style = (theme: Theme) => createStyles({
     ...ANIMATION,
@@ -70,28 +65,24 @@ class ArchiveTableComponent extends Component<IJoinProps> {
             classes,
             archives,
             loading,
-            paginator,
-            changePaginator,
-            changeSearchPaginator
         } = this.props
 
         return <Paper className={classes.paper}>
-            <Box display="flex">
+            {/*<Box display="flex">
                 <Box flexGrow={1} p={.5}>
                     <Search 
                         paginator={paginator}
                         changePaginator={changePaginator}
                         changeSearchPaginator={changeSearchPaginator}/>
                 </Box>
-            </Box>
+            </Box>*/}
 
             <Box pt={2}>
                 <Box
                     display="flex"
-                    justifyContent="space-between"
                     alignItems="center"
                     p={0.5}>
-                    <Box p={0.5}>
+                    {/*<Box p={0.5}>
                         <FormControlLabel
                             control={
                                 <Checkbox
@@ -118,7 +109,7 @@ class ArchiveTableComponent extends Component<IJoinProps> {
                             </span>
                         </Tooltip>
 
-                    </Box>
+                    </Box>*/}
 
                     <Box 
                         display="flex"
@@ -137,13 +128,19 @@ class ArchiveTableComponent extends Component<IJoinProps> {
                         </Tooltip>
 
                         <Tooltip title={`${t('BUTTON.IMPORT.TOOLTIP')}`}>
-                           <span>
+                            <span>
                                 <Button
                                     size="small"
                                     color="primary"
                                     variant="contained"
-                                    onClick={() => console.log("inserting")}>
+                                    component="label">
                                     {t('BUTTON.IMPORT.TITLE')}
+                                    <input
+                                        id="file-import"
+                                        name="file-import"
+                                        type="file"
+                                        hidden={true}
+                                        onChange={this.readFile}/>
                                 </Button>
                             </span>
                         </Tooltip>
@@ -226,26 +223,29 @@ class ArchiveTableComponent extends Component<IJoinProps> {
     }
 
     private readFile(e: any): void {
-        console.log(typeof e)
-        /*const promise = new Promise((res, rej) => {
-            const file = new FileReader();
-            file.readAsArrayBuffer(e)
-
-            file.onload = (item) => {
-                const bufferArray = item.target.results
+        const allowedTypes: string[] = [
+            'application/vnd.ms-excel', 
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        ]
+        const file = e.target.files[0]
+        if (file) {
+            if (file && allowedTypes.includes(file.type)) {
+                const fileReader = new FileReader()
+                fileReader.readAsArrayBuffer(file)
+                fileReader.onload = (item: any) => {
+                    const aux = item.target.result
+                    // read the buffer
+                    const wb = XLSX.read(aux, { type: 'buffer' })
+                    // file name
+                    const wsn = wb.SheetNames[0]
+                    // getting the file data
+                    const ws = wb.Sheets[wsn]
+                    // converting data to json
+                    const json = XLSX.utils.sheet_to_json(ws)
+                    console.log(json)
+                }
             }
-        })
-        if (e.target.files) {
-            const reader = new FileReader()
-            reader.onload = (e) => {
-                const data = e.target.result
-                const wb = XLSX.read(data, { type: 'array' })
-                const sn = wb.SheetNames[0]
-                const ws = wb.Sheets[sn]
-                const json = XLSX.utils.sheet_to_json(ws)
-                console.log(json)
-            }
-        }*/
+        }
     }
 }
 
