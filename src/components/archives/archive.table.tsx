@@ -24,6 +24,7 @@ import Cell from '../table.utils/cell'
 import TableLoading from '../table.utils/loading'
 import TableEmpty from '../table.utils/table.empty'
 import { ReactComponent as DocNotFound } from '../../assets/imgs/icons/custom/doc-not-found.svg'
+import ArchiveLine from './line'
 
 const Style = (theme: Theme) => createStyles({
     ...ANIMATION,
@@ -67,49 +68,15 @@ class ArchiveTableComponent extends Component<IJoinProps> {
             loading,
         } = this.props
 
+        const stickyTop: number = 60
+
         return <Paper className={classes.paper}>
-            {/*<Box display="flex">
-                <Box flexGrow={1} p={.5}>
-                    <Search 
-                        paginator={paginator}
-                        changePaginator={changePaginator}
-                        changeSearchPaginator={changeSearchPaginator}/>
-                </Box>
-            </Box>*/}
 
             <Box pt={2}>
                 <Box
                     display="flex"
                     alignItems="center"
                     p={0.5}>
-                    {/*<Box p={0.5}>
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    id="checkbox_select_all"
-                                    checked={
-                                        false
-                                    }
-                                    disabled={archives.length === 0}
-                                    color="primary"
-                                    onChange={(e: any) => {
-                                        console.log("changing")
-                                    }}/>
-                            }
-                            label={`${t('BUTTON.REMOVE.SELECT_ALL')}`}/>
-                        <Tooltip title={`${t('BUTTON.REMOVE.REMOVE_SELECTED.TOOLTIP')}`}>
-                            <span>
-                                <Button
-                                    size="small"
-                                    color="primary"
-                                    disabled={false}
-                                    onClick={() => console.log("removing")}>
-                                    {t('BUTTON.REMOVE.REMOVE_SELECTED.TITLE')}
-                                </Button>
-                            </span>
-                        </Tooltip>
-
-                    </Box>*/}
 
                     <Box 
                         display="flex"
@@ -148,23 +115,156 @@ class ArchiveTableComponent extends Component<IJoinProps> {
 
                 </Box>
 
-                <TableContainer>
+                <TableContainer style={{ maxHeight: 'calc(100vh - 130px)' }}>
                     <Table size="small" stickyHeader={true} aria-label="sticky table">
                         <TableHead>
                             <TableRow>
-                                <Cell className={classes.tableHeader} width="100px">
-                                    <Typography align="center">
-                                        #
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    rowSpan={2}>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.PRODUCT_COD')}</b>
+                                    </Typography>
+                                </Cell>
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    rowSpan={2}>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.NCM')}</b>
+                                    </Typography>
+                                </Cell>
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    rowSpan={2}>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.DESCRIPTION')}</b>
+                                    </Typography>
+                                </Cell>
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    rowSpan={2}>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.TOTAL_COMPENSATE')}</b>
+                                    </Typography>
+                                </Cell>
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    rowSpan={2}>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.TOTAL_COMPENSATE_CALCULATED')}</b>
+                                    </Typography>
+                                </Cell>
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    rowSpan={2}>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.AMOUNT_INPUT')}</b>
+                                    </Typography>
+                                </Cell>
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    rowSpan={2}>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.AMOUNT_OUTPUT')}</b>
+                                    </Typography>
+                                </Cell>
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    colSpan={3}>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.TITLE')}</b>
+                                    </Typography>
+                                </Cell>
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    colSpan={3}>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.DECLARED_VALUES_SALES.TITLE')}</b>
+                                    </Typography>
+                                </Cell>
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    colSpan={3}>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.CALCULATED_VALUES.TITLE')}</b>
                                     </Typography>
                                 </Cell>
                                 <Cell className={classes.tableHeader}>
-                                    <Typography align="center">
-                                        <b>{t('ARCHIVES.TABLE_HEAD.FILE_NAME')}</b>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.AUDITORS_ANALISIS')}</b>
                                     </Typography>
                                 </Cell>
-                                <Cell className={classes.tableHeader} width="140px">
-                                    <Typography align="center">
-                                        <b>{t('ARCHIVES.TABLE_HEAD.ACTIONS')}</b>
+                            </TableRow>
+
+                            <TableRow>
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.UNITARY_VALUE_PRESUMED_MINIMUM')}</b>
+                                    </Typography>
+                                </Cell>
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.UNITARY_VALUE_PRESUMED_MEDIUM')}</b>
+                                    </Typography>
+                                </Cell>
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.UNITARY_VALUE_PRESUMED_MAXIMUM')}</b>
+                                    </Typography>
+                                </Cell>
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.UNITARY_VALUE_PRESUMED_MINIMUM')}</b>
+                                    </Typography>
+                                </Cell>
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.UNITARY_VALUE_PRESUMED_MEDIUM')}</b>
+                                    </Typography>
+                                </Cell>
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.UNITARY_VALUE_PRESUMED_MAXIMUM')}</b>
+                                    </Typography>
+                                </Cell>
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.UNITARY_VALUE_PRESUMED_MINIMUM')}</b>
+                                    </Typography>
+                                </Cell>
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.UNITARY_VALUE_PRESUMED_MEDIUM')}</b>
+                                    </Typography>
+                                </Cell>
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
+                                    <Typography>
+                                        <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.UNITARY_VALUE_PRESUMED_MAXIMUM')}</b>
+                                    </Typography>
+                                </Cell>
+                                <Cell 
+                                    className={classes.tableHeader}
+                                    style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
+                                    <Typography>
+                                        <b>Analisis</b>
                                     </Typography>
                                 </Cell>
                             </TableRow>
@@ -172,7 +272,7 @@ class ArchiveTableComponent extends Component<IJoinProps> {
 
                         <TableBody>
                             {
-                                !loading && archives
+                                /*!loading && archives
                                     ?.map((item: Archive, index: number) => {
                                         return <TableRow
                                             key={index}
@@ -183,7 +283,12 @@ class ArchiveTableComponent extends Component<IJoinProps> {
                                             <Cell className={classes.tableCell}>{item.id}</Cell>
                                             <Cell className={classes.tableCell}>test</Cell>
                                         </TableRow>
-                                    })
+                                    })*/
+                                Array.from({ length: 10 }).map((item: any, index: number) => {
+                                    return <ArchiveLine
+                                        key={`archive_line_${index}`}
+                                        index={index}/>
+                                })
                             }
                         </TableBody>
                     </Table>
@@ -197,7 +302,7 @@ class ArchiveTableComponent extends Component<IJoinProps> {
                             message={t('TABLE.LOADING')}/>
                     )
                 }
-                {
+                {/*
                     (!loading && !archives.length) && (
                         <TableEmpty
                             message={t('TABLE.EMPTY')}
@@ -205,20 +310,20 @@ class ArchiveTableComponent extends Component<IJoinProps> {
                             svgSize="100px"
                             viewBox="0 0 460 430"/>
                     )
-                }
+                */}
             </Box>
         </Paper>
     }
 
     private exportFile(): void {
         // head columns(make the adjustments after check the model table)
-        const headers: any[] = [['col1', 'col2']]
+        const headers: any[] = [new Archive().exportHeaders()]
         // work sheet
         const ws = XLSX.utils.aoa_to_sheet(headers)
         // work book
         const wb = XLSX.utils.book_new()
-        XLSX.utils.book_append_sheet(wb, ws)
-        XLSX.writeFile(wb, `Modelo_de_dados.xlsx`, { type: 'array', bookType: 'xlsx' })
+        XLSX.utils.book_append_sheet(wb, ws, "Sheet1")
+        XLSX.writeFile(wb, `Modelo_de_dados.xlsx`, { bookType: "xlsx", type: "buffer" })
         setTimeout(() => console.log("asd"), 1000)
     }
 
@@ -228,6 +333,7 @@ class ArchiveTableComponent extends Component<IJoinProps> {
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         ]
         const file = e.target.files[0]
+        console.log(file.type)
         if (file) {
             if (file && allowedTypes.includes(file.type)) {
                 const fileReader = new FileReader()
@@ -240,9 +346,14 @@ class ArchiveTableComponent extends Component<IJoinProps> {
                     const wsn = wb.SheetNames[0]
                     // getting the file data
                     const ws = wb.Sheets[wsn]
+                    console.log(ws)
                     // converting data to json
-                    const json = XLSX.utils.sheet_to_json(ws)
-                    console.log(json)
+                    const json: any[] = XLSX.utils.sheet_to_json(ws, { header: 1 }) || []
+                    if (json.length === 0) {
+                        console.log("empty")
+                    } else {
+                        console.log(json)
+                    }
                 }
             }
         }

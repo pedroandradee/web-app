@@ -219,8 +219,32 @@
   "ARCHIVES": {
     "TITLE": "Arquivos",
     "TABLE_HEAD": {
-      "FILE_NAME": "Nome do arquivo",
-      "ACTIONS": "Ações"
+      "PRODUCT_COD": "Código do produto",
+      "NCM": "NCM",
+      "DESCRIPTION": "Descrição",
+      "TOTAL_COMPENSATE": "Total ressarcir",
+      "TOTAL_COMPENSATE_CALCULATED": "Total ressarcir calculado",
+      "AMOUNT_INPUT": "Quantidade entrada",
+      "AMOUNT_OUTPUT": "Quantidade saída",
+      "INPUT_DECLARED_VALUES": {
+        "TITLE": "Valores declarados entrada",
+        "UNITARY_VALUE_PRESUMED_MINIMUM": "Vl. unit. venda presumida min.",
+        "UNITARY_VALUE_PRESUMED_MEDIUM": "Vl. unit. venda presumida méd.",
+        "UNITARY_VALUE_PRESUMED_MAXIMUM": "Vl. unit. venda presumida máx."
+      },
+      "DECLARED_VALUES_SALES": {
+        "TITLE": "Valores declarados venda",
+        "UNITARY_VALUE_PRESUMED_MINIMUM": "Vl. unit. venda presumida min.",
+        "UNITARY_VALUE_PRESUMED_MEDIUM": "Vl. unit. venda presumida méd.",
+        "UNITARY_VALUE_PRESUMED_MAXIMUM": "Vl. unit. venda presumida máx."
+      },
+      "CALCULATED_VALUES": {
+        "TITLE": "Valores calculados",
+        "UNITARY_VALUE_PRESUMED_MINIMUM": "Vl. unit. venda presumida min.",
+        "UNITARY_VALUE_PRESUMED_MEDIUM": "Vl. unit. venda presumida méd.",
+        "UNITARY_VALUE_PRESUMED_MAXIMUM": "Vl. unit. venda presumida máx."
+      },
+      "AUDITORS_ANALISIS": "Análise do auditor"
     }
   },
   "FILTERS": {

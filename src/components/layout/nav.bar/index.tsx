@@ -15,6 +15,7 @@ import {
     SvgIcon,
     Theme,
     Tooltip,
+    Typography,
     WithStyles,
     withStyles
 } from '@material-ui/core'
@@ -128,11 +129,15 @@ class NavBar extends Component<IProps> {
                     <Grid container={true} justifyContent="center">
                         <Tooltip title={`${t('DRAWER.HOME')}`} arrow={true}>
                             <Box className={classes.drawerLogo}>
-                                <Link id="link_to_home_page" to="/" onClick={closeMobileView}>
-                                    <SvgIcon
+                                <Link 
+                                    id="link_to_home_page" to="/" 
+                                    style={{ textDecoration: 'none', color: 'inherit' }}
+                                    onClick={closeMobileView}>
+                                    <Typography>{`Sistema de\n Ressarcimento`}</Typography>
+                                    {/*<SvgIcon
                                         component={themeMode === ThemeMode.LIGHT ? LogoLight : LogoDark}
                                         viewBox="0 0 164 62"
-                                        className={classes.logo}/>
+                                        className={classes.logo}/>*/}
                                 </Link>
                             </Box>
                         </Tooltip>
