@@ -12,7 +12,6 @@ import {
     ListItem,
     ListItemIcon,
     ListItemText,
-    SvgIcon,
     Theme,
     Tooltip,
     Typography,
@@ -25,8 +24,6 @@ import {
 } from '@material-ui/icons'
 import clsx from 'clsx'
 import { ThemeMode } from '../../../material.theme'
-import { ReactComponent as LogoLight } from '../../../assets/imgs/logo_light.svg'
-import { ReactComponent as LogoDark } from '../../../assets/imgs/logo_dark.svg'
 
 interface Props extends WithStyles<typeof NavBarStyle, true> {
     readonly mobileOpen: boolean
@@ -115,8 +112,7 @@ class NavBar extends Component<IProps> {
             mobileOpen,
             desktopOpen,
             theme,
-            closeMobileView,
-            themeMode
+            closeMobileView
         } = this.props
 
         const container = window !== undefined ? () => window.document.body : undefined

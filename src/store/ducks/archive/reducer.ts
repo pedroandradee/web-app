@@ -103,6 +103,19 @@ export const changePaginator = (state: IArchiveState = INITIAL_STATE, action: IA
     }
 }
 
+export const changeArchiveList = (state: IArchiveState = INITIAL_STATE, action: IActionType<{
+    data: Archive[]
+}>) => {
+    const { data } = action.payload
+    return {
+        ...state,
+        list: {
+            ...state.list,
+            data
+        }
+    }
+}
+
 /**
  *
  * @memberof ArchiveTypes
@@ -164,6 +177,7 @@ const reducer: Reducer<IArchiveState> = createReducer<IArchiveState>(INITIAL_STA
     [ArchiveTypes.RESET_LIST]: resetList,
     [ArchiveTypes.CHANGE_PAGINATOR]: changePaginator,
     [ArchiveTypes.CHANGE_SEARCH_PAGINATOR]: changeSearchPaginator,
+    [ArchiveTypes.CHANGE_ARCHIVE_LIST]: changeArchiveList,
 
     [ArchiveTypes.LOAD_REQUEST]: loadRequest,
     [ArchiveTypes.LOAD_SUCCESS]: loadSuccess,

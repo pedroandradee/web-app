@@ -1,4 +1,5 @@
 import { action } from 'typesafe-actions'
+import { Archive } from '../../application/models/archive/archive'
 import { IAxiosResponse, IPaginator, ISearch } from '../root.types'
 import { ArchiveTypes } from './types'
 
@@ -49,6 +50,8 @@ export const changePaginator = (paginator?: IPaginator) => [
  */
  export const changeSearchPaginator = (search: ISearch) => action(ArchiveTypes.CHANGE_SEARCH_PAGINATOR, { search })
 
+ export const changeArchiveList = (data: Archive[]) => action(ArchiveTypes.CHANGE_ARCHIVE_LIST, { data })
+
 /**
  * Action that triggers the request to obtain the list of archives.
  * @memberof ArchiveActions
@@ -58,7 +61,7 @@ export const changePaginator = (paginator?: IPaginator) => [
  * @subcategory Redux / Actions
  * @return Redux.Action
  */
-export const loadRequest = (paginator?: IPaginator) => action(ArchiveTypes.LOAD_REQUEST)
+export const loadRequest = (paginator?: IPaginator) => action(ArchiveTypes.LOAD_REQUEST, { paginator })
 
 /**
  * Action that receives the return request data from the archive list when successfully performed.

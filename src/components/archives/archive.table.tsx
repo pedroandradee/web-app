@@ -21,9 +21,7 @@ import { ANIMATION, TABLES } from '../../material.theme'
 import { Archive } from '../../store/application/models/archive/archive'
 import { IPaginator, ISearch } from '../../store/ducks/root.types'
 import Cell from '../table.utils/cell'
-import TableLoading from '../table.utils/loading'
-import TableEmpty from '../table.utils/table.empty'
-import { ReactComponent as DocNotFound } from '../../assets/imgs/icons/custom/doc-not-found.svg'
+import TableRowLoading from '../table.utils/table.row.loading'
 import ArchiveLine from './line'
 
 const Style = (theme: Theme) => createStyles({
@@ -46,18 +44,32 @@ interface IProps extends WithTranslation {
     changePaginator(paginator?: IPaginator): void
 
     changeSearchPaginator(search: ISearch): void
+
+    changeArchiveList(data: Archive[]): void
+}
+
+interface IState {
+    readonly readLoading: boolean
 }
 
 type IJoinProps = IProps & WithStyles<typeof Style>
 
-class ArchiveTableComponent extends Component<IJoinProps> {
+const INITIAL_STATE = {
+    readLoading: false
+}
+
+class ArchiveTableComponent extends Component<IJoinProps, IState> {
     
     constructor(props: IJoinProps) {
         super(props)
 
+        /* State */
+        this.state = INITIAL_STATE
+
         /* Bind context */
         this.exportFile = this.exportFile.bind(this)
         this.readFile = this.readFile.bind(this)
+        this.readFinished = this.readFinished.bind(this)
     }
 
     public render() {
@@ -67,6 +79,12 @@ class ArchiveTableComponent extends Component<IJoinProps> {
             archives,
             loading,
         } = this.props
+
+        const {
+            readLoading
+        } = this.state
+
+        console.log(readLoading)
 
         const stickyTop: number = 60
 
@@ -272,36 +290,24 @@ class ArchiveTableComponent extends Component<IJoinProps> {
 
                         <TableBody>
                             {
-                                /*!loading && archives
-                                    ?.map((item: Archive, index: number) => {
-                                        return <TableRow
-                                            key={index}
-                                            className={classes.rowStyle}
-                                            onClick={() => 
-                                                console.log("show file content")
-                                            }>
-                                            <Cell className={classes.tableCell}>{item.id}</Cell>
-                                            <Cell className={classes.tableCell}>test</Cell>
-                                        </TableRow>
-                                    })*/
-                                Array.from({ length: 10 }).map((item: any, index: number) => {
+                                (!loading && !readLoading) && 
+                                    archives?.map((item: Archive, index: number) => {
                                     return <ArchiveLine
                                         key={`archive_line_${index}`}
-                                        index={index}/>
-                                })
+                                        index={index}
+                                        item={item}/>
+                                    })
+                            }
+
+                            {
+                                (loading || readLoading) && (
+                                    <TableRowLoading
+                                        numberOfColumns={17}/>
+                                )
                             }
                         </TableBody>
                     </Table>
                 </TableContainer>
-
-                {
-                    loading && (
-                        <TableLoading
-                            withIcon={false}
-                            withMessage={false}
-                            message={t('TABLE.LOADING')}/>
-                    )
-                }
                 {/*
                     (!loading && !archives.length) && (
                         <TableEmpty
@@ -324,17 +330,21 @@ class ArchiveTableComponent extends Component<IJoinProps> {
         const wb = XLSX.utils.book_new()
         XLSX.utils.book_append_sheet(wb, ws, "Sheet1")
         XLSX.writeFile(wb, `Modelo_de_dados.xlsx`, { bookType: "xlsx", type: "buffer" })
-        setTimeout(() => console.log("asd"), 1000)
+    }
+
+    private readFinished(): void {
+        this.setState(INITIAL_STATE)
     }
 
     private readFile(e: any): void {
+        this.setState({ readLoading: true })
         const allowedTypes: string[] = [
             'application/vnd.ms-excel', 
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         ]
         const file = e.target.files[0]
-        console.log(file.type)
         if (file) {
+            const { changeArchiveList } = this.props
             if (file && allowedTypes.includes(file.type)) {
                 const fileReader = new FileReader()
                 fileReader.readAsArrayBuffer(file)
@@ -342,21 +352,23 @@ class ArchiveTableComponent extends Component<IJoinProps> {
                     const aux = item.target.result
                     // read the buffer
                     const wb = XLSX.read(aux, { type: 'buffer' })
-                    // file name
+                    // gets the sheet name
                     const wsn = wb.SheetNames[0]
                     // getting the file data
                     const ws = wb.Sheets[wsn]
-                    console.log(ws)
                     // converting data to json
-                    const json: any[] = XLSX.utils.sheet_to_json(ws, { header: 1 }) || []
+                    const json: any[] = XLSX.utils.sheet_to_json(ws) || []
                     if (json.length === 0) {
                         console.log("empty")
                     } else {
-                        console.log(json)
+                        const data = json.map(item => new Archive().fromJSON(item)) || []
+                        changeArchiveList(data)
+                        console.log(data)
                     }
                 }
             }
         }
+        setTimeout(this.readFinished, 1000)
     }
 }
 

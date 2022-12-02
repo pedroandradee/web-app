@@ -31,6 +31,8 @@ interface IDispatch extends RouteComponentProps<any> {
     changeSearchPaginator(search: ISearch): void
 
     loadRequest(paginator?: IPaginator): void
+
+    changeArchiveList(data: Archive[]): void
 }
 
 type IJoinProps = IProps & IDispatch & WithStyles<typeof Style>
@@ -54,8 +56,8 @@ class ArchivesListComponent extends Component<IJoinProps> {
      * @returns {void}
      */
      public componentDidMount() {
-        const { loadRequest, paginator } = this.props
-        loadRequest(paginator)
+        // const { loadRequest, paginator } = this.props
+        // loadRequest(paginator)
     }
 
     public render() {
@@ -66,7 +68,8 @@ class ArchivesListComponent extends Component<IJoinProps> {
             loading,
             paginator,
             changePaginator,
-            changeSearchPaginator
+            changeSearchPaginator,
+            changeArchiveList
         } = this.props
 
         return <React.Fragment>
@@ -79,7 +82,8 @@ class ArchivesListComponent extends Component<IJoinProps> {
                 loading={loading}
                 paginator={paginator}
                 changePaginator={changePaginator}
-                changeSearchPaginator={changeSearchPaginator}/>
+                changeSearchPaginator={changeSearchPaginator}
+                changeArchiveList={changeArchiveList}/>
                 
         </React.Fragment>
     }

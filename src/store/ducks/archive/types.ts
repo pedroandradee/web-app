@@ -19,6 +19,7 @@ import { IComponentState, IPaginator } from '../root.types'
  *         <li>@archive/RESET_LIST</li>
  *         <li>@archive/CHANGE_PAGINATOR</li>
  *         <li>@archive/CHANGE_SEARCH_PAGINATOR</li>
+ *         <li>@archive/CHANGE_ARCHIVE_LIST</li>
  *         <li>@archive/LOAD_REQUEST</li>
  *         <li>@archive/LOAD_SUCCESS</li>
  *         <li>@archive/LOAD_FAILURE</li>
@@ -35,6 +36,7 @@ export const ArchiveTypes = createTypes(`
 
     CHANGE_PAGINATOR
     CHANGE_SEARCH_PAGINATOR
+    CHANGE_ARCHIVE_LIST
 
     LOAD_REQUEST
     LOAD_SUCCESS

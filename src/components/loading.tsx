@@ -12,7 +12,7 @@ import {
     WithStyles
 } from '@material-ui/core'
 
-import { ReactComponent as LoadingIcon } from '../../assets/imgs/icons/custom/loading-icon.svg'
+import { ReactComponent as LoadingIcon } from '../assets/imgs/icons/custom/loading-icon.svg'
 
 const Style = (theme: Theme) => createStyles({
     box: {
