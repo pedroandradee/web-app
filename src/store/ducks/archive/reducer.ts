@@ -1,6 +1,7 @@
 import { Reducer } from 'redux'
 import { createReducer } from 'reduxsauce'
 import { Archive } from '../../application/models/archive/archive'
+import { ArchiveInvalidate } from '../../application/models/archive/archive.invalidate'
 import { failure, IActionType, IPaginator, ISearch, request, success } from '../root.types'
 import { ArchiveTypes, IArchiveState } from './types'
 
@@ -28,6 +29,24 @@ export const INITIAL_STATE: IArchiveState = {
         loading: false,
         success: false,
         error: false
+    },
+    invalidate: {
+        data: [],
+        paginator: {
+            first: 0,
+            rows: 20,
+            page: 0,
+            pageCount: 0,
+            totalRecords: 0,
+            search: {
+                key: '',
+                value: ''
+            }
+        },
+        loading: false,
+        success: false,
+        error: false,
+        dialog: false
     }
 }
 
@@ -116,6 +135,33 @@ export const changeArchiveList = (state: IArchiveState = INITIAL_STATE, action: 
     }
 }
 
+export const changeInvalidateList = (state: IArchiveState = INITIAL_STATE, action: IActionType<{
+    data: ArchiveInvalidate[]
+}>) => {
+    const { data } = action.payload
+    return {
+        ...state,
+        invalidate: {
+            ...state.invalidate,
+            data
+        }
+    }
+}
+
+export const changeInvalidDialog = (state: IArchiveState = INITIAL_STATE, action: IActionType<{
+    dialog: boolean
+}>) => {
+    const { dialog } = action.payload
+    return {
+        ...state,
+        invalidate: {
+            ...state.invalidate,
+            dialog
+        }
+        
+    }
+}
+
 /**
  *
  * @memberof ArchiveTypes
@@ -178,6 +224,8 @@ const reducer: Reducer<IArchiveState> = createReducer<IArchiveState>(INITIAL_STA
     [ArchiveTypes.CHANGE_PAGINATOR]: changePaginator,
     [ArchiveTypes.CHANGE_SEARCH_PAGINATOR]: changeSearchPaginator,
     [ArchiveTypes.CHANGE_ARCHIVE_LIST]: changeArchiveList,
+    [ArchiveTypes.CHANGE_INVALIDATE_LIST]: changeInvalidateList,
+    [ArchiveTypes.CHANGE_INVALID_DIALOG]: changeInvalidDialog,
 
     [ArchiveTypes.LOAD_REQUEST]: loadRequest,
     [ArchiveTypes.LOAD_SUCCESS]: loadSuccess,

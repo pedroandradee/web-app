@@ -1,5 +1,6 @@
 import { action } from 'typesafe-actions'
 import { Archive } from '../../application/models/archive/archive'
+import { ArchiveInvalidate } from '../../application/models/archive/archive.invalidate'
 import { IAxiosResponse, IPaginator, ISearch } from '../root.types'
 import { ArchiveTypes } from './types'
 
@@ -51,6 +52,10 @@ export const changePaginator = (paginator?: IPaginator) => [
  export const changeSearchPaginator = (search: ISearch) => action(ArchiveTypes.CHANGE_SEARCH_PAGINATOR, { search })
 
  export const changeArchiveList = (data: Archive[]) => action(ArchiveTypes.CHANGE_ARCHIVE_LIST, { data })
+ 
+ export const changeInvalidateList = (data: ArchiveInvalidate[]) => action(ArchiveTypes.CHANGE_INVALIDATE_LIST, { data })
+ 
+ export const changeInvalidDialog = (dialog: boolean) => action(ArchiveTypes.CHANGE_INVALID_DIALOG, { dialog })
 
 /**
  * Action that triggers the request to obtain the list of archives.

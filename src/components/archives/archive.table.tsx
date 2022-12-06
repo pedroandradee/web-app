@@ -23,6 +23,8 @@ import { IPaginator, ISearch } from '../../store/ducks/root.types'
 import Cell from '../table.utils/cell'
 import TableRowLoading from '../table.utils/table.row.loading'
 import ArchiveLine from './line'
+import { ArchiveInvalidate } from '../../store/application/models/archive/archive.invalidate'
+import ArchiveTableInvalidDialog from './archive.table.invalid.dialog'
 
 const Style = (theme: Theme) => createStyles({
     ...ANIMATION,
@@ -38,6 +40,8 @@ const Style = (theme: Theme) => createStyles({
 
 interface IProps extends WithTranslation {
     readonly archives: Archive[]
+    readonly invalidate: ArchiveInvalidate[]
+    readonly dialog: boolean
     readonly loading: boolean
     readonly paginator: IPaginator
 
@@ -46,16 +50,22 @@ interface IProps extends WithTranslation {
     changeSearchPaginator(search: ISearch): void
 
     changeArchiveList(data: Archive[]): void
+
+    changeInvalidateList(data: ArchiveInvalidate[]): void
+
+    changeInvalidDialog(dialog: boolean): void
 }
 
 interface IState {
     readonly readLoading: boolean
-}
+    readonly empty: boolean
+} 
 
 type IJoinProps = IProps & WithStyles<typeof Style>
 
 const INITIAL_STATE = {
-    readLoading: false
+    readLoading: false,
+    empty: false
 }
 
 class ArchiveTableComponent extends Component<IJoinProps, IState> {
@@ -77,18 +87,24 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
             t,
             classes,
             archives,
+            invalidate,
             loading,
+            dialog,
+            changeInvalidDialog
         } = this.props
 
         const {
             readLoading
         } = this.state
 
-        console.log(readLoading)
-
         const stickyTop: number = 60
 
         return <Paper className={classes.paper}>
+
+            <ArchiveTableInvalidDialog
+                invalidate={invalidate}
+                dialog={dialog}
+                changeInvalidDialog={changeInvalidDialog}/>
 
             <Box pt={2}>
                 <Box
@@ -125,7 +141,9 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                                         name="file-import"
                                         type="file"
                                         hidden={true}
-                                        onChange={this.readFile}/>
+                                        accept=".xlsx, .xls"
+                                        onChange={(e) => this.readFile(e)}
+                                        onClick={(e)=> {e.currentTarget.value = ""}}/>
                                 </Button>
                             </span>
                         </Tooltip>
@@ -290,7 +308,7 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
 
                         <TableBody>
                             {
-                                (!loading && !readLoading) && 
+                                (!loading && !readLoading && invalidate?.length === 0) && 
                                     archives?.map((item: Archive, index: number) => {
                                     return <ArchiveLine
                                         key={`archive_line_${index}`}
@@ -317,10 +335,33 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                             viewBox="0 0 460 430"/>
                     )
                 */}
+                {
+                    (!loading && !readLoading && invalidate?.length > 0) &&
+                    <Box
+                        display="flex"
+                        justifyContent="flex-end"
+                        p={2}
+                        style={{
+                            cursor: "pointer"
+                        }}
+                        onClick={() => changeInvalidDialog(true)}>
+                        <Tooltip title={`${t('ARCHIVES.INVALID.TOOLTIP')}`}>
+                            <Button 
+                                size="small"
+                                color="primary"
+                                variant="contained">
+                                {t('ARCHIVES.INVALID.SOME_ROW_WITH_EMPTY_CELL')}
+                            </Button>
+                        </Tooltip>
+                    </Box>
+                }
             </Box>
         </Paper>
     }
 
+    /**
+     * exports the base model to be filled
+     */
     private exportFile(): void {
         // head columns(make the adjustments after check the model table)
         const headers: any[] = [new Archive().exportHeaders()]
@@ -332,10 +373,20 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
         XLSX.writeFile(wb, `Modelo_de_dados.xlsx`, { bookType: "xlsx", type: "buffer" })
     }
 
+    /**
+     * Set the current state to the initial state
+     */
     private readFinished(): void {
         this.setState(INITIAL_STATE)
     }
 
+    /**
+     * pré-validations
+     * check the table content(not empty)(ok)
+     * check the table head
+     * check the table values(check if the required variables are setted)(ok)
+     * @param e event
+     */
     private readFile(e: any): void {
         this.setState({ readLoading: true })
         const allowedTypes: string[] = [
@@ -344,7 +395,7 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
         ]
         const file = e.target.files[0]
         if (file) {
-            const { changeArchiveList } = this.props
+            const { changeArchiveList, changeInvalidateList } = this.props
             if (file && allowedTypes.includes(file.type)) {
                 const fileReader = new FileReader()
                 fileReader.readAsArrayBuffer(file)
@@ -359,17 +410,31 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                     // converting data to json
                     const json: any[] = XLSX.utils.sheet_to_json(ws) || []
                     if (json.length === 0) {
-                        console.log("empty")
+                        this.setState({ empty: true })
                     } else {
-                        const data = json.map(item => new Archive().fromJSON(item)) || []
+                        const data: Archive[] = []
+                        const invalid_items: ArchiveInvalidate[] = []
+                        json.forEach((value: any, index:number) => {
+                            if (new Archive().invalidate(value)) {
+                                invalid_items.push(new ArchiveInvalidate().fromJSON({
+                                    ...value,
+                                    table_index: index + 2
+                                }))
+                            } else {
+                                data.push(new Archive().fromJSON(value))
+                            }
+                        })
+                        // values to be showed in this component
                         changeArchiveList(data)
-                        console.log(data)
+                        // values to be showed in the invalid line, if exists
+                        changeInvalidateList(invalid_items)
                     }
                 }
             }
         }
         setTimeout(this.readFinished, 1000)
     }
+
 }
 
 const ArchiveTableWithTranslation = withTranslation()(ArchiveTableComponent)

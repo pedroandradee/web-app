@@ -1,5 +1,6 @@
 import { createTypes } from 'reduxsauce'
 import { Archive } from '../../application/models/archive/archive'
+import { ArchiveInvalidate } from '../../application/models/archive/archive.invalidate'
 import { IComponentState, IPaginator } from '../root.types'
 
 /**
@@ -20,6 +21,8 @@ import { IComponentState, IPaginator } from '../root.types'
  *         <li>@archive/CHANGE_PAGINATOR</li>
  *         <li>@archive/CHANGE_SEARCH_PAGINATOR</li>
  *         <li>@archive/CHANGE_ARCHIVE_LIST</li>
+ *         <li>@archive/CHANGE_INVALIDATE_LIST</li>
+ *         <li>@archive/CHANGE_INVALID_DIALOG</li>
  *         <li>@archive/LOAD_REQUEST</li>
  *         <li>@archive/LOAD_SUCCESS</li>
  *         <li>@archive/LOAD_FAILURE</li>
@@ -37,6 +40,8 @@ export const ArchiveTypes = createTypes(`
     CHANGE_PAGINATOR
     CHANGE_SEARCH_PAGINATOR
     CHANGE_ARCHIVE_LIST
+    CHANGE_INVALIDATE_LIST
+    CHANGE_INVALID_DIALOG
 
     LOAD_REQUEST
     LOAD_SUCCESS
@@ -75,6 +80,12 @@ export interface ILoadState extends IComponentState {
     readonly paginator: IPaginator
 }
 
+export interface IInvalidateState extends IComponentState {
+    readonly data: ArchiveInvalidate[]
+    readonly dialog: boolean
+    readonly paginator: IPaginator
+}
+
 /**
  * @memberof ArchiveTypes
  * @interface
@@ -86,4 +97,5 @@ export interface ILoadState extends IComponentState {
 export interface IArchiveState {
     readonly create: ICreateState
     readonly list: ILoadState
+    readonly invalidate: IInvalidateState
 }

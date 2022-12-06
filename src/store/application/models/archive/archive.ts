@@ -1,6 +1,47 @@
 import { JsonUtils } from "../../utils/json.util"
 
-
+/**
+ * Archive
+ * @category Models
+ * @subcategory archive
+ * @property {string} [cd_uf_nf_aquis]
+ * @property {number} [cod_produto]
+ * @property {string} [descricao]
+ * @property {number} [ncm_produto]
+ * @property {number} [gtin_ean]
+ * @property {number} [num_item_nf_aquis]
+ * @property {number} [aliquota_interna]
+ * @property {string} [dta_emiss_nf_aquis]
+ * @property {number} [num_nf_aquis]
+ * @property {number} [num_chv_nf_aquis]
+ * @property {number} [serie_entrada]
+ * @property {number} [quantidade_entrada]
+ * @property {string} [vl_unit_prod_nf_aquis]
+ * @property {number} [vl_bc_icms_op_prop_prod_nf_aquis]
+ * @property {number} [vl_icms_op_prop_prod_nf_aquis]
+ * @property {string} [tipo_bc_icms_st_prod_nf_aquis]
+ * @property {number} [vl_pauta_icms_st_prod]
+ * @property {string} [perc_mva_prod]
+ * @property {number} [vl_bc_icms_st_prod_nf_aquis]
+ * @property {number} [vl_icms_st_item_nf_aquis]
+ * @property {string} [num_nf_saida]
+ * @property {string} [num_chv_saida]
+ * @property {string} [dta_emiss_nf_saida]
+ * @property {string} [vl_alq_icms_st_prod_oper_saida]
+ * @property {number} [quantidade_saida]
+ * @property {string} [num_item_nf_saida]
+ * @property {string} [descricao_item_produto]
+ * @property {number} [vl_unit_prod_nf_saida]
+ * @property {string} [vl_desc_prod_nf_saida]
+ * @property {number} [vl_venda_unitario_presumido]
+ * @property {number} [vl_venda_unitario_presumido_x_qtd_saida]
+ * @property {number} [vl_bc_icms_st_prod_nf_saida]
+ * @property {number} [quantidade_saldo]
+ * @property {number} [saldo_st_unitario]
+ * @property {number} [saldo_st_total]
+ * @property {number} [vl_ressar_icms_st_prod]
+ * @property {number} [outras_operacoes_que_nao_geram_ressarcimento]
+ */
 export class Archive {
     private _cd_uf_nf_aquis: string | undefined
     private _cod_produto: number | undefined
@@ -544,5 +585,120 @@ export class Archive {
             'vl_ressar_icms_st_prod',
             'outras_operacoes_que_nao_geram_ressarcimento'
         ]
+    }
+
+    public invalidate(json: any): boolean {
+        if (json.cd_uf_nf_aquis === undefined) {
+            return true
+        }
+        if (json.cod_produto === undefined) {
+            return true
+        }
+        if (json.descricao === undefined) {
+            return true
+        }
+        if (json.ncm_produto === undefined) {
+            return true
+        }
+        if (json.gtin_ean === undefined) {
+            return true
+        }
+        if (json.num_item_nf_aquis === undefined) {
+            return true
+        }
+        if (json.aliquota_interna === undefined) {
+            return true
+        }
+        if (json.dta_emiss_nf_aquis === undefined) {
+            return true
+        }
+        if (json.num_nf_aquis === undefined) {
+            return true
+        }
+        if (json.num_chv_nf_aquis === undefined) {
+            return true
+        }
+        if (json.serie_entrada === undefined) {
+            return true
+        }
+        if (json.quantidade_entrada === undefined) {
+            return true
+        }
+        if (json.vl_unit_prod_nf_aquis === undefined) {
+            return true
+        }
+        if (json.vl_bc_icms_op_prop_prod_nf_aquis === undefined) {
+            return true
+        }
+        if (json.vl_icms_op_prop_prod_nf_aquis === undefined) {
+            return true
+        }
+        if (json.tipo_bc_icms_st_prod_nf_aquis === undefined) {
+            return true
+        }
+        if (json.vl_pauta_icms_st_prod === undefined) {
+            return true
+        }
+        if (json.perc_mva_prod === undefined) {
+            return true
+        }
+        if (json.vl_bc_icms_st_prod_nf_aquis === undefined) {
+            return true
+        }
+        if (json.vl_icms_st_item_nf_aquis === undefined) {
+            return true
+        }
+        if (json.num_nf_saida === undefined) {
+            return true
+        }
+        if (json.num_chv_saida === undefined) {
+            return true
+        }
+        if (json.dta_emiss_nf_saida === undefined) {
+            return true
+        }
+        if (json.vl_alq_icms_st_prod_oper_saida === undefined) {
+            return true
+        }
+        if (json.quantidade_saida === undefined) {
+            return true
+        }
+        if (json.num_item_nf_saida === undefined) {
+            return true
+        }
+        if (json.descricao_item_produto === undefined) {
+            return true
+        }
+        if (json.vl_unit_prod_nf_saida === undefined) {
+            return true
+        }
+        if (json.vl_desc_prod_nf_saida === undefined) {
+            return true
+        }
+        if (json.vl_venda_unitario_presumido === undefined) {
+            return true
+        }
+        if (json.vl_venda_unitario_presumido_x_qtd_saida === undefined) {
+            return true
+        }
+        if (json.vl_bc_icms_st_prod_nf_saida === undefined) {
+            return true
+        }
+        if (json.quantidade_saldo === undefined) {
+            return true
+        }
+        if (json.saldo_st_unitario === undefined) {
+            return true
+        }
+        if (json.saldo_st_total === undefined) {
+            return true
+        }
+        if (json.vl_ressar_icms_st_prod === undefined) {
+            return true
+        }
+        if (json.outras_operacoes_que_nao_geram_ressarcimento === undefined) {
+            return true
+        }
+        return false   
     }
 }

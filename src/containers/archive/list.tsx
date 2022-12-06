@@ -11,6 +11,7 @@ import { Archive } from '../../store/application/models/archive/archive'
 import { IPaginator, ISearch } from '../../store/ducks/root.types'
 import * as ArchiveActions from '../../store/ducks/archive/actions'
 import ArchiveTable from '../../components/archives/archive.table'
+import { ArchiveInvalidate } from '../../store/application/models/archive/archive.invalidate'
 
 const Style = (theme: Theme) => createStyles({
     ...ANIMATION,
@@ -19,6 +20,8 @@ const Style = (theme: Theme) => createStyles({
 
 interface IProps extends WithTranslation {
     readonly archives: Archive[]
+    readonly invalidate: ArchiveInvalidate[]
+    readonly dialog: boolean
     readonly loading: boolean
     readonly paginator: IPaginator
 }
@@ -33,6 +36,10 @@ interface IDispatch extends RouteComponentProps<any> {
     loadRequest(paginator?: IPaginator): void
 
     changeArchiveList(data: Archive[]): void
+
+    changeInvalidateList(data: ArchiveInvalidate[]): void
+
+    changeInvalidDialog(dialog: boolean): void
 }
 
 type IJoinProps = IProps & IDispatch & WithStyles<typeof Style>
@@ -65,11 +72,15 @@ class ArchivesListComponent extends Component<IJoinProps> {
         const {
             t,
             archives,
+            invalidate,
+            dialog,
             loading,
             paginator,
             changePaginator,
             changeSearchPaginator,
-            changeArchiveList
+            changeArchiveList,
+            changeInvalidateList,
+            changeInvalidDialog
         } = this.props
 
         return <React.Fragment>
@@ -79,11 +90,15 @@ class ArchivesListComponent extends Component<IJoinProps> {
 
             <ArchiveTable
                 archives={archives}
+                invalidate={invalidate}
+                dialog={dialog}
                 loading={loading}
                 paginator={paginator}
                 changePaginator={changePaginator}
                 changeSearchPaginator={changeSearchPaginator}
-                changeArchiveList={changeArchiveList}/>
+                changeArchiveList={changeArchiveList}
+                changeInvalidateList={changeInvalidateList}
+                changeInvalidDialog={changeInvalidDialog}/>
                 
         </React.Fragment>
     }
@@ -95,6 +110,8 @@ const ArchivesListWithStyles = withStyles<any>(Style)(ArchivesListWithTranslatio
 
 const mapStateToProps = (state: IApplicationState) => ({
     archives: state.archive.list.data,
+    invalidate: state.archive.invalidate.data,
+    dialog: state.archive.invalidate.dialog,
     loading: state.archive.list.loading,
     paginator: state.archive.list.paginator,
 })

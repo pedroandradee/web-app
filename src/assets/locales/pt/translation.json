@@ -245,6 +245,22 @@
         "UNITARY_VALUE_PRESUMED_MAXIMUM": "Vl. unit. venda presumida máx."
       },
       "AUDITORS_ANALISIS": "Análise do auditor"
+    },
+    "INVALID": {
+      "SOME_ROW_WITH_EMPTY_CELL": "Dados da planilha inválidos.",
+      "TOOLTIP": "Verificar itens inválidos",
+      "DIALOG": {
+        "TITLE": "Itens inválidos",
+        "TABLE_HEAD": {
+          "INDEX": "Índice",
+          "TOOLTIP": "Índice da tabela",
+          "UF": "UF",
+          "COD": "Código",
+          "DESCRIPTION": "Descrição",
+          "NCM": "NCM",
+          "GTIN_EAN": "GTIN/EAN"
+        }
+      }
     }
   },
   "FILTERS": {
