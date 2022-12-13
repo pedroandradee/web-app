@@ -1,4 +1,4 @@
-# Sistema de Ressarcimento
+# Sistema de Restituição
 
 [![License][license-badge]][license-url]
 [![Material UI][mui-badge]][mui-url]

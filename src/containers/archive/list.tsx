@@ -80,7 +80,8 @@ class ArchivesListComponent extends Component<IJoinProps> {
             changeSearchPaginator,
             changeArchiveList,
             changeInvalidateList,
-            changeInvalidDialog
+            changeInvalidDialog,
+            resetList
         } = this.props
 
         return <React.Fragment>
@@ -98,7 +99,8 @@ class ArchivesListComponent extends Component<IJoinProps> {
                 changeSearchPaginator={changeSearchPaginator}
                 changeArchiveList={changeArchiveList}
                 changeInvalidateList={changeInvalidateList}
-                changeInvalidDialog={changeInvalidDialog}/>
+                changeInvalidDialog={changeInvalidDialog}
+                resetList={resetList}/>
                 
         </React.Fragment>
     }

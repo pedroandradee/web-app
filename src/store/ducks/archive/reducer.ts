@@ -130,7 +130,11 @@ export const changeArchiveList = (state: IArchiveState = INITIAL_STATE, action: 
         ...state,
         list: {
             ...state.list,
-            data
+            data,
+            paginator: {
+                ...state.list.paginator,
+                totalRecords: data.length
+            }
         }
     }
 }

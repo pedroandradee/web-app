@@ -8,6 +8,7 @@ import {
     TableBody, 
     TableContainer, 
     TableHead, 
+    TablePagination, 
     TableRow, 
     Theme, 
     Tooltip, 
@@ -25,6 +26,9 @@ import TableRowLoading from '../table.utils/table.row.loading'
 import ArchiveLine from './line'
 import { ArchiveInvalidate } from '../../store/application/models/archive/archive.invalidate'
 import ArchiveTableInvalidDialog from './archive.table.invalid.dialog'
+// import TableEmpty from '../table.utils/table.empty'
+
+// import { ReactComponent as DocNotFound } from '../../assets/imgs/icons/custom/doc-not-found.svg'
 
 const Style = (theme: Theme) => createStyles({
     ...ANIMATION,
@@ -54,6 +58,8 @@ interface IProps extends WithTranslation {
     changeInvalidateList(data: ArchiveInvalidate[]): void
 
     changeInvalidDialog(dialog: boolean): void
+
+    resetList(): void
 }
 
 interface IState {
@@ -90,7 +96,9 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
             invalidate,
             loading,
             dialog,
-            changeInvalidDialog
+            paginator,
+            changeInvalidDialog,
+            changePaginator
         } = this.props
 
         const {
@@ -98,6 +106,12 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
         } = this.state
 
         const stickyTop: number = 60
+
+        const {
+            rows,
+            page,
+
+        } = paginator
 
         return <Paper className={classes.paper}>
 
@@ -122,6 +136,7 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                                     size="small"
                                     color="primary"
                                     variant="contained"
+                                    disabled={readLoading || loading}
                                     onClick={this.exportFile}>
                                     {t('BUTTON.EXPORT.TITLE')}
                                 </Button>
@@ -134,6 +149,7 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                                     size="small"
                                     color="primary"
                                     variant="contained"
+                                    disabled={readLoading || loading}
                                     component="label">
                                     {t('BUTTON.IMPORT.TITLE')}
                                     <input
@@ -300,7 +316,7 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                                     className={classes.tableHeader}
                                     style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
                                     <Typography>
-                                        <b>Analisis</b>
+                                        <b>{' - - '}</b>
                                     </Typography>
                                 </Cell>
                             </TableRow>
@@ -309,7 +325,9 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                         <TableBody>
                             {
                                 (!loading && !readLoading && invalidate?.length === 0) && 
-                                    archives?.map((item: Archive, index: number) => {
+                                    archives
+                                        ?.slice(page * rows, page * rows + rows)
+                                        ?.map((item: Archive, index: number) => {
                                     return <ArchiveLine
                                         key={`archive_line_${index}`}
                                         index={index}
@@ -326,8 +344,29 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                
+                <TablePagination
+                    rowsPerPageOptions={[20, 50, 100]}
+                    component="div"
+                    count={paginator.totalRecords}
+                    rowsPerPage={paginator.rows}
+                    page={paginator.page}
+                    onRowsPerPageChange={(e) => {
+                        changePaginator({
+                            ...paginator,
+                            rows: Number(e.target.value)
+                        })
+                    }}
+                    onPageChange={(e, current_page: number) => {
+                        changePaginator({
+                            ...paginator,
+                            page: current_page
+                        })
+                    }}
+                />
+
                 {/*
-                    (!loading && !archives.length) && (
+                    (!loading && !readLoading && !archives.length) && (
                         <TableEmpty
                             message={t('TABLE.EMPTY')}
                             svg={DocNotFound}
@@ -395,8 +434,9 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
         ]
         const file = e.target.files[0]
         if (file) {
-            const { changeArchiveList, changeInvalidateList } = this.props
-            if (file && allowedTypes.includes(file.type)) {
+            const { changeArchiveList, changeInvalidateList, resetList } = this.props
+            resetList()
+            if (allowedTypes.includes(file.type)) {
                 const fileReader = new FileReader()
                 fileReader.readAsArrayBuffer(file)
                 fileReader.onload = (item: any) => {
@@ -415,6 +455,7 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                         const data: Archive[] = []
                         const invalid_items: ArchiveInvalidate[] = []
                         json.forEach((value: any, index:number) => {
+                            console.log(index)
                             if (new Archive().invalidate(value)) {
                                 invalid_items.push(new ArchiveInvalidate().fromJSON({
                                     ...value,
@@ -423,6 +464,7 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                             } else {
                                 data.push(new Archive().fromJSON(value))
                             }
+                            return value
                         })
                         // values to be showed in this component
                         changeArchiveList(data)

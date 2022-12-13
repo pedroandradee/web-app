@@ -82,6 +82,7 @@ export class ArchiveInvalidLineComponent extends Component<IJoinProps> {
                     classes.tableCell}>
                 {item.gtin_ean || ' - - '}
             </Cell>
+            <Cell className={classes.tableCell}>{' - - '}</Cell>
         </TableRow>
     }
 }

@@ -40,17 +40,17 @@ export class ArchiveLineComponent extends Component<IJoinProps> {
             className={classes.fadeIn1}>
             <Cell className={classes.tableCell}>
                 <Typography variant="caption">
-                    {item.cod_produto}
+                    {item.cod_produto || ' - - '}
                 </Typography>
             </Cell>
             <Cell className={classes.tableCell}>
                 <Typography variant="caption">
-                    {item.ncm_produto}
+                    {item.ncm_produto || ' - - '}
                 </Typography>
             </Cell>
             <Cell className={classes.tableCell}>
                 <Typography variant="caption">
-                    {item.descricao}
+                    {item.descricao || ' - - '}
                 </Typography>
             </Cell>
             <Cell className={classes.tableCell} align="right">
@@ -65,12 +65,12 @@ export class ArchiveLineComponent extends Component<IJoinProps> {
             </Cell>
             <Cell className={classes.tableCell}>
                 <Typography variant="caption">
-                    {item.quantidade_entrada}
+                    {item.quantidade_entrada || ' - - '}
                 </Typography>
             </Cell>
             <Cell className={classes.tableCell}>
                 <Typography variant="caption">
-                    {item.quantidade_saida}
+                    {item.quantidade_saida || ' - - '}
                 </Typography>
             </Cell>
             <Cell className={classes.tableCell} align="right">

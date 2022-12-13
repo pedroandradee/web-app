@@ -1,6 +1,6 @@
 {
   "APP": {
-    "TITLE": "Sistema de Ressarcimento - SR"
+    "TITLE": "Sistema de Restituição - SR"
   },
   "AUTH": {
     "LOGIN": {
@@ -258,7 +258,8 @@
           "COD": "Código",
           "DESCRIPTION": "Descrição",
           "NCM": "NCM",
-          "GTIN_EAN": "GTIN/EAN"
+          "GTIN_EAN": "GTIN/EAN",
+          "OTHERS": "Outras..."
         }
       }
     }
