@@ -455,17 +455,22 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                         const data: Archive[] = []
                         const invalid_items: ArchiveInvalidate[] = []
                         json.forEach((value: any, index:number) => {
-                            console.log(index)
-                            if (new Archive().invalidate(value)) {
+                            //console.log(index)
+                       /*     if (new Archive().invalidate(value)) {
                                 invalid_items.push(new ArchiveInvalidate().fromJSON({
                                     ...value,
                                     table_index: index + 2
                                 }))
                             } else {
-                                data.push(new Archive().fromJSON(value))
                             }
-                            return value
+                            return value*/
+                            data.push(new Archive().fromJSON(value))
                         })
+                        json.forEach((value: any, index:number) => {
+                            console.log(value.descricao)
+                        }
+                        )
+                        console.log(data)
                         // values to be showed in this component
                         changeArchiveList(data)
                         // values to be showed in the invalid line, if exists
