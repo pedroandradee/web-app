@@ -455,22 +455,42 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                         const data: Archive[] = []
                         const invalid_items: ArchiveInvalidate[] = []
                         json.forEach((value: any, index:number) => {
-                            //console.log(index)
-                       /*     if (new Archive().invalidate(value)) {
+                        /*      //console.log(index)
+                          if (new Archive().invalidate(value)) {
                                 invalid_items.push(new ArchiveInvalidate().fromJSON({
                                     ...value,
                                     table_index: index + 2
                                 }))
-                            } else {
-                            }
-                            return value*/
-                            data.push(new Archive().fromJSON(value))
-                        })
-                        json.forEach((value: any, index:number) => {
-                            console.log(value.descricao)
+                            }*/ 
+                            if(new Archive().calculation_invalidation(value)) {
+                                invalid_items.push(new ArchiveInvalidate().fromJSON({
+                                    ...value,
+                                    table_index: index + 2
+                                }))
+                            } 
+                            else {
+                          
+                       
+                            data.push(new Archive().fromJSON({
+                                ...value,
+                                vl_venda_unitario_presumido : (value.vl_pauta_icms_st_prod||0)/(value.num_item_nf_aquis||1),
+                                vl_venda_unitario_presumido_x_qtd_saida: 
+                                (value.vl_venda_unitario_presumido||0)*(value.quantidade_saida||0),
+                             //   saldo_st_unitario:  (value.saldo_st_total||0)/ (value.quantidade_saldo||1),
+                                vl_ressar_icms_st_prod:
+                                 ((value.vl_venda_unitario_presumido_x_qtd_saida||0)-(value.vl_bc_icms_st_prod_nf_saida||0))
+                                 *(value.vl_alq_icms_st_prod_oper_saida||0),
+                                outras_operacoes_que_nao_geram_ressarcimento: 
+                                ((value.vl_venda_unitario_presumido_x_qtd_saida||0)-(value.vl_bc_icms_st_prod_nf_saida||0))
+                                *(value.vl_alq_icms_st_prod_oper_saida||0)
+                             }  ))
                         }
+                          return value}
                         )
+                      
+                        
                         console.log(data)
+                        
                         // values to be showed in this component
                         changeArchiveList(data)
                         // values to be showed in the invalid line, if exists

@@ -701,4 +701,31 @@ export class Archive {
         }
         return false   
     }
+
+    public calculation_invalidation(json: any): boolean {
+        if(json.saldo_st_unitario === (json.saldo_st_total||0)/ (json.quantidade_saldo||1)){
+            console.log("saldo_st_unitario diferente")
+            return true
+        }
+        if(json.vl_venda_unitario_presumido === (json.vl_pauta_icms_st_prod||0)/(json.num_item_nf_aquis||1)){
+            console.log("vl_venda_unitario_presumido diferente")
+            return true
+        }
+        if(json.vl_venda_unitario_presumido_x_qtd_saida=== (json.vl_venda_unitario_presumido||0)*(json.quantidade_saida||0)){
+            console.log("vl_venda_unitario_presumido_x_qtd_saida")
+            return true
+        }
+        if(json.vl_ressar_icms_st_prod===((json.vl_venda_unitario_presumido_x_qtd_saida||0)-(json.vl_bc_icms_st_prod_nf_saida||0))
+            *(json.vl_alq_icms_st_prod_oper_saida||0)){
+                console.log("vl_ressar_icms_st_prod diferente")
+                return true
+        }
+        if( json.outras_operacoes_que_nao_geram_ressarcimento===
+            ((json.vl_venda_unitario_presumido_x_qtd_saida||0)-(json.vl_bc_icms_st_prod_nf_saida||0))
+            *(json.vl_alq_icms_st_prod_oper_saida||0)){
+                console.log("outras_operacoes_que_nao_geram_ressarcimento diferente")
+                return true
+            }
+        return false   
+    }
 }

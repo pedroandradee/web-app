@@ -259,7 +259,8 @@
           "DESCRIPTION": "Descrição",
           "NCM": "NCM",
           "GTIN_EAN": "GTIN/EAN",
-          "OTHERS": "Outras..."
+          "OTHERS": "Outras...",
+          "MOTIVE":"Motivo"
         }
       }
     }

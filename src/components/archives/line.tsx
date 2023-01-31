@@ -14,6 +14,7 @@ import FormatCurrency from '../formatters/currency'
 import { Archive } from '../../store/application/models/archive/archive'
 
 
+
 const Style = (theme: Theme) => createStyles({
     ...ANIMATION,
     ...TABLES(theme)
@@ -90,7 +91,7 @@ export class ArchiveLineComponent extends Component<IJoinProps> {
             </Cell>
             <Cell className={classes.tableCell} align="right">
                 <Typography variant="caption">
-                    <FormatCurrency value={999.99} maximumFractionDigits={2}/>
+                    <FormatCurrency value={item.vl_venda_unitario_presumido|| 0} maximumFractionDigits={2}/>
                 </Typography>
             </Cell>
             <Cell className={classes.tableCell} align="right">

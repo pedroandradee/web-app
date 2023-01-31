@@ -79,6 +79,9 @@ export class ArchiveTableInvalidDialogComponent extends Component<IJoinProps> {
                                     <Cell className={classes.tableHeader}>
                                         {t('ARCHIVES.INVALID.DIALOG.TABLE_HEAD.OTHERS')}
                                     </Cell>
+                                    <Cell className={classes.tableHeader}>
+                                        {t('ARCHIVES.INVALID.DIALOG.TABLE_HEAD.MOTIVE')}
+                                    </Cell>
                                 </TableRow>
                             </TableHead>
 
