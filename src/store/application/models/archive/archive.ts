@@ -703,16 +703,17 @@ export class Archive {
     }
 
     public calculation_invalidation(json: any): boolean {
+        console.log(json)
         if(json.saldo_st_unitario === (json.saldo_st_total||0)/ (json.quantidade_saldo||1)){
-            console.log("saldo_st_unitario diferente")
+            console.log("saldo_st_unitario diferente", json.saldo_st_unitario,json.saldo_st_total||0,json.quantidade_saldo||1)
             return true
         }
         if(json.vl_venda_unitario_presumido === (json.vl_pauta_icms_st_prod||0)/(json.num_item_nf_aquis||1)){
-            console.log("vl_venda_unitario_presumido diferente")
+            console.log("vl_venda_unitario_presumido diferente", json.vl_venda_unitario_presumido ,json.vl_pauta_icms_st_prod,json.num_item_nf_aquis)
             return true
         }
         if(json.vl_venda_unitario_presumido_x_qtd_saida=== (json.vl_venda_unitario_presumido||0)*(json.quantidade_saida||0)){
-            console.log("vl_venda_unitario_presumido_x_qtd_saida")
+            console.log("vl_venda_unitario_presumido_x_qtd_saida",json.vl_venda_unitario_presumido_x_qtd_saida,json.vl_venda_unitario_presumido||0,json.quantidade_saida||0)
             return true
         }
         if(json.vl_ressar_icms_st_prod===((json.vl_venda_unitario_presumido_x_qtd_saida||0)-(json.vl_bc_icms_st_prod_nf_saida||0))
