@@ -28,7 +28,7 @@ interface IProps extends WithTranslation {
 type IJoinProps = IProps & WithStyles<typeof Style>
 
 export class ArchiveLineComponent extends Component<IJoinProps> {
-
+    
     public render() {
         const {
             classes,
@@ -39,7 +39,8 @@ export class ArchiveLineComponent extends Component<IJoinProps> {
         return <TableRow
             key={`table_row_${index}`}
             className={classes.fadeIn1}>
-            <Cell className={classes.tableCell}>
+
+           <Cell className={classes.tableCell}>
                 <Typography variant="caption">
                     {item.cod_produto || ' - - '}
                 </Typography>

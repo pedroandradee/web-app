@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
-import { 
+import {
     Box,
     Button,
-    createStyles, 
-    Paper, 
-    Table, 
-    TableBody, 
-    TableContainer, 
-    TableHead, 
-    TablePagination, 
-    TableRow, 
-    Theme, 
-    Tooltip, 
-    Typography, 
-    withStyles, 
-    WithStyles 
+    createStyles,
+    Paper,
+    Table,
+    TableBody,
+    TableContainer,
+    TableHead,
+    TablePagination,
+    TableRow,
+    Theme,
+    Tooltip,
+    Typography,
+    withStyles,
+    WithStyles
 } from '@material-ui/core'
 import { withTranslation, WithTranslation } from 'react-i18next'
 import * as XLSX from 'xlsx'
@@ -65,7 +65,7 @@ interface IProps extends WithTranslation {
 interface IState {
     readonly readLoading: boolean
     readonly empty: boolean
-} 
+}
 
 type IJoinProps = IProps & WithStyles<typeof Style>
 
@@ -75,7 +75,7 @@ const INITIAL_STATE = {
 }
 
 class ArchiveTableComponent extends Component<IJoinProps, IState> {
-    
+
     constructor(props: IJoinProps) {
         super(props)
 
@@ -118,7 +118,8 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
             <ArchiveTableInvalidDialog
                 invalidate={invalidate}
                 dialog={dialog}
-                changeInvalidDialog={changeInvalidDialog}/>
+                changeInvalidDialog={changeInvalidDialog}
+            />
 
             <Box pt={2}>
                 <Box
@@ -126,7 +127,7 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                     alignItems="center"
                     p={0.5}>
 
-                    <Box 
+                    <Box
                         display="flex"
                         style={{ gap: 5 }}
                         p={0.5}>
@@ -159,7 +160,7 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                                         hidden={true}
                                         accept=".xlsx, .xls"
                                         onChange={(e) => this.readFile(e)}
-                                        onClick={(e)=> {e.currentTarget.value = ""}}/>
+                                        onClick={(e) => { e.currentTarget.value = "" }} />
                                 </Button>
                             </span>
                         </Tooltip>
@@ -171,70 +172,70 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                     <Table size="small" stickyHeader={true} aria-label="sticky table">
                         <TableHead>
                             <TableRow>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     rowSpan={2}>
                                     <Typography>
                                         <b>{t('ARCHIVES.TABLE_HEAD.PRODUCT_COD')}</b>
                                     </Typography>
                                 </Cell>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     rowSpan={2}>
                                     <Typography>
                                         <b>{t('ARCHIVES.TABLE_HEAD.NCM')}</b>
                                     </Typography>
                                 </Cell>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     rowSpan={2}>
                                     <Typography>
                                         <b>{t('ARCHIVES.TABLE_HEAD.DESCRIPTION')}</b>
                                     </Typography>
                                 </Cell>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     rowSpan={2}>
                                     <Typography>
                                         <b>{t('ARCHIVES.TABLE_HEAD.TOTAL_COMPENSATE')}</b>
                                     </Typography>
                                 </Cell>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     rowSpan={2}>
                                     <Typography>
                                         <b>{t('ARCHIVES.TABLE_HEAD.TOTAL_COMPENSATE_CALCULATED')}</b>
                                     </Typography>
                                 </Cell>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     rowSpan={2}>
                                     <Typography>
                                         <b>{t('ARCHIVES.TABLE_HEAD.AMOUNT_INPUT')}</b>
                                     </Typography>
                                 </Cell>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     rowSpan={2}>
                                     <Typography>
                                         <b>{t('ARCHIVES.TABLE_HEAD.AMOUNT_OUTPUT')}</b>
                                     </Typography>
                                 </Cell>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     colSpan={3}>
                                     <Typography>
                                         <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.TITLE')}</b>
                                     </Typography>
                                 </Cell>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     colSpan={3}>
                                     <Typography>
                                         <b>{t('ARCHIVES.TABLE_HEAD.DECLARED_VALUES_SALES.TITLE')}</b>
                                     </Typography>
                                 </Cell>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     colSpan={3}>
                                     <Typography>
@@ -249,70 +250,70 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                             </TableRow>
 
                             <TableRow>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
                                     <Typography>
                                         <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.UNITARY_VALUE_PRESUMED_MINIMUM')}</b>
                                     </Typography>
                                 </Cell>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
                                     <Typography>
                                         <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.UNITARY_VALUE_PRESUMED_MEDIUM')}</b>
                                     </Typography>
                                 </Cell>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
                                     <Typography>
                                         <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.UNITARY_VALUE_PRESUMED_MAXIMUM')}</b>
                                     </Typography>
                                 </Cell>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
                                     <Typography>
                                         <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.UNITARY_VALUE_PRESUMED_MINIMUM')}</b>
                                     </Typography>
                                 </Cell>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
                                     <Typography>
                                         <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.UNITARY_VALUE_PRESUMED_MEDIUM')}</b>
                                     </Typography>
                                 </Cell>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
                                     <Typography>
                                         <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.UNITARY_VALUE_PRESUMED_MAXIMUM')}</b>
                                     </Typography>
                                 </Cell>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
                                     <Typography>
                                         <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.UNITARY_VALUE_PRESUMED_MINIMUM')}</b>
                                     </Typography>
                                 </Cell>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
                                     <Typography>
                                         <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.UNITARY_VALUE_PRESUMED_MEDIUM')}</b>
                                     </Typography>
                                 </Cell>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
                                     <Typography>
                                         <b>{t('ARCHIVES.TABLE_HEAD.INPUT_DECLARED_VALUES.UNITARY_VALUE_PRESUMED_MAXIMUM')}</b>
                                     </Typography>
                                 </Cell>
-                                <Cell 
+                                <Cell
                                     className={classes.tableHeader}
                                     style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
                                     <Typography>
@@ -324,27 +325,27 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
 
                         <TableBody>
                             {
-                                (!loading && !readLoading && invalidate?.length === 0) && 
-                                    archives
-                                        ?.slice(page * rows, page * rows + rows)
-                                        ?.map((item: Archive, index: number) => {
-                                    return <ArchiveLine
-                                        key={`archive_line_${index}`}
-                                        index={index}
-                                        item={item}/>
+                                (!loading && !readLoading && invalidate?.length === 0) &&
+                                archives
+                                    ?.slice(page * rows, page * rows + rows)
+                                    ?.map((item: Archive, index: number) => {
+                                        return <ArchiveLine
+                                            key={`archive_line_${index}`}
+                                            index={index}
+                                            item={item} />
                                     })
                             }
 
                             {
                                 (loading || readLoading) && (
                                     <TableRowLoading
-                                        numberOfColumns={17}/>
+                                        numberOfColumns={17} />
                                 )
                             }
                         </TableBody>
                     </Table>
                 </TableContainer>
-                
+
                 <TablePagination
                     rowsPerPageOptions={[20, 50, 100]}
                     component="div"
@@ -385,7 +386,7 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                         }}
                         onClick={() => changeInvalidDialog(true)}>
                         <Tooltip title={`${t('ARCHIVES.INVALID.TOOLTIP')}`}>
-                            <Button 
+                            <Button
                                 size="small"
                                 color="primary"
                                 variant="contained">
@@ -429,7 +430,7 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
     private readFile(e: any): void {
         this.setState({ readLoading: true })
         const allowedTypes: string[] = [
-            'application/vnd.ms-excel', 
+            'application/vnd.ms-excel',
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         ]
         const file = e.target.files[0]
@@ -454,33 +455,36 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                     } else {
                         const data: Archive[] = []
                         const invalid_items: ArchiveInvalidate[] = []
-                        json.forEach((value: any, index:number) => {
-                        /*      //console.log(index)
-                          if (new Archive().invalidate(value)) {
-                                invalid_items.push(new ArchiveInvalidate().fromJSON({
-                                    ...value,
-                                    table_index: index + 2
-                                }))
-                            }*/ 
-                            if(new Archive().calculation_invalidation(value)) {
-                                invalid_items.push(new ArchiveInvalidate().fromJSON({
-                                    ...value,
-                                    table_index: index + 2
-                                }))
-                            } 
-                            else {
+                        json.forEach((value: any, index: number) => {
                           
-                       
-                            data.push(new Archive().fromJSON({
-                                ...value
-                             }  ))
+                            if (new Archive().invalidate(value)||new Archive().calculation_invalidation(value)) {
+                                invalid_items.push(new ArchiveInvalidate().fromJSON({
+                                    ...value,
+                                    table_index: index + 2
+                                }))
+                               
+                            }
+                            /*else if (new Archive().calculation_invalidation(value)) {
+                                invalid_items.push(new ArchiveInvalidate().fromJSON({
+                                    ...value,
+                                    table_index: index + 2
+                                }))
+                                //console.log('calculo invalido')
+                            }*/
+                            else {
+
+
+                                data.push(new Archive().fromJSON({
+                                    ...value
+                                }))
+                            }
+                            return value
                         }
-                          return value}
                         )
-                      
-                        
-                       // console.log(data)
-                        
+
+
+                        // console.log(data)
+
                         // values to be showed in this component
                         changeArchiveList(data)
                         // values to be showed in the invalid line, if exists

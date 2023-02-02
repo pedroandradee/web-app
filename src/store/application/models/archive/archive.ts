@@ -703,7 +703,7 @@ export class Archive {
     }
 
     public calculation_invalidation(json: any): boolean {
-        console.log(json)
+      //  console.log(json)
 
         if (json.vl_venda_unitario_presumido_x_qtd_saida !==
             Number((json.vl_venda_unitario_presumido || 0) * (json.quantidade_saida || 0).toFixed(2))) {
@@ -726,7 +726,8 @@ export class Archive {
             * (json.vl_alq_icms_st_prod_oper_saida || 0)) {
             console.log("vl_ressar_icms_st_prod diferente",
                 json.vl_ressar_icms_st_prod,
-                Number(((json.vl_venda_unitario_presumido_x_qtd_saida || 0) - (json.vl_bc_icms_st_prod_nf_saida || 0).toFixed(2))) * (json.vl_alq_icms_st_prod_oper_saida || 0),
+                Number(((json.vl_venda_unitario_presumido_x_qtd_saida || 0) - (json.vl_bc_icms_st_prod_nf_saida || 0).toFixed(2))) 
+                * (json.vl_alq_icms_st_prod_oper_saida || 0),
                 (json.vl_venda_unitario_presumido_x_qtd_saida ?|| 0),
                 (json.vl_bc_icms_st_prod_nf_saida || 0)
             )
