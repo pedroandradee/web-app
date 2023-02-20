@@ -161,6 +161,16 @@ class NavBar extends Component<IProps> {
                         <ListItemIcon><InsertDriveFile/></ListItemIcon>
                         <ListItemText primary={t('DRAWER.ARCHIVE')}/>
                     </ListItem>
+                    <ListItem
+                        id="list_item_home"
+                        button={true}
+                        component={NavLink}
+                        to="/app/protocols"
+                        onClick={closeMobileView}
+                        activeClassName={clsx(classes.navActive, colorStyle)}>
+                        <ListItemIcon><InsertDriveFile/></ListItemIcon>
+                        <ListItemText primary={t('DRAWER.PROTOCOLS')}/>
+                    </ListItem>
 
                 </List>
             </React.Fragment>

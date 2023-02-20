@@ -101,11 +101,11 @@ export const TABLES = (theme: Theme) => {
         tableHeader: {
             backgroundColor: theme.palette.backgroundTableHeader.main,
             minWidth: COL_WIDTH * 3,
-            border: '1px solid #e6e6e6'
+            border: '1px solid #e6e6e6 none'
         },
         tableCell: {
             backgroundColor: theme.palette.background.paper,
-            border: '1px solid #e6e6e6',
+            border: '1px solid #e6e6e6 none',
             padding: theme.spacing(0.5)
         }
     }

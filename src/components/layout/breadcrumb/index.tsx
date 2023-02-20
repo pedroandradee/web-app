@@ -34,7 +34,8 @@ class BreadCrumbComponent extends Component<IJoinProps> {
         return {
             '/app': 'DRAWER.HOME',
             '/app/myprofile': 'BREAD_CRUMB.PROFILE',
-            '/app/archives': 'BREAD_CRUMB.ARCHIVE.TITLE'
+            '/app/archives': 'BREAD_CRUMB.ARCHIVE.TITLE',
+            '/app/protocols': 'BREAD_CRUMB.PROTOCOLS.TITLE'
         }
     }
 

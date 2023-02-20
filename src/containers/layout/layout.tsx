@@ -2,6 +2,7 @@ import React, { Component, lazy, Suspense } from 'react'
 
 import { WithTranslation, withTranslation } from 'react-i18next'
 import { 
+    Box,
     Container, 
     createStyles, 
     isWidthDown, 
@@ -54,7 +55,9 @@ const Style = (theme: Theme) => createStyles({
         flexDirection: 'column',
         flex: '1 0 auto',
         padding: 0,
-        margin: 0
+        margin: 0,
+        maxWidth: 'none',
+        width: '100%'
     },
     contentCenter: {
         margin: '0 auto'
@@ -147,7 +150,7 @@ class Layout extends Component<IProps, IState> {
 
         const downMd = isWidthDown('md', width)
 
-        return <div className={classes.root}>
+        return <Box component="div" className={classes.root}>
 
             <AppBar
                 theme={theme}
@@ -193,7 +196,7 @@ class Layout extends Component<IProps, IState> {
 
             </Container>
 
-        </div>
+        </Box>
     }
 
     private handleDrawerToggle() {

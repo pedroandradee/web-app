@@ -70,11 +70,15 @@
     "PROFILE": "Meus Dados",
     "ARCHIVE": {
       "TITLE": "Arquivos"
+    },
+    "PROTOCOLS": {
+      "TITLE": "Protocolos"
     }
   },
   "DRAWER": {
     "HOME": "Página Inicial",
-    "ARCHIVE": "Arquivos"
+    "ARCHIVE": "Arquivos",
+    "PROTOCOLS": "Protocolos"
   },
   "DEFAULT": {
     "LIST_EMPTY": "Nenhum registro encontrado!",
@@ -208,13 +212,15 @@
     "HOME_PAGE": "Página Inicial"
   },
   "NAVIGATION_TAB": {
-    "HOME": "[SR] - Página Inicial"
+    "HOME": "[SR] - Página Inicial",
+    "PROTOCOLS": "[SR] - Protocolos"
   },
   "TABLE": {
     "HOLD": "Aguarde...",
     "LOADING": "Por favor, aguarde enquanto os dados são carregados...",
     "EMPTY": "Desculpe, nenhum arquivo foi encontrado.",
-    "DEFAULT_EMPTY": "Desculpe, nenhuma informação encontrada."
+    "DEFAULT_EMPTY": "Desculpe, nenhuma informação encontrada.",
+    "VIEW_DETAILS": "Clique para visualizar detalhes"
   },
   "ARCHIVES": {
     "TITLE": "Arquivos",
@@ -302,7 +308,7 @@
     "FILE_NAME": "Nome do arquivo"
   },
   "PROTOCOLS": {
-    "TITLE": "Arquivos",
+    "TITLE": "Protocolos",
     "TABLE_HEAD": {
       "#": "#",
       "PROTOCOLS": "Protocolos",

@@ -8,6 +8,7 @@ import { ScopesUtil } from '../store/application/utils/scopes.util'
 import { AUTH_ROUTES } from './auth'
 import Loading from '../components/layout/loading'
 import { VerifyUserType } from '../components/verify.user.type'
+import { PROTOCOLS_ROUTES } from './protocols'
 
 
 export enum LogicalStrategy {
@@ -106,7 +107,7 @@ const HomePage = lazy(() => import('../containers/home/home'))
 const NotFound = lazy(() => import('../components/layout/escape.pages/not.found'))
 const AccessDenied = lazy(() => import('../components/layout/escape.pages/access.denied'))
 const InternalError = lazy(() => import('../components/layout/escape.pages/internal.error'))
-const Protocols = lazy(()=> import('../components/protocols/protocols.table'))
+// const Protocols = lazy(()=> import('../components/protocols/protocols.table'))
 
 const ROUTES: IPrivateRouteProps | any = [
     { path: '/', exact: true, redirect: '/app/home' },
@@ -123,11 +124,12 @@ const ROUTES: IPrivateRouteProps | any = [
                 exact: true,
                 component: HomePage
             },
-            {
+            ...PROTOCOLS_ROUTES,
+            /*{
                 path: '/app/archives',
                 component: Protocols,
                 exact: true
-            },
+            },*/
             { path: '*', redirect: '/not_found' }
         ]
     },
