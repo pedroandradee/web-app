@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { 
+import {
     Box,
     createStyles,
+    InputAdornment,
     Paper,
     Table,
     TableBody,
@@ -9,12 +10,15 @@ import {
     TableHead,
     TablePagination,
     TableRow,
+    TextField,
     Theme,
     Tooltip,
     Typography,
     withStyles,
     WithStyles
 } from '@material-ui/core'
+
+import SearchIcon from '@material-ui/icons/Search'
 import { ANIMATION, TABLES } from '../../../material.theme'
 import { withTranslation, WithTranslation } from 'react-i18next'
 import { Protocol } from '../../../store/application/models/protocol/protocol'
@@ -48,9 +52,9 @@ interface IProps extends RouteComponentProps {
     readonly protocols: Protocol[]
     readonly loading: boolean
     readonly paginator: IPaginator
-    
+
     loadRequest(paginator?: IPaginator): void
-    
+
     changePaginator(paginator?: IPaginator): void
 
     changeSearchPaginator(search: ISearch): void
@@ -65,6 +69,9 @@ class TableProtocolComponent extends Component<IJoinProps> {
 
         /* Bind Context */
         this.loadProtocols = this.loadProtocols.bind(this)
+        this.state={
+            search:0
+        }
     }
 
     /**
@@ -90,7 +97,19 @@ class TableProtocolComponent extends Component<IJoinProps> {
 
         return <Paper className={clsx(classes.paper, classes.fadeIn2)}>
             <Box display="flex">
-                Search component
+                <TextField placeholder="Pesquisa"
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="start">
+                                <SearchIcon />
+                            </InputAdornment>
+                        )
+                    }}
+                    onChange={(e) => {
+                      this.setState({search: Number(e.target.value)})
+                      console.log(this.state)
+                    }}  
+                />
             </Box>
 
             <Box pt={2}>
@@ -130,26 +149,17 @@ class TableProtocolComponent extends Component<IJoinProps> {
                         </TableHead>
 
                         <TableBody>
-                            {/*
-                                MOCK
-                                    //   ?.slice(page * rows, page * rows + rows)
-                                    ?.map((item: any, index: number) => {
-                                        return <ProtocolLine
-                                            key={`protocol_line_${index}`}
-                                            index={index}
-                                            item={item}
-                                        />
-                                    })
-                            */}
+
                             {
-                                !loading && (
+                                !loading && (   
                                     protocols?.map((item: Protocol, index: number) => {
+
                                         return <Tooltip
                                             key={`table_row_${index}`}
                                             title={`${t('TABLE.VIEW_DETAILS')}`}
                                             placement="top">
                                             <TableRow
-                                                className={classes.styleRow}
+                                                className={classes.styleRow}   
                                                 onClick={() =>
                                                     // history
                                                     //     .push(`/app/protocols/${item.protocol}`)
@@ -158,10 +168,10 @@ class TableProtocolComponent extends Component<IJoinProps> {
                                                 <Cell
                                                     className={classes.tableCell}
                                                     width="50px">
-                                                        <Typography variant="caption">
-                                                            {index + 1 || ' - - '}
-                                                        </Typography>
-                                                    </Cell>
+                                                    <Typography variant="caption">
+                                                        {index + 1 || ' - - '}
+                                                    </Typography>
+                                                </Cell>
                                                 <Cell className={classes.tableCell}>
                                                     <Typography variant="caption">
                                                         {item.protocol || ' - - '}
@@ -180,19 +190,20 @@ class TableProtocolComponent extends Component<IJoinProps> {
                                             </TableRow>
                                         </Tooltip>
                                     })
+
                                 )
 
                             }
                         </TableBody>
                     </Table>
                 </TableContainer>
-                
+
                 {
                     loading && (
                         <TableLoading
                             withIcon={true}
                             withMessage={true}
-                            message={t('TABLE.LOADING')}/>
+                            message={t('TABLE.LOADING')} />
                     )
                 }
                 {
@@ -201,7 +212,7 @@ class TableProtocolComponent extends Component<IJoinProps> {
                             message={t('TABLE.EMPTY')}
                             svg={DocumentNotFound}
                             svgSize="100px"
-                            viewBox="0 0 460 430"/>
+                            viewBox="0 0 460 430" />
                     )
                 }
 
@@ -222,7 +233,7 @@ class TableProtocolComponent extends Component<IJoinProps> {
                             ...paginator,
                             page
                         })
-                    }}/>
+                    }} />
             </Box>
         </Paper>
     }
