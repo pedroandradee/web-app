@@ -29,6 +29,7 @@ import TableLoading from '../../loading'
 import TableEmpty from '../../table.utils/table.empty'
 import { ReactComponent as DocumentNotFound } from '../../../assets/imgs/icons/custom/doc-not-found.svg'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
+import { Search } from '@material-ui/icons'
 
 const Style = (theme: Theme) => createStyles({
     ...ANIMATION,
@@ -69,9 +70,7 @@ class TableProtocolComponent extends Component<IJoinProps> {
 
         /* Bind Context */
         this.loadProtocols = this.loadProtocols.bind(this)
-        this.state={
-            search:0
-        }
+     
     }
 
     /**
@@ -97,18 +96,20 @@ class TableProtocolComponent extends Component<IJoinProps> {
 
         return <Paper className={clsx(classes.paper, classes.fadeIn2)}>
             <Box display="flex">
-                <TextField placeholder="Pesquisa"
+                <TextField 
+                id="search-text"
+                placeholder="Pesquisa"
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="start">
                                 <SearchIcon />
                             </InputAdornment>
-                        )
+                        ),
                     }}
                     onChange={(e) => {
-                      this.setState({search: Number(e.target.value)})
-                      console.log(this.state)
-                    }}  
+                       
+                        console.log(e)
+                    }}
                 />
             </Box>
 
@@ -151,7 +152,7 @@ class TableProtocolComponent extends Component<IJoinProps> {
                         <TableBody>
 
                             {
-                                !loading && (   
+                                !loading && (
                                     protocols?.map((item: Protocol, index: number) => {
 
                                         return <Tooltip
@@ -159,11 +160,10 @@ class TableProtocolComponent extends Component<IJoinProps> {
                                             title={`${t('TABLE.VIEW_DETAILS')}`}
                                             placement="top">
                                             <TableRow
-                                                className={classes.styleRow}   
+                                                className={classes.styleRow}
                                                 onClick={() =>
-                                                    // history
-                                                    //     .push(`/app/protocols/${item.protocol}`)
-                                                    console.log(`/app/protocols/${item.protocol}`)
+                                                     history.push(`/app/protocols/${item.protocol}`)
+                                                    //  console.log(`/app/protocols/${item.protocol}`)
                                                 }>
                                                 <Cell
                                                     className={classes.tableCell}

@@ -225,32 +225,38 @@
   "ARCHIVES": {
     "TITLE": "Arquivos",
     "TABLE_HEAD": {
-      "PRODUCT_COD": "Código do produto",
-      "NCM": "NCM",
-      "DESCRIPTION": "Descrição",
-      "TOTAL_COMPENSATE": "Total ressarcir",
+
+      "PRODUCT_DATA": {
+        "TITLE":"Dados do produto",
+        "PRODUCT_COD": "Código do produto",
+        "NCM": "NCM",
+        "CHASSI_VEHICLE":"Chassi_Veículo",
+        "DESCRIPTION": "Descrição"
+      }, 
+
+      "TOTAL_COMPENSATE": "Total Restituição Declarado",
       "TOTAL_COMPENSATE_CALCULATED": "Total ressarcir calculado",
-      "AMOUNT_INPUT": "Quantidade entrada",
-      "AMOUNT_OUTPUT": "Quantidade saída",
+     
       "INPUT_DECLARED_VALUES": {
         "TITLE": "Valores declarados entrada",
-        "UNITARY_VALUE_PRESUMED_MINIMUM": "Vl. unit. venda presumida min.",
-        "UNITARY_VALUE_PRESUMED_MEDIUM": "Vl. unit. venda presumida méd.",
-        "UNITARY_VALUE_PRESUMED_MAXIMUM": "Vl. unit. venda presumida máx."
+        "UNITARY_VALUE_PRESUMED": "Vl. unit. venda presumida.",
+         "AMOUNT": "Quantidade"
       },
       "DECLARED_VALUES_SALES": {
         "TITLE": "Valores declarados venda",
-        "UNITARY_VALUE_PRESUMED_MINIMUM": "Vl. unit. venda presumida min.",
-        "UNITARY_VALUE_PRESUMED_MEDIUM": "Vl. unit. venda presumida méd.",
-        "UNITARY_VALUE_PRESUMED_MAXIMUM": "Vl. unit. venda presumida máx."
+        "UNITARY_VALUE_PRESUMED": "Vl. unit. venda.",
+        "AMOUNT_OUTPUT": "Quantidade saída"
       },
       "CALCULATED_VALUES": {
         "TITLE": "Valores calculados",
-        "UNITARY_VALUE_PRESUMED_MINIMUM": "Vl. unit. venda presumida min.",
-        "UNITARY_VALUE_PRESUMED_MEDIUM": "Vl. unit. venda presumida méd.",
-        "UNITARY_VALUE_PRESUMED_MAXIMUM": "Vl. unit. venda presumida máx."
+        "UNITARY_VALUE_PRESUMED": "Vl. unit. venda presumida."
       },
-      "AUDITORS_ANALISIS": "Análise do auditor"
+      "AUDITORS_ANALISIS": "Análise do auditor",
+      "ALERT":{
+        "TITLE":"Alertas",
+        "DIVERGENT_NCM":"NCM Divergentes",
+        "SMALLER_AMOUNT":"Quantidade menor"
+      }
     },
     "INVALID": {
       "SOME_ROW_WITH_EMPTY_CELL": "Dados da planilha inválidos.",
