@@ -1,6 +1,6 @@
 {
   "name": "web-app",
-  "description": "Sistema de Ressarcimento",
+  "description": "Sistema de Restituição",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -114,9 +114,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/smtc-sefaz-pb/web-app"
+    "url": "https://github.com/sr-sefaz-pb/web-app"
   },
   "bugs": {
-    "url": "https://github.com/smtc-sefaz-pb/web-app/issues"
+    "url": "https://github.com/sr-sefaz-pb/web-app/issues"
   }
 }

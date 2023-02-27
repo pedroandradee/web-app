@@ -31,3 +31,22 @@ export const changeTheme = (themeMode: ThemeMode) => {
     return action(LayoutTypes.CHANGE_THEME, { themeMode })
 }
 
+/**
+ * Action responsible for triggering application update availability status modification.
+ * @memberof LayoutActions
+ * @alias LayoutActions.changeUpdateAvailable
+ * @function
+ * @param {boolean} updateAvailable Flag that records application update availability status.
+ * @param {ServiceWorkerRegistration} [registration] Register instance object triggered in application's service worker.
+ * @category React
+ * @subcategory Redux / Actions
+ * @return Redux.Action
+ */
+export const changeUpdateAvailable = (
+    updateAvailable: boolean,
+    registration: ServiceWorkerRegistration | undefined
+) => action(
+    LayoutTypes.UPDATE_AVAILABLE,
+    { updateAvailable, registration }
+)
+

@@ -13,6 +13,7 @@ export const LayoutTypes = createTypes(`
     CHANGE_AVATAR    
     CHANGE_BREAD_CRUMB
     CHANGE_THEME  
+    UPDATE_AVAILABLE
 `,
     {
         prefix: '@layout/'
@@ -32,4 +33,6 @@ export interface ILayoutState {
     readonly language: LanguageOptions
     readonly breadCrumbLast: string
     readonly themeMode: ThemeMode
+    readonly updateAvailable: boolean
+    readonly registration: ServiceWorkerRegistration | undefined
 }

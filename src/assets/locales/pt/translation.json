@@ -1,6 +1,7 @@
 {
   "APP": {
-    "TITLE": "Sistema de Restituição - SR"
+    "TITLE": "Sistema de Restituição - SR",
+    "UPDATE_AVAILABLE": "Uma nova versão do aplicativo está disponível!"
   },
   "AUTH": {
     "LOGIN": {

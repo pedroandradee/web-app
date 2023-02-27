@@ -10,7 +10,7 @@ import * as SnackBarActions from '../../../store/ducks/snack.bar/actions'
 import { IApplicationState } from '../../../store'
 import { WithTranslation, withTranslation } from 'react-i18next'
 
-function Alert(props: AlertProps) {
+export const Alert = (props: AlertProps) => {
     return <MuiAlert elevation={6} variant="filled" {...props} />
 }
 

@@ -7,6 +7,7 @@
     "tslint-config-prettier"
   ],
   "rules": {
+    "no-string-literal": false,
     "ordered-imports": false,
     "object-literal-sort-keys": false,
     "jsx-wrap-multiline": false,

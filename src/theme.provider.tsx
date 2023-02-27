@@ -14,6 +14,7 @@ import SnackbarComponent from './components/layout/snackbar'
 import Routes from './routes'
 import ErrorBoundary from './components/layout/error.boundary'
 import localStorageService from './services/local.storage'
+import UpdateAvailable from './components/layout/update.available'
 
 interface Props {
     readonly language: LanguageOptions
@@ -54,6 +55,7 @@ class ThemeProviderComponent extends Component<IJoinProps> {
             <ErrorBoundary>
                 <CssBaseline/>
                 <SnackbarComponent/>
+                <UpdateAvailable />
                 <Routes history={history}/>
             </ErrorBoundary>
         </ThemeProvider>

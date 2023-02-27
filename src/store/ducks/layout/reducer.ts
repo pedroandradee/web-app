@@ -10,7 +10,9 @@ const INITIAL_STATE: ILayoutState = {
     },
     language: MAP_LANGUAGE_TO_ENUM[i18n.language],
     breadCrumbLast: '',
-    themeMode: ThemeMode.LIGHT
+    themeMode: ThemeMode.LIGHT,
+    updateAvailable: false,
+    registration: undefined
 }
 
 const reducer: Reducer<ILayoutState> = (state: ILayoutState = INITIAL_STATE, action: any) => {
@@ -38,6 +40,10 @@ const reducer: Reducer<ILayoutState> = (state: ILayoutState = INITIAL_STATE, act
         case LayoutTypes.CHANGE_THEME:
             const { themeMode } = action.payload
             return { ...state, themeMode }
+
+        case LayoutTypes.UPDATE_AVAILABLE: 
+            const { updateAvailable, registration } = action.payload
+            return { ...state, updateAvailable, registration }
 
         default:
             return state
