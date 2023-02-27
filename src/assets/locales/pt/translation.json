@@ -213,8 +213,8 @@
     "HOME_PAGE": "Página Inicial"
   },
   "NAVIGATION_TAB": {
-    "HOME": "[SR] - Página Inicial",
-    "PROTOCOLS": "[SR] - Protocolos"
+    "HOME": "[SR] - Página inicial",
+    "PROTOCOL": "[SR] - Dados do protocolo"
   },
   "TABLE": {
     "HOLD": "Aguarde...",
