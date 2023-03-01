@@ -7,6 +7,8 @@ import { JsonUtils } from "../../utils/json.util"
  * @property {string} [cd_uf_nf_aquis]
  * @property {number} [cod_produto]
  * @property {string} [descricao]
+ * @property {number} [chassi_veiculo]
+ * @property {number} [ncm]
  * @property {number} [ncm_produto]
  * @property {number} [gtin_ean]
  * @property {number} [num_item_nf_aquis]
@@ -22,6 +24,7 @@ import { JsonUtils } from "../../utils/json.util"
  * @property {string} [tipo_bc_icms_st_prod_nf_aquis]
  * @property {number} [vl_pauta_icms_st_prod]
  * @property {string} [perc_mva_prod]
+ * @property {number} [pmpf]
  * @property {number} [vl_bc_icms_st_prod_nf_aquis]
  * @property {number} [vl_icms_st_item_nf_aquis]
  * @property {string} [num_nf_saida]
@@ -45,6 +48,7 @@ import { JsonUtils } from "../../utils/json.util"
 export class Archive {
     private _cd_uf_nf_aquis: string | undefined
     private _cod_produto: number | undefined
+    private _chassi_veiculo: number | undefined
     private _descricao: string | undefined
     private _ncm_produto: number | undefined
     private _gtin_ean: number | undefined
@@ -61,6 +65,7 @@ export class Archive {
     private _tipo_bc_icms_st_prod_nf_aquis: string | undefined
     private _vl_pauta_icms_st_prod: number | undefined
     private _perc_mva_prod: string | undefined
+    private _pmpf: number | undefined
     private _vl_bc_icms_st_prod_nf_aquis: number | undefined
     private _vl_icms_st_item_nf_aquis: number | undefined
     private _num_nf_saida: string | undefined
@@ -89,6 +94,13 @@ export class Archive {
         this._cd_uf_nf_aquis = value
     }
 
+    get chassi_veiculo(): number | undefined {
+        return this._chassi_veiculo
+    }
+
+    set chassi_veiculo(value: number | undefined) {
+        this._chassi_veiculo = value
+    }
     get cod_produto(): number | undefined {
         return this._cod_produto
     }
@@ -96,7 +108,6 @@ export class Archive {
     set cod_produto(value: number | undefined) {
         this._cod_produto = value
     }
-
     get descricao(): string | undefined {
         return this._descricao
     }
@@ -224,7 +235,13 @@ export class Archive {
     set perc_mva_prod(value: string | undefined) {
         this._perc_mva_prod = value
     }
+    get pmpf(): number | undefined {
+        return this._pmpf
+    }
 
+    set pmpf(value: number | undefined) {
+        this._pmpf = value
+    }
     get vl_bc_icms_st_prod_nf_aquis(): number | undefined {
         return this._vl_bc_icms_st_prod_nf_aquis
     }
@@ -394,6 +411,9 @@ export class Archive {
         if (json.cod_produto !== undefined) {
             this.cod_produto = json.cod_produto
         }
+        if(json.chassi_veiculo!==undefined){
+            this.chassi_veiculo=json.chassi_veiculo
+        }
         if (json.descricao !== undefined) {
             this.descricao = json.descricao
         }
@@ -549,6 +569,7 @@ export class Archive {
         return [
             'cd_uf_nf_aquis',
             'cod_produto',
+            'chass_veiculo',
             'descricao',
             'ncm_produto',
             'gtin_ean',
@@ -565,6 +586,7 @@ export class Archive {
             'tipo_bc_icms_st_prod_nf_aquis',
             'vl_pauta_icms_st_prod',
             'perc_mva_prod',
+            'pmpv',
             'vl_bc_icms_st_prod_nf_aquis',
             'vl_icms_st_item_nf_aquis',
             'num_nf_saida',

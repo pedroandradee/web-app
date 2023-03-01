@@ -83,3 +83,4 @@ build
 /public/firebase.config.js
 /docs/
 /.cache/
+.env
