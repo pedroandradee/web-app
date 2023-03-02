@@ -4,87 +4,100 @@ import { JsonUtils } from "../../utils/json.util"
  * Archive
  * @category Models
  * @subcategory archive
+ * @property {number} [aliquota_entrada]
  * @property {string} [cd_uf_nf_aquis]
- * @property {number} [cod_produto]
- * @property {string} [descricao]
  * @property {number} [chassi_veiculo]
+ * @property {number} [cod_produto]
+ * @property {string} [descricao_completa_item]
+ * @property {string} [descricao_item_produto]
+ * @property {string} [dta_emiss_nf_aquis]
+ * @property {string} [dta_emiss_nf_saida]
+ * @property {number} [gtin_ean]
  * @property {number} [ncm]
  * @property {number} [ncm_produto]
- * @property {number} [gtin_ean]
- * @property {number} [num_item_nf_aquis]
- * @property {number} [aliquota_interna]
- * @property {string} [dta_emiss_nf_aquis]
- * @property {number} [num_nf_aquis]
- * @property {number} [num_chv_nf_aquis]
- * @property {number} [serie_entrada]
- * @property {number} [quantidade_entrada]
- * @property {string} [vl_unit_prod_nf_aquis]
- * @property {number} [vl_bc_icms_op_prop_prod_nf_aquis]
- * @property {number} [vl_icms_op_prop_prod_nf_aquis]
- * @property {string} [tipo_bc_icms_st_prod_nf_aquis]
- * @property {number} [vl_pauta_icms_st_prod]
- * @property {string} [perc_mva_prod]
- * @property {number} [pmpf]
- * @property {number} [vl_bc_icms_st_prod_nf_aquis]
- * @property {number} [vl_icms_st_item_nf_aquis]
- * @property {string} [num_nf_saida]
  * @property {string} [num_chv_saida]
- * @property {string} [dta_emiss_nf_saida]
- * @property {string} [vl_alq_icms_st_prod_oper_saida]
- * @property {number} [quantidade_saida]
+ * @property {number} [num_chv_nf_aquis]
+ * @property {number} [!num_item_nf_aquis]
  * @property {string} [num_item_nf_saida]
- * @property {string} [descricao_item_produto]
- * @property {number} [vl_unit_prod_nf_saida]
+ * @property {number} [num_nf_aquis]
+ * @property {string} [num_nf_saida]
+ * @property {number} [outras_operacoes_que_nao_geram_ressarcimento]
+ * @property {number} [pmpf]
+ * @property {string} [perc_mva_prod]
+ * @property {number} [quantidade_saida]
+ * @property {number} [quantidade_saldo]
+ * @property {number} [quantidade_entrada]
+ * @property {number} [saldo_st_total]
+ * @property {number} [saldo_st_unitario]
+ * @property {number} [!serie_entrada]
+ * @property {string} [tipo_bc_icms_st_prod_nf_aquis]
+ * @property {number} [unidade_venda]
+ * @property {string} [vl_alq_icms_st_prod_oper_saida]
+ * @property {number} [vl_bc_icms_op_prop_prod_nf_aquis]
+ * @property {number} [vl_bc_icms_st_prod_nf_aquis]
+ * @property {number} [!vl_bc_icms_st_prod_nf_saida]
  * @property {string} [vl_desc_prod_nf_saida]
+ * @property {number} [vl_icms_st_item_nf_aquis]
+ * @property {number} [vl_icms_st_prod_nf_saida]
+ * @property {number} [vl_icms_op_prop_prod_nf_aquis]
+ * @property {number} [vl_pauta_icms_st_prod]
+ * @property {number} [vl_ressar_icms_st_prod]
+ * @property {string} [!vl_unit_prod_nf_aquis]
+ * @property {number} [vl_unit_prod_nf_saida]
  * @property {number} [vl_venda_unitario_presumido]
  * @property {number} [vl_venda_unitario_presumido_x_qtd_saida]
- * @property {number} [vl_bc_icms_st_prod_nf_saida]
- * @property {number} [quantidade_saldo]
- * @property {number} [saldo_st_unitario]
- * @property {number} [saldo_st_total]
- * @property {number} [vl_ressar_icms_st_prod]
- * @property {number} [outras_operacoes_que_nao_geram_ressarcimento]
  */
 export class Archive {
+    private _aliquota_entrada: number | undefined
     private _cd_uf_nf_aquis: string | undefined
-    private _cod_produto: number | undefined
     private _chassi_veiculo: number | undefined
-    private _descricao: string | undefined
-    private _ncm_produto: number | undefined
-    private _gtin_ean: number | undefined
-    private _num_item_nf_aquis: number | undefined
-    private _aliquota_interna: number | undefined
-    private _dta_emiss_nf_aquis: string | undefined
-    private _num_nf_aquis: number | undefined
-    private _num_chv_nf_aquis: number | undefined
-    private _serie_entrada: number | undefined
-    private _quantidade_entrada: number | undefined
-    private _vl_unit_prod_nf_aquis: string | undefined
-    private _vl_bc_icms_op_prop_prod_nf_aquis: number | undefined
-    private _vl_icms_op_prop_prod_nf_aquis: number | undefined
-    private _tipo_bc_icms_st_prod_nf_aquis: string | undefined
-    private _vl_pauta_icms_st_prod: number | undefined
-    private _perc_mva_prod: string | undefined
-    private _pmpf: number | undefined
-    private _vl_bc_icms_st_prod_nf_aquis: number | undefined
-    private _vl_icms_st_item_nf_aquis: number | undefined
-    private _num_nf_saida: string | undefined
-    private _num_chv_saida: string | undefined
-    private _dta_emiss_nf_saida: string | undefined
-    private _vl_alq_icms_st_prod_oper_saida: string | undefined
-    private _quantidade_saida: number | undefined
-    private _num_item_nf_saida: string | undefined
+    private _cod_produto: number | undefined
+    private _descricao_completa_item: string | undefined
     private _descricao_item_produto: string | undefined
-    private _vl_unit_prod_nf_saida: number | undefined
+    private _dta_emiss_nf_aquis: string | undefined
+    private _dta_emiss_nf_saida: string | undefined
+    private _gtin_ean: number | undefined
+    private _ncm: number | undefined
+    private _ncm_produto: number | undefined
+    private _num_chv_saida: string | undefined
+    private _num_chv_nf_aquis: number | undefined
+    //private _num_item_nf_aquis: number | undefined
+    private _num_item_nf_saida: string | undefined
+    private _num_nf_aquis: number | undefined
+    private _num_nf_saida: string | undefined
+    private _outras_operacoes_que_nao_geram_ressarcimento: number | undefined
+    private _pmpf: number | undefined
+    private _perc_mva_prod: string | undefined
+    private _quantidade_saida: number | undefined
+    private _quantidade_saldo: number | undefined
+    private _quantidade_entrada: number | undefined
+    private _saldo_st_total: number | undefined
+    private _saldo_st_unitario: number | undefined
+    //private _serie_entrada: number | undefined
+    private _tipo_bc_icms_st_prod_nf_aquis: string | undefined
+    private _unidade_venda: number | undefined
+    private _vl_bc_icms_op_prop_prod_nf_aquis: number | undefined
+    private _vl_bc_icms_st_prod_nf_aquis: number | undefined
+    private _vl_bc_icms_st_prod_nf_saida: number | undefined
+    //private _vl_alq_icms_st_prod_oper_saida: string | undefined
     private _vl_desc_prod_nf_saida: string | undefined
+    private _vl_icms_st_item_nf_aquis: number | undefined
+    private _vl_icms_st_prod_nf_saida: number | undefined
+    private _vl_icms_op_prop_prod_nf_aquis: number | undefined
+    private _vl_pauta_icms_st_prod: number | undefined
+    private _vl_ressar_icms_st_prod: number | undefined
+    //private _vl_unit_prod_nf_aquis: string | undefined
+    private _vl_unit_prod_nf_saida: number | undefined
     private _vl_venda_unitario_presumido: number | undefined
     private _vl_venda_unitario_presumido_x_qtd_saida: number | undefined
-    private _vl_bc_icms_st_prod_nf_saida: number | undefined
-    private _quantidade_saldo: number | undefined
-    private _saldo_st_unitario: number | undefined
-    private _saldo_st_total: number | undefined
-    private _vl_ressar_icms_st_prod: number | undefined
-    private _outras_operacoes_que_nao_geram_ressarcimento: number | undefined
+
+    get aliquota_entrada(): number | undefined {
+        return this._aliquota_entrada
+    }
+
+    set aliquota_entrada(value: number | undefined) {
+        this._aliquota_entrada = value
+    }
 
     get cd_uf_nf_aquis(): string | undefined {
         return this._cd_uf_nf_aquis
@@ -108,44 +121,21 @@ export class Archive {
     set cod_produto(value: number | undefined) {
         this._cod_produto = value
     }
-    get descricao(): string | undefined {
-        return this._descricao
+
+    get descricao_completa_item(): string | undefined {
+        return this._descricao_completa_item
     }
 
-    set descricao(value: string | undefined) {
-        this._descricao = value
+    set descricao_completa_item(value: string | undefined) {
+        this._descricao_completa_item = value
     }
 
-    get ncm_produto(): number | undefined {
-        return this._ncm_produto
+    get descricao_item_produto(): string | undefined {
+        return this._descricao_item_produto
     }
 
-    set ncm_produto(value: number | undefined) {
-        this._ncm_produto = value
-    }
-
-    get gtin_ean(): number | undefined {
-        return this._gtin_ean
-    }
-
-    set gtin_ean(value: number | undefined) {
-        this._gtin_ean = value
-    }
-
-    get num_item_nf_aquis(): number | undefined {
-        return this._num_item_nf_aquis
-    }
-
-    set num_item_nf_aquis(value: number | undefined) {
-        this._num_item_nf_aquis = value
-    }
-
-    get aliquota_interna(): number | undefined {
-        return this._aliquota_interna
-    }
-
-    set aliquota_interna(value: number | undefined) {
-        this._aliquota_interna = value
+    set descricao_item_produto(value: string | undefined) {
+        this._descricao_item_produto = value
     }
 
     get dta_emiss_nf_aquis(): string | undefined {
@@ -156,14 +146,44 @@ export class Archive {
         this._dta_emiss_nf_aquis = value
     }
 
-    get num_nf_aquis(): number | undefined {
-        return this._num_nf_aquis
+    get dta_emiss_nf_saida(): string | undefined {
+        return this._dta_emiss_nf_saida
     }
 
-    set num_nf_aquis(value: number | undefined) {
-        this._num_nf_aquis = value
+    set dta_emiss_nf_saida(value: string | undefined) {
+        this._dta_emiss_nf_saida = value
     }
 
+    get gtin_ean(): number | undefined {
+        return this._gtin_ean
+    }
+
+    set gtin_ean(value: number | undefined) {
+        this._gtin_ean = value
+    }
+
+    get ncm(): number | undefined {
+        return this._ncm
+    }
+    set ncm(value: number | undefined) {
+        this._ncm
+    }
+
+    get ncm_produto(): number | undefined {
+        return this._ncm_produto
+    }
+
+    set ncm_produto(value: number | undefined) {
+        this._ncm_produto = value
+    }
+
+    get num_chv_saida(): string | undefined {
+        return this._num_chv_saida
+    }
+
+    set num_chv_saida(value: string | undefined) {
+        this._num_chv_saida = value
+    }
     get num_chv_nf_aquis(): number | undefined {
         return this._num_chv_nf_aquis
     }
@@ -172,90 +192,28 @@ export class Archive {
         this._num_chv_nf_aquis = value
     }
 
-    get serie_entrada(): number | undefined {
-        return this._serie_entrada
+    /*get num_item_nf_aquis(): number | undefined {
+        return this._num_item_nf_aquis
     }
 
-    set serie_entrada(value: number | undefined) {
-        this._serie_entrada = value
+    set num_item_nf_aquis(value: number | undefined) {
+        this._num_item_nf_aquis = value
+    }*/
+
+    get num_item_nf_saida(): string | undefined {
+        return this._num_item_nf_saida
     }
 
-    get quantidade_entrada(): number | undefined {
-        return this._quantidade_entrada
+    set num_item_nf_saida(value: string | undefined) {
+        this._num_item_nf_saida = value
     }
 
-    set quantidade_entrada(value: number | undefined) {
-        this._quantidade_entrada = value
+    get num_nf_aquis(): number | undefined {
+        return this._num_nf_aquis
     }
 
-    get vl_unit_prod_nf_aquis(): string | undefined {
-        return this._vl_unit_prod_nf_aquis
-    }
-
-    set vl_unit_prod_nf_aquis(value: string | undefined) {
-        this._vl_unit_prod_nf_aquis = value
-    }
-
-    get vl_bc_icms_op_prop_prod_nf_aquis(): number | undefined {
-        return this._vl_bc_icms_op_prop_prod_nf_aquis
-    }
-
-    set vl_bc_icms_op_prop_prod_nf_aquis(value: number | undefined) {
-        this._vl_bc_icms_op_prop_prod_nf_aquis = value
-    }
-
-    get vl_icms_op_prop_prod_nf_aquis(): number | undefined {
-        return this._vl_icms_op_prop_prod_nf_aquis
-    }
-
-    set vl_icms_op_prop_prod_nf_aquis(value: number | undefined) {
-        this._vl_icms_op_prop_prod_nf_aquis = value
-    }
-
-    get tipo_bc_icms_st_prod_nf_aquis(): string | undefined {
-        return this._tipo_bc_icms_st_prod_nf_aquis
-    }
-
-    set tipo_bc_icms_st_prod_nf_aquis(value: string | undefined) {
-        this._tipo_bc_icms_st_prod_nf_aquis = value
-    }
-
-    get vl_pauta_icms_st_prod(): number | undefined {
-        return this._vl_pauta_icms_st_prod
-    }
-
-    set vl_pauta_icms_st_prod(value: number | undefined) {
-        this._vl_pauta_icms_st_prod = value
-    }
-
-    get perc_mva_prod(): string | undefined {
-        return this._perc_mva_prod
-    }
-
-    set perc_mva_prod(value: string | undefined) {
-        this._perc_mva_prod = value
-    }
-    get pmpf(): number | undefined {
-        return this._pmpf
-    }
-
-    set pmpf(value: number | undefined) {
-        this._pmpf = value
-    }
-    get vl_bc_icms_st_prod_nf_aquis(): number | undefined {
-        return this._vl_bc_icms_st_prod_nf_aquis
-    }
-
-    set vl_bc_icms_st_prod_nf_aquis(value: number | undefined) {
-        this._vl_bc_icms_st_prod_nf_aquis = value
-    }
-
-    get vl_icms_st_item_nf_aquis(): number | undefined {
-        return this._vl_icms_st_item_nf_aquis
-    }
-
-    set vl_icms_st_item_nf_aquis(value: number | undefined) {
-        this._vl_icms_st_item_nf_aquis = value
+    set num_nf_aquis(value: number | undefined) {
+        this._num_nf_aquis = value
     }
 
     get num_nf_saida(): string | undefined {
@@ -266,28 +224,29 @@ export class Archive {
         this._num_nf_saida = value
     }
 
-    get num_chv_saida(): string | undefined {
-        return this._num_chv_saida
+    get outras_operacoes_que_nao_geram_ressarcimento(): number | undefined {
+        return this._outras_operacoes_que_nao_geram_ressarcimento
     }
 
-    set num_chv_saida(value: string | undefined) {
-        this._num_chv_saida = value
+    set outras_operacoes_que_nao_geram_ressarcimento(value: number | undefined) {
+        this._outras_operacoes_que_nao_geram_ressarcimento = value
     }
 
-    get dta_emiss_nf_saida(): string | undefined {
-        return this._dta_emiss_nf_saida
+
+    get pmpf(): number | undefined {
+        return this._pmpf
     }
 
-    set dta_emiss_nf_saida(value: string | undefined) {
-        this._dta_emiss_nf_saida = value
+    set pmpf(value: number | undefined) {
+        this._pmpf = value
     }
 
-    get vl_alq_icms_st_prod_oper_saida(): string | undefined {
-        return this._vl_alq_icms_st_prod_oper_saida
+    get perc_mva_prod(): string | undefined {
+        return this._perc_mva_prod
     }
 
-    set vl_alq_icms_st_prod_oper_saida(value: string | undefined) {
-        this._vl_alq_icms_st_prod_oper_saida = value
+    set perc_mva_prod(value: string | undefined) {
+        this._perc_mva_prod = value
     }
 
     get quantidade_saida(): number | undefined {
@@ -298,20 +257,119 @@ export class Archive {
         this._quantidade_saida = value
     }
 
-    get num_item_nf_saida(): string | undefined {
-        return this._num_item_nf_saida
+    get quantidade_saldo(): number | undefined {
+        return this._quantidade_saldo
     }
 
-    set num_item_nf_saida(value: string | undefined) {
-        this._num_item_nf_saida = value
+    set quantidade_saldo(value: number | undefined) {
+        this._quantidade_saldo = value
     }
 
-    get descricao_item_produto(): string | undefined {
-        return this._descricao_item_produto
+    get quantidade_entrada(): number | undefined {
+        return this._quantidade_entrada
     }
 
-    set descricao_item_produto(value: string | undefined) {
-        this._descricao_item_produto = value
+    set quantidade_entrada(value: number | undefined) {
+        this._quantidade_entrada = value
+    }
+
+    /*  get serie_entrada(): number | undefined {
+          return this._serie_entrada
+     } 
+     set serie_entrada(value: number | undefined) {
+          this._serie_entrada = value
+      }
+      }*/
+
+    get saldo_st_total(): number | undefined {
+        return this._saldo_st_total
+    }
+
+    set saldo_st_total(value: number | undefined) {
+        this._saldo_st_total = value
+    }
+
+    get saldo_st_unitario(): number | undefined {
+        return this._saldo_st_unitario
+    }
+
+    set saldo_st_unitario(value: number | undefined) {
+        this._saldo_st_unitario = value
+    }
+
+    get tipo_bc_icms_st_prod_nf_aquis(): string | undefined {
+        return this._tipo_bc_icms_st_prod_nf_aquis
+    }
+    set tipo_bc_icms_st_prod_nf_aquis(value: string | undefined) {
+        this._tipo_bc_icms_st_prod_nf_aquis = value
+    }
+
+    get unidade_venda(): number | undefined {
+        return this.unidade_venda
+    }
+
+    set unidade_venda(value: number | undefined) {
+        this._unidade_venda = value
+    }
+
+    get vl_bc_icms_op_prop_prod_nf_aquis(): number | undefined {
+        return this._vl_bc_icms_op_prop_prod_nf_aquis
+    }
+
+    get vl_bc_icms_st_prod_nf_aquis(): number | undefined {
+        return this._vl_bc_icms_st_prod_nf_aquis
+    }
+
+    set vl_bc_icms_st_prod_nf_aquis(value: number | undefined) {
+        this._vl_bc_icms_st_prod_nf_aquis = value
+    }
+    set vl_bc_icms_op_prop_prod_nf_aquis(value: number | undefined) {
+        this._vl_bc_icms_op_prop_prod_nf_aquis = value
+    }
+
+   /* get vl_unit_prod_nf_aquis(): string | undefined {
+        return this._vl_unit_prod_nf_aquis
+    }
+
+    set vl_unit_prod_nf_aquis(value: string | undefined) {
+        this._vl_unit_prod_nf_aquis = value
+    }*/
+
+
+
+    get vl_icms_op_prop_prod_nf_aquis(): number | undefined {
+        return this._vl_icms_op_prop_prod_nf_aquis
+    }
+
+    set vl_icms_op_prop_prod_nf_aquis(value: number | undefined) {
+        this._vl_icms_op_prop_prod_nf_aquis = value
+    }
+
+
+
+    get vl_pauta_icms_st_prod(): number | undefined {
+        return this._vl_pauta_icms_st_prod
+    }
+
+    set vl_pauta_icms_st_prod(value: number | undefined) {
+        this._vl_pauta_icms_st_prod = value
+    }
+
+    get vl_icms_st_item_nf_aquis(): number | undefined {
+        return this._vl_icms_st_item_nf_aquis
+    }
+
+    set vl_icms_st_item_nf_aquis(value: number | undefined) {
+        this._vl_icms_st_item_nf_aquis = value
+    }
+
+
+    get vl_alq_icms_st_prod_oper_saida(): string | undefined {
+        return this._vl_alq_icms_st_prod_oper_saida
+    }
+
+    set vl_alq_icms_st_prod_oper_saida(value: string | undefined) {
+        this._vl_alq_icms_st_prod_oper_saida = value
     }
 
     get vl_unit_prod_nf_saida(): number | undefined {
@@ -354,29 +412,6 @@ export class Archive {
         this._vl_bc_icms_st_prod_nf_saida = value
     }
 
-    get quantidade_saldo(): number | undefined {
-        return this._quantidade_saldo
-    }
-
-    set quantidade_saldo(value: number | undefined) {
-        this._quantidade_saldo = value
-    }
-
-    get saldo_st_unitario(): number | undefined {
-        return this._saldo_st_unitario
-    }
-
-    set saldo_st_unitario(value: number | undefined) {
-        this._saldo_st_unitario = value
-    }
-
-    get saldo_st_total(): number | undefined {
-        return this._saldo_st_total
-    }
-
-    set saldo_st_total(value: number | undefined) {
-        this._saldo_st_total = value
-    }
 
     get vl_ressar_icms_st_prod(): number | undefined {
         return this._vl_ressar_icms_st_prod
@@ -384,14 +419,6 @@ export class Archive {
 
     set vl_ressar_icms_st_prod(value: number | undefined) {
         this._vl_ressar_icms_st_prod = value
-    }
-
-    get outras_operacoes_que_nao_geram_ressarcimento(): number | undefined {
-        return this._outras_operacoes_que_nao_geram_ressarcimento
-    }
-
-    set outras_operacoes_que_nao_geram_ressarcimento(value: number | undefined) {
-        this._outras_operacoes_que_nao_geram_ressarcimento = value
     }
 
     public fromJSON(json: any): Archive {
@@ -411,11 +438,11 @@ export class Archive {
         if (json.cod_produto !== undefined) {
             this.cod_produto = json.cod_produto
         }
-        if(json.chassi_veiculo!==undefined){
-            this.chassi_veiculo=json.chassi_veiculo
+        if (json.chassi_veiculo !== undefined) {
+            this.chassi_veiculo = json.chassi_veiculo
         }
-        if (json.descricao !== undefined) {
-            this.descricao = json.descricao
+        if (json.descricao_completa_item !== undefined) {
+            this.descricao_completa_item = json.descricao_completa_item
         }
         if (json.ncm_produto !== undefined) {
             this.ncm_produto = json.ncm_produto
@@ -426,8 +453,8 @@ export class Archive {
         if (json.num_item_nf_aquis !== undefined) {
             this.num_item_nf_aquis = json.num_item_nf_aquis
         }
-        if (json.aliquota_interna !== undefined) {
-            this.aliquota_interna = json.aliquota_interna
+        if (json.aliquota_entrada !== undefined) {
+            this.aliquota_entrada = json.aliquota_entrada
         }
         if (json.dta_emiss_nf_aquis !== undefined) {
             this.dta_emiss_nf_aquis = json.dta_emiss_nf_aquis
@@ -527,11 +554,11 @@ export class Archive {
         return {
             cd_uf_nf_aquis: this.cd_uf_nf_aquis || undefined,
             cod_produto: this.cod_produto || undefined,
-            descricao: this.descricao || undefined,
+            descricao_completa_item: this.descricao_completa_item || undefined,
             ncm_produto: this.ncm_produto || undefined,
             gtin_ean: this.gtin_ean || undefined,
             num_item_nf_aquis: this.num_item_nf_aquis || undefined,
-            aliquota_interna: this.aliquota_interna || undefined,
+            aliquota_entrada: this.aliquota_entrada || undefined,
             dta_emiss_nf_aquis: this.dta_emiss_nf_aquis || undefined,
             num_nf_aquis: this.num_nf_aquis || undefined,
             num_chv_nf_aquis: this.num_chv_nf_aquis || undefined,
@@ -570,11 +597,11 @@ export class Archive {
             'cd_uf_nf_aquis',
             'cod_produto',
             'chass_veiculo',
-            'descricao',
+            'descricao_completa_item',
             'ncm_produto',
             'gtin_ean',
             'num_item_nf_aquis',
-            'aliquota_interna',
+            'aliquota_entrada',
             'dta_emiss_nf_aquis',
             'num_nf_aquis',
             'num_chv_nf_aquis',
@@ -616,7 +643,7 @@ export class Archive {
         if (json.cod_produto === undefined) {
             return true
         }
-        if (json.descricao === undefined) {
+        if (json.descricao_completa_item === undefined) {
             return true
         }
         if (json.ncm_produto === undefined) {
@@ -628,7 +655,7 @@ export class Archive {
         if (json.num_item_nf_aquis === undefined) {
             return true
         }
-        if (json.aliquota_interna === undefined) {
+        if (json.aliquota_entrada === undefined) {
             return true
         }
         if (json.dta_emiss_nf_aquis === undefined) {
@@ -725,7 +752,7 @@ export class Archive {
     }
 
     public calculation_invalidation(json: any): boolean {
-      //  console.log(json)
+        //  console.log(json)
 
         if (json.vl_venda_unitario_presumido_x_qtd_saida !==
             Number((json.vl_venda_unitario_presumido || 0) * (json.quantidade_saida || 0).toFixed(2))) {
@@ -742,7 +769,7 @@ export class Archive {
                 json.saldo_st_total || 0, json.quantidade_saldo || 1)
             return true
         }
-      
+
         /*if (json.vl_ressar_icms_st_prod !==
             Number(((json.vl_venda_unitario_presumido_x_qtd_saida || 0) - (json.vl_bc_icms_st_prod_nf_saida || 0).toFixed(2)))
             * (json.vl_alq_icms_st_prod_oper_saida || 0)) {
