@@ -104,10 +104,10 @@ export class ArchiveInvalidLineComponent extends Component<IJoinProps> {
             </Cell>
             <Cell 
                 className={
-                    item.descricao === undefined ?
+                    item.descricao_completa_item=== undefined ?
                     clsx(classes.tableCell, classes.invalidCell) :
                     classes.tableCell}>
-                {item.descricao || ' - - '}
+                {item.descricao_completa_item || ' - - '}
             </Cell>
             <Cell 
                 className={
@@ -132,10 +132,10 @@ export class ArchiveInvalidLineComponent extends Component<IJoinProps> {
             </Cell>
             <Cell 
                 className={
-                    item.aliquota_interna === undefined ?
+                    item.aliquota_entrada === undefined ?
                     clsx(classes.tableCell, classes.invalidCell) :
                     classes.tableCell}>
-                { item.aliquota_interna || ' - - '}
+                { item.aliquota_entrada || ' - - '}
               
             </Cell>
             <Cell 
@@ -161,24 +161,10 @@ export class ArchiveInvalidLineComponent extends Component<IJoinProps> {
             </Cell>
             <Cell 
                 className={
-                    item.serie_entrada === undefined ?
-                    clsx(classes.tableCell, classes.invalidCell) :
-                    classes.tableCell}>
-                {item.serie_entrada || ' - - '}
-            </Cell>
-            <Cell 
-                className={
                     item.quantidade_entrada === undefined ?
                     clsx(classes.tableCell, classes.invalidCell) :
                     classes.tableCell}>
                 { item.quantidade_entrada || ' - - '}
-            </Cell>
-            <Cell 
-                className={
-                    item.vl_unit_prod_nf_aquis === undefined ?
-                    clsx(classes.tableCell, classes.invalidCell) :
-                    classes.tableCell}>
-                { item.vl_unit_prod_nf_aquis  || ' - - '}
             </Cell>
             <Cell 
                 className={

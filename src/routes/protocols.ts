@@ -1,7 +1,7 @@
 import { lazy } from 'react'
 
 const ProtocolsList = lazy(() => import ('../containers/protocol/list'))
-const ArchivesList = lazy(() => import ('../containers/archive/list'))
+const ArchivesList = lazy(() => import ('../containers/protocol/data'))
 
 export const PROTOCOLS_ROUTES = [
     {

@@ -22,14 +22,12 @@ import {
 import SearchIcon from '@material-ui/icons/Search'
 import { withTranslation, WithTranslation } from 'react-i18next'
 import * as XLSX from 'xlsx'
-import { ANIMATION, TABLES } from '../../material.theme'
-import { Archive } from '../../store/application/models/archive/archive'
-import { IPaginator, ISearch } from '../../store/ducks/root.types'
-import Cell from '../table.utils/cell'
-import TableRowLoading from '../table.utils/table.row.loading'
-import ArchiveLine from './line'
-import { ArchiveInvalidate } from '../../store/application/models/archive/archive.invalidate'
-import ArchiveTableInvalidDialog from './archive.table.invalid.dialog'
+import { ANIMATION, TABLES } from '../../../material.theme'
+import { Archive } from '../../../store/application/models/archive/archive'
+import { IPaginator, ISearch } from '../../../store/ducks/root.types'
+import Cell from '../../table.utils/cell'
+import TableRowLoading from '../../table.utils/table.row.loading'
+import GeneralConsultationLine from './line'
 // import TableEmpty from '../table.utils/table.empty'
 
 // import { ReactComponent as DocNotFound } from '../../assets/imgs/icons/custom/doc-not-found.svg'
@@ -48,8 +46,6 @@ const Style = (theme: Theme) => createStyles({
 
 interface IProps extends WithTranslation {
     readonly archives: Archive[]
-    readonly invalidate: ArchiveInvalidate[]
-    readonly dialog: boolean
     readonly loading: boolean
     readonly paginator: IPaginator
 
@@ -58,10 +54,6 @@ interface IProps extends WithTranslation {
     changeSearchPaginator(search: ISearch): void
 
     changeArchiveList(data: Archive[]): void
-
-    changeInvalidateList(data: ArchiveInvalidate[]): void
-
-    changeInvalidDialog(dialog: boolean): void
 
     resetList(): void
 }
@@ -78,7 +70,7 @@ const INITIAL_STATE = {
     empty: false
 }
 
-class ArchiveTableComponent extends Component<IJoinProps, IState> {
+class GeneralConsultationTableComponent extends Component<IJoinProps, IState> {
 
     constructor(props: IJoinProps) {
         super(props)
@@ -87,7 +79,6 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
         this.state = INITIAL_STATE
 
         /* Bind context */
-        this.exportFile = this.exportFile.bind(this)
         this.readFile = this.readFile.bind(this)
         this.readFinished = this.readFinished.bind(this)
     }
@@ -97,11 +88,8 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
             t,
             classes,
             archives,
-            invalidate,
             loading,
-            dialog,
             paginator,
-            changeInvalidDialog,
             changePaginator
         } = this.props
 
@@ -118,12 +106,6 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
         } = paginator
 
         return <Paper className={classes.paper}>
-
-            <ArchiveTableInvalidDialog
-                invalidate={invalidate}
-                dialog={dialog}
-                changeInvalidDialog={changeInvalidDialog}
-            />
 
             <Box pt={2}>
                 <Box
@@ -173,19 +155,6 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                         display="flex"
                         style={{ gap: 5 }}
                         p={0.5}>
-                        <Tooltip title={`${t('BUTTON.EXPORT.TOOLTIP')}`}>
-                            <span>
-                                <Button
-                                    size="small"
-                                    color="primary"
-                                    variant="contained"
-                                    disabled={readLoading || loading}
-                                    onClick={this.exportFile}>
-                                    {t('BUTTON.EXPORT.TITLE')}
-                                </Button>
-                            </span>
-                        </Tooltip>
-
                         <Tooltip title={`${t('BUTTON.IMPORT.TOOLTIP')}`}>
                             <span>
                                 <Button
@@ -356,11 +325,11 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
 
                         <TableBody>
                             {
-                                (!loading && !readLoading && invalidate?.length === 0) &&
+                                (!loading && !readLoading /*&& invalidate?.length === 0*/) &&
                                 archives
                                     ?.slice(page * rows, page * rows + rows)
                                     ?.map((item: Archive, index: number) => {
-                                        return <ArchiveLine
+                                        return <GeneralConsultationLine
                                             key={`archive_line_${index}`}
                                             index={index}
                                             item={item} />
@@ -407,7 +376,7 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                     )
                 */}
                 {
-                    (!loading && !readLoading && invalidate?.length > 0) &&
+                    (!loading && !readLoading /*&& invalidate?.length > 0*/) &&
                     <Box
                         display="flex"
                         justifyContent="flex-end"
@@ -415,7 +384,7 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                         style={{
                             cursor: "pointer"
                         }}
-                        onClick={() => changeInvalidDialog(true)}>
+                        onClick={() => alert("oi")/*changeInvalidDialog(true)*/}>
                         <Tooltip title={`${t('ARCHIVES.INVALID.TOOLTIP')}`}>
                             <Button
                                 size="small"
@@ -430,19 +399,7 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
         </Paper>
     }
 
-    /**
-     * exports the base model to be filled
-     */
-    private exportFile(): void {
-        // head columns(make the adjustments after check the model table)
-        const headers: any[] = [new Archive().exportHeaders()]
-        // work sheet
-        const ws = XLSX.utils.aoa_to_sheet(headers)
-        // work book
-        const wb = XLSX.utils.book_new()
-        XLSX.utils.book_append_sheet(wb, ws, "Sheet1")
-        XLSX.writeFile(wb, `Modelo_de_dados.xlsx`, { bookType: "xlsx", type: "buffer" })
-    }
+    
 
     /**
      * Set the current state to the initial state
@@ -466,7 +423,10 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
         ]
         const file = e.target.files[0]
         if (file) {
-            const { changeArchiveList, changeInvalidateList, resetList } = this.props
+            const { 
+                changeArchiveList, 
+                // changeInvalidateList, 
+                resetList } = this.props
             resetList()
             if (allowedTypes.includes(file.type)) {
                 const fileReader = new FileReader()
@@ -485,30 +445,29 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                         this.setState({ empty: true })
                     } else {
                         const data: Archive[] = []
-                        const invalid_items: ArchiveInvalidate[] = []
                         json.forEach((value: any, index: number) => {
 
-                            if (new Archive().invalidate(value) || new Archive().calculation_invalidation(value)) {
+                              /*if (new Archive().invalidate(value) || new Archive().calculation_invalidation(value)) {
                                 invalid_items.push(new ArchiveInvalidate().fromJSON({
                                     ...value,
                                     table_index: index + 2
                                 }))
 
                             }
-                            /*else if (new Archive().calculation_invalidation(value)) {
+                          else if (new Archive().calculation_invalidation(value)) {
                                 invalid_items.push(new ArchiveInvalidate().fromJSON({
                                     ...value,
                                     table_index: index + 2
                                 }))
                                 //console.log('calculo invalido')
-                            }*/
-                            else {
+                            }
+                            else {*/
 
 
-                                data.push(new Archive().fromJSON({
+                             data.push(new Archive().fromJSON({
                                     ...value
                                 }))
-                            }
+                           // }
                             return value
                         }
                         )
@@ -519,7 +478,7 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
                         // values to be showed in this component
                         changeArchiveList(data)
                         // values to be showed in the invalid line, if exists
-                        changeInvalidateList(invalid_items)
+                        // changeInvalidateList(invalid_items)
                     }
                 }
             }
@@ -529,8 +488,8 @@ class ArchiveTableComponent extends Component<IJoinProps, IState> {
 
 }
 
-const ArchiveTableWithTranslation = withTranslation()(ArchiveTableComponent)
+const GeneralConsultationTableWithTranslation = withTranslation()(GeneralConsultationTableComponent)
 
-const ArchiveTable = withStyles<any>(Style)(ArchiveTableWithTranslation)
+const GeneralConsultationTable = withStyles<any>(Style)(GeneralConsultationTableWithTranslation)
 
-export default ArchiveTable
+export default GeneralConsultationTable

@@ -4,7 +4,10 @@ import { JsonUtils } from "../../utils/json.util"
  * Archive
  * @category Models
  * @subcategory archive
+ * @property {string} [analise_auditor]
  * @property {number} [aliquota_entrada]
+ * @property {string} [alerta_qtd_menor]
+ * @property {string} [alerta_ncm_divergente]
  * @property {string} [cd_uf_nf_aquis]
  * @property {number} [chassi_veiculo]
  * @property {number} [cod_produto]
@@ -17,7 +20,7 @@ import { JsonUtils } from "../../utils/json.util"
  * @property {number} [ncm_produto]
  * @property {string} [num_chv_saida]
  * @property {number} [num_chv_nf_aquis]
- * @property {number} [!num_item_nf_aquis]
+ * @property {number} [num_item_nf_aquis]
  * @property {string} [num_item_nf_saida]
  * @property {number} [num_nf_aquis]
  * @property {string} [num_nf_saida]
@@ -48,7 +51,10 @@ import { JsonUtils } from "../../utils/json.util"
  * @property {number} [vl_venda_unitario_presumido_x_qtd_saida]
  */
 export class Archive {
+    private _analise_auditor: string | undefined
     private _aliquota_entrada: number | undefined
+    private _alerta_qtd_menor: string | undefined
+    private _alerta_ncm_divergente: string | undefined
     private _cd_uf_nf_aquis: string | undefined
     private _chassi_veiculo: number | undefined
     private _cod_produto: number | undefined
@@ -61,7 +67,7 @@ export class Archive {
     private _ncm_produto: number | undefined
     private _num_chv_saida: string | undefined
     private _num_chv_nf_aquis: number | undefined
-    //private _num_item_nf_aquis: number | undefined
+    private _num_item_nf_aquis: number | undefined
     private _num_item_nf_saida: string | undefined
     private _num_nf_aquis: number | undefined
     private _num_nf_saida: string | undefined
@@ -73,7 +79,7 @@ export class Archive {
     private _quantidade_entrada: number | undefined
     private _saldo_st_total: number | undefined
     private _saldo_st_unitario: number | undefined
-    //private _serie_entrada: number | undefined
+    // private _serie_entrada: number | undefined
     private _tipo_bc_icms_st_prod_nf_aquis: string | undefined
     private _unidade_venda: number | undefined
     private _vl_bc_icms_op_prop_prod_nf_aquis: number | undefined
@@ -86,10 +92,18 @@ export class Archive {
     private _vl_icms_op_prop_prod_nf_aquis: number | undefined
     private _vl_pauta_icms_st_prod: number | undefined
     private _vl_ressar_icms_st_prod: number | undefined
-    //private _vl_unit_prod_nf_aquis: string | undefined
+    private _vl_unit_prod_nf_aquis: string | undefined
     private _vl_unit_prod_nf_saida: number | undefined
     private _vl_venda_unitario_presumido: number | undefined
     private _vl_venda_unitario_presumido_x_qtd_saida: number | undefined
+
+    get analise_auditor(): string | undefined {
+        return this._analise_auditor
+    }
+
+    set analise_auditor(value: string | undefined) {
+        this._analise_auditor = value
+    }
 
     get aliquota_entrada(): number | undefined {
         return this._aliquota_entrada
@@ -97,6 +111,22 @@ export class Archive {
 
     set aliquota_entrada(value: number | undefined) {
         this._aliquota_entrada = value
+    }
+
+    get alerta_qtd_menor(): string | undefined {
+        return this._alerta_qtd_menor
+    }
+
+    set alerta_qtd_menor(value: string | undefined) {
+        this._alerta_qtd_menor = value
+    }
+
+    get alerta_ncm_divergente(): string | undefined {
+        return this._alerta_ncm_divergente
+    }
+
+    set alerta_ncm_divergente(value: string | undefined) {
+        this._alerta_ncm_divergente = value
     }
 
     get cd_uf_nf_aquis(): string | undefined {
@@ -166,7 +196,7 @@ export class Archive {
         return this._ncm
     }
     set ncm(value: number | undefined) {
-        this._ncm
+        this._ncm = value
     }
 
     get ncm_produto(): number | undefined {
@@ -192,13 +222,13 @@ export class Archive {
         this._num_chv_nf_aquis = value
     }
 
-    /*get num_item_nf_aquis(): number | undefined {
+    get num_item_nf_aquis(): number | undefined {
         return this._num_item_nf_aquis
     }
 
     set num_item_nf_aquis(value: number | undefined) {
         this._num_item_nf_aquis = value
-    }*/
+    }
 
     get num_item_nf_saida(): string | undefined {
         return this._num_item_nf_saida
@@ -392,13 +422,13 @@ export class Archive {
         this._vl_ressar_icms_st_prod = value
     }
 
-    /* get vl_unit_prod_nf_aquis(): string | undefined {
-         return this._vl_unit_prod_nf_aquis
-     }
- 
-     set vl_unit_prod_nf_aquis(value: string | undefined) {
-         this._vl_unit_prod_nf_aquis = value
-     }*/
+    get vl_unit_prod_nf_aquis(): string | undefined {
+        return this._vl_unit_prod_nf_aquis
+    }
+
+    set vl_unit_prod_nf_aquis(value: string | undefined) {
+        this._vl_unit_prod_nf_aquis = value
+    }
 
     get vl_unit_prod_nf_saida(): number | undefined {
         return this._vl_unit_prod_nf_saida
@@ -434,9 +464,17 @@ export class Archive {
             }
             json = JSON.parse(json)
         }
-
+        if (json.analise_auditor !== undefined) {
+            this.analise_auditor = json.analise_auditor
+        }
         if (json.aliquota_entrada !== undefined) {
             this.aliquota_entrada = json.aliquota_entrada
+        }
+        if(json.alerta_qtd_menor!==undefined){
+            this.alerta_qtd_menor = json.alerta_qtd_menor
+        }
+        if(json.alerta_ncm_divergente!==undefined){
+            this.alerta_ncm_divergente = json.alerta_ncm_divergente
         }
         if (json.cd_uf_nf_aquis !== undefined) {
             this.cd_uf_nf_aquis = json.cd_uf_nf_aquis
@@ -452,17 +490,17 @@ export class Archive {
         }
         if (json.descricao_item_produto !== undefined) {
             this.descricao_item_produto = json.descricao_item_produto
-        } 
+        }
         if (json.dta_emiss_nf_aquis !== undefined) {
             this.dta_emiss_nf_aquis = json.dta_emiss_nf_aquis
         }
         if (json.dta_emiss_nf_saida !== undefined) {
             this.dta_emiss_nf_saida = json.dta_emiss_nf_saida
         }
-         if (json.gtin_ean !== undefined) {
+        if (json.gtin_ean !== undefined) {
             this.gtin_ean = json.gtin_ean
-        } 
-         if(this.ncm!==undefined){
+        }
+        if (this.ncm !== undefined) {
             this.ncm = json.ncm
         }
         if (json.ncm_produto !== undefined) {
@@ -474,9 +512,9 @@ export class Archive {
         if (json.num_chv_nf_aquis !== undefined) {
             this.num_chv_nf_aquis = json.num_chv_nf_aquis
         }
-        /*  if (json.num_item_nf_aquis !== undefined) {
-              this.num_item_nf_aquis = json.num_item_nf_aquis
-          }*/
+        if (json.num_item_nf_aquis !== undefined) {
+            this.num_item_nf_aquis = json.num_item_nf_aquis
+        }
         if (json.num_nf_aquis !== undefined) {
             this.num_nf_aquis = json.num_nf_aquis
         }
@@ -486,7 +524,7 @@ export class Archive {
         if (json.outras_operacoes_que_nao_geram_ressarcimento !== undefined) {
             this.outras_operacoes_que_nao_geram_ressarcimento = json.outras_operacoes_que_nao_geram_ressarcimento
         }
-        if(json.pmpf!==undefined){
+        if (json.pmpf !== undefined) {
             this.pmpf = json.pmpf
         }
         if (json.perc_mva_prod !== undefined) {
@@ -513,10 +551,10 @@ export class Archive {
         /*if (json.serie_entrada !== undefined) {
             this.serie_entrada = json.serie_entrada
         }*/
-        if(json.tipo_bc_icms_st_prod_nf_aquis!==undefined){
+        if (json.tipo_bc_icms_st_prod_nf_aquis !== undefined) {
             this.tipo_bc_icms_st_prod_nf_aquis = json.tipo_bc_icms_st_prod_nf_aquis
         }
-        if(json.unidade_venda!==undefined){
+        if (json.unidade_venda !== undefined) {
             this.unidade_venda = json.unidade_venda
         }
         if (json.vl_alq_icms_st_prod_oper_saida !== undefined) {
@@ -528,16 +566,16 @@ export class Archive {
         if (json.vl_bc_icms_st_prod_nf_aquis !== undefined) {
             this.vl_bc_icms_st_prod_nf_aquis = json.vl_bc_icms_st_prod_nf_aquis
         }
-       /* if (json.vl_bc_icms_st_prod_nf_saida !== undefined) {
-            this.vl_bc_icms_st_prod_nf_saida = json.vl_bc_icms_st_prod_nf_saida
-        }*/
+        /* if (json.vl_bc_icms_st_prod_nf_saida !== undefined) {
+             this.vl_bc_icms_st_prod_nf_saida = json.vl_bc_icms_st_prod_nf_saida
+         }*/
         if (json.vl_desc_prod_nf_saida !== undefined) {
             this.vl_desc_prod_nf_saida = json.vl_desc_prod_nf_saida
         }
         if (json.vl_icms_st_item_nf_aquis !== undefined) {
             this.vl_icms_st_item_nf_aquis = json.vl_icms_st_item_nf_aquis
         }
-        if(json.vl_icms_st_prod_nf_saida!==undefined){
+        if (json.vl_icms_st_prod_nf_saida !== undefined) {
             this.vl_icms_st_prod_nf_saida = json.vl_icms_st_prod_nf_saida
         }
         if (json.vl_icms_op_prop_prod_nf_aquis !== undefined) {
@@ -549,13 +587,13 @@ export class Archive {
         if (json.vl_ressar_icms_st_prod !== undefined) {
             this.vl_ressar_icms_st_prod = json.vl_ressar_icms_st_prod
         }
-        /* if (json.vl_unit_prod_nf_aquis !== undefined) {
-             this.vl_unit_prod_nf_aquis = json.vl_unit_prod_nf_aquis
-         }*/
+        if (json.vl_unit_prod_nf_aquis !== undefined) {
+            this.vl_unit_prod_nf_aquis = json.vl_unit_prod_nf_aquis
+        }
         if (json.vl_unit_prod_nf_saida !== undefined) {
             this.vl_unit_prod_nf_saida = json.vl_unit_prod_nf_saida
         }
-     
+
         if (json.vl_venda_unitario_presumido !== undefined) {
             this.vl_venda_unitario_presumido = json.vl_venda_unitario_presumido
         }
@@ -568,16 +606,19 @@ export class Archive {
 
     public toJSON(): any {
         return {
+            analise_auditor:this.analise_auditor||undefined,
             aliquota_entrada: this.aliquota_entrada || undefined,
+            alerta_qtd_menor: this.alerta_qtd_menor||undefined,
+            alerta_ncm_divergente: this.alerta_ncm_divergente||undefined,
             cd_uf_nf_aquis: this.cd_uf_nf_aquis || undefined,
-            chassi_veiculo: this.chassi_veiculo||undefined,
+            chassi_veiculo: this.chassi_veiculo || undefined,
             cod_produto: this.cod_produto || undefined,
             descricao_completa_item: this.descricao_completa_item || undefined,
             descricao_item_produto: this.descricao_item_produto || undefined,
             dta_emiss_nf_aquis: this.dta_emiss_nf_aquis || undefined,
             dta_emiss_nf_saida: this.dta_emiss_nf_saida || undefined,
             gtin_ean: this.gtin_ean || undefined,
-            ncm:this.ncm||undefined,
+            ncm: this.ncm || undefined,
             ncm_produto: this.ncm_produto || undefined,
             num_chv_saida: this.num_chv_saida || undefined,
             num_chv_nf_aquis: this.num_chv_nf_aquis || undefined,
@@ -586,27 +627,27 @@ export class Archive {
             num_nf_aquis: this.num_nf_aquis || undefined,
             num_nf_saida: this.num_nf_saida || undefined,
             outras_operacoes_que_nao_geram_ressarcimento: this.outras_operacoes_que_nao_geram_ressarcimento || undefined,
-            pmpf:this.pmpf||undefined,
+            pmpf: this.pmpf || undefined,
             perc_mva_prod: this.perc_mva_prod || undefined,
             quantidade_saida: this.quantidade_saida || undefined,
             quantidade_saldo: this.quantidade_saldo || undefined,
             quantidade_entrada: this.quantidade_entrada || undefined,
             saldo_st_total: this.saldo_st_total || undefined,
             saldo_st_unitario: this.saldo_st_unitario || undefined,
-            //serie_entrada: this.serie_entrada || undefined,
+            // serie_entrada: this.serie_entrada || undefined,
             tipo_bc_icms_st_prod_nf_aquis: this.tipo_bc_icms_st_prod_nf_aquis || undefined,
-            unidade_venda:this.unidade_venda||undefined,
+            unidade_venda: this.unidade_venda || undefined,
             vl_alq_icms_st_prod_oper_saida: this.vl_alq_icms_st_prod_oper_saida || undefined,
             vl_bc_icms_op_prop_prod_nf_aquis: this.vl_bc_icms_op_prop_prod_nf_aquis || undefined,
             vl_bc_icms_st_prod_nf_aquis: this.vl_bc_icms_st_prod_nf_aquis || undefined,
-            //    vl_bc_icms_st_prod_nf_saida: this.vl_bc_icms_st_prod_nf_saida || undefined,
+            // vl_bc_icms_st_prod_nf_saida: this.vl_bc_icms_st_prod_nf_saida || undefined,
             vl_desc_prod_nf_saida: this.vl_desc_prod_nf_saida || undefined,
             vl_icms_st_item_nf_aquis: this.vl_icms_st_item_nf_aquis || undefined,
-            vl_icms_st_prod_nf_saida: this.vl_icms_st_prod_nf_saida||undefined,
+            vl_icms_st_prod_nf_saida: this.vl_icms_st_prod_nf_saida || undefined,
             vl_icms_op_prop_prod_nf_aquis: this.vl_icms_op_prop_prod_nf_aquis || undefined,
             vl_pauta_icms_st_prod: this.vl_pauta_icms_st_prod || undefined,
             vl_ressar_icms_st_prod: this.vl_ressar_icms_st_prod || undefined,
-            // vl_unit_prod_nf_aquis: this.vl_unit_prod_nf_aquis || undefined,
+            vl_unit_prod_nf_aquis: this.vl_unit_prod_nf_aquis || undefined,
             vl_unit_prod_nf_saida: this.vl_unit_prod_nf_saida || undefined,
             vl_venda_unitario_presumido: this.vl_venda_unitario_presumido || undefined,
             vl_venda_unitario_presumido_x_qtd_saida: this.vl_venda_unitario_presumido_x_qtd_saida || undefined,
@@ -665,7 +706,8 @@ export class Archive {
         if (json.cd_uf_nf_aquis === undefined) {
             return true
         }
-        if(json.chass_veiculo===undefined){
+        // Campo obrigatório quando o produto for veículo
+        if (json.chass_veiculo === undefined) {
             return true
         }
         if (json.cod_produto === undefined) {
@@ -686,7 +728,7 @@ export class Archive {
         if (json.gtin_ean === undefined) {
             return true
         }
-        if(json.ncm===undefined){
+        if (json.ncm === undefined) {
             return true
         }
         if (json.ncm_produto === undefined) {
@@ -696,8 +738,8 @@ export class Archive {
             return true
         }
         if (json.num_chv_nf_aquis === undefined) {
-            return true  
-          }     
+            return true
+        }
         if (json.num_item_nf_saida === undefined) {
             return true
         }
@@ -713,7 +755,7 @@ export class Archive {
         if (json.outras_operacoes_que_nao_geram_ressarcimento === undefined) {
             return true
         }
-        if(json.pmpf){
+        if (json.pmpf) {
             return true
         }
         if (json.perc_mva_prod === undefined) {
@@ -734,13 +776,13 @@ export class Archive {
         if (json.saldo_st_unitario === undefined) {
             return true
         }
-         /*if (json.serie_entrada === undefined) {
-            return true
-        }*/
+        /*if (json.serie_entrada === undefined) {
+           return true
+       }*/
         if (json.tipo_bc_icms_st_prod_nf_aquis === undefined) {
             return true
         }
-        if(json.unidade_venda===undefined){
+        if (json.unidade_venda === undefined) {
             return true
         }
         if (json.vl_alq_icms_st_prod_oper_saida === undefined) {
@@ -757,11 +799,11 @@ export class Archive {
         }*/
         if (json.vl_desc_prod_nf_saida === undefined) {
             return true
-        } 
+        }
         if (json.vl_icms_st_item_nf_aquis === undefined) {
             return true
         }
-        if(json.vl_icms_st_prod_nf_saida==undefined){
+        if (json.vl_icms_st_prod_nf_saida === undefined) {
             return true
         }
         if (json.vl_icms_op_prop_prod_nf_aquis === undefined) {
@@ -773,10 +815,10 @@ export class Archive {
         if (json.vl_ressar_icms_st_prod === undefined) {
             return true
         }
-       /* if (json.vl_unit_prod_nf_aquis === undefined) {
-            return true
-        }*/
-      
+        /* if (json.vl_unit_prod_nf_aquis === undefined) {
+             return true
+         }*/
+
         if (json.vl_unit_prod_nf_saida === undefined) {
             return true
         }
