@@ -295,7 +295,7 @@ class ProtocolService {
             resolve(
                 {
                     data: MOCKS
-                    .filter((item: Protocol) => item?.protocol === parseInt(protocol || '0'))[0]
+                    .filter((item: Protocol) => item?.protocol === parseInt(protocol || '0',10))[0]
                     ?.toJSON() || new Protocol(),
                     headers: {}
                 }
@@ -320,10 +320,10 @@ class ProtocolService {
             await this.delay(1000)
             resolve ({
                 data: MOCKITEM
-                    .filter((pi: ProtocolItem) => pi.protocol === parseInt(protocol)),
+                    .filter((pi: ProtocolItem) => pi.protocol === parseInt(protocol,10)),
                 headers: {
                     'x-total-count': MOCKITEM
-                    .filter((pi: ProtocolItem) => pi.protocol === parseInt(protocol))
+                    .filter((pi: ProtocolItem) => pi.protocol === parseInt(protocol,10))
                     .length
                 }
             })

@@ -19,9 +19,9 @@ import clsx from 'clsx'
 
 import * as ProtocolActions from '../../store/ducks/protocol/actions'
 
-import { Archive } from '../../store/application/models/archive/archive'
 import { IPaginator, ISearch } from '../../store/ducks/root.types'
-//import GeneralConsultation from '../../components/table/general.consultation/list'
+import { ProtocolItem } from '../../store/application/models/protocol/protocol.item'
+// import GeneralConsultation from '../../components/table/general.consultation/list'
 const GeneralConsultation= lazy(() => import('../../components/table/general.consultation/list'))
 
 const Style = (theme: Theme) => createStyles({
@@ -33,21 +33,23 @@ const Style = (theme: Theme) => createStyles({
 })
 
 interface IProps extends WithTranslation {
-    readonly archives: Archive[]
+    readonly protocolItem: ProtocolItem[]
     readonly loading: boolean
     readonly paginator: IPaginator
+    
+    loadRequest(paginator?: IPaginator): void
 
     changePaginator(paginator?: IPaginator): void
 
     changeSearchPaginator(search: ISearch): void
-    
-    changeArchiveList(data: Archive[]): void
-
-    resetList(): void
 }
 
 interface IDispatch extends RouteComponentProps<any> {
+    loadRequest(paginator?: IPaginator): void
 
+    changePaginator(paginator?: IPaginator): void
+
+    changeSearchPaginator(search: ISearch): void
 }
 
 type IJoinProps = IProps & IDispatch & WithStyles<typeof Style>
@@ -58,7 +60,7 @@ class ProtocolTableComponent extends Component<IJoinProps> {
         super(props)
 
         /* Bind Context */
-        this.loadProtocol = this.loadProtocol.bind(this)
+       // this.loadProtocol = this.loadProtocol.bind(this)
     }
 
     public componentDidMount(): void {
@@ -79,9 +81,10 @@ class ProtocolTableComponent extends Component<IJoinProps> {
         const {
             t,
             classes,
-            archives,
+            protocolItem,
             loading,
             paginator,
+            loadRequest,
             changePaginator,
             changeSearchPaginator
         } = this.props
@@ -93,14 +96,14 @@ class ProtocolTableComponent extends Component<IJoinProps> {
 
             <Paper className={clsx(classes.paper, classes.fadeIn2)}>
                 {/*
-                <FullHeaderProtocol
-                    />
+                <FullHeaderProtocol/>
                 */}
                 <Box pt={1}>
                     <GeneralConsultation
-                     archives={archives}
+                     protocolItem={protocolItem}
                      loading={loading}
-                     paginator={paginator}
+                     paginator={paginator}  
+                    // loadRequest={loadRequest}
                      changePaginator={changePaginator}
                      changeSearchPaginator={changeSearchPaginator} />
                 </Box>
@@ -123,11 +126,15 @@ const ProtocolTableWithTranslation = withTranslation()(ProtocolTableComponent)
 const ProtocolTable = withStyles<any>(Style)(ProtocolTableWithTranslation)
 
 const mapStateToProps = (state: IApplicationState) => ({
-    archives: state.archive.list.data,
-    loading: state.protocol.list.loading,
-    paginator: state.protocol.list.paginator
+    protocolItem: state.protocol.protocolItemsList.data,
+    loading: state.protocol.protocolItemsList.loading,
+    paginator: state.protocol.protocolItemsList.paginator
 })
 
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(ProtocolActions, dispatch)
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
+    changePaginator: ProtocolActions.changePaginator,
+    changeSearchPaginator: ProtocolActions.changeSearchPaginator
+
+}, dispatch)
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProtocolTable))

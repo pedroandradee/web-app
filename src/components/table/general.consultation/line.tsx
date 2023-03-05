@@ -13,6 +13,8 @@ import Cell from '../../table.utils/cell'
 import FormatCurrency from '../../formatters/currency'
 import { Archive } from '../../../store/application/models/archive/archive'
 
+import { ProtocolItem } from '../../../store/application/models/protocol/protocol.item'
+
 
 
 const Style = (theme: Theme) => createStyles({
@@ -22,7 +24,7 @@ const Style = (theme: Theme) => createStyles({
 
 interface IProps extends WithTranslation {
     readonly index: number
-    readonly item: Archive
+    readonly item: ProtocolItem
 }
 
 type IJoinProps = IProps & WithStyles<typeof Style>
@@ -110,20 +112,20 @@ export class GeneralConsultationLineComponent extends Component<IJoinProps> {
             <Cell className={classes.tableCell} align="right">
                   {/*Analise do auditor*/}
                 <Typography variant="caption">
-                    {item.analise_auditor||" - - "}
+                    {/*item.analise_auditor||*/" - - "}
                 </Typography>
             </Cell>
             <Cell className={classes.tableCell} align="right">
                {/*Alerta NCM divergente */}
                 <Typography variant="caption">
-                    {item.alerta_ncm_divergente||" - - "}
+                    {/*item.alerta_ncm_divergente||*/" - - "}
                 </Typography>
             </Cell>
             <Cell className={classes.tableCell} align="right">
                
              {/* Alerta qtd*/}
                 <Typography variant="caption">
-                    { item.alerta_qtd_menor||" - - "}
+                    {/* item.alerta_qtd_menor||*/" - - "}
                 </Typography>
             </Cell>
            

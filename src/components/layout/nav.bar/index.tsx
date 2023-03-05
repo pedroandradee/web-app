@@ -20,7 +20,8 @@ import {
 } from '@material-ui/core'
 import { 
     Home,
-    InsertDriveFile
+    InsertDriveFile,
+    FindInPage
 } from '@material-ui/icons'
 import clsx from 'clsx'
 import { ThemeMode } from '../../../material.theme'
@@ -168,7 +169,7 @@ class NavBar extends Component<IProps> {
                         to="/app/protocols"
                         onClick={closeMobileView}
                         activeClassName={clsx(classes.navActive, colorStyle)}>
-                        <ListItemIcon><InsertDriveFile/></ListItemIcon>
+                        <ListItemIcon>< FindInPage/></ListItemIcon>
                         <ListItemText primary={t('DRAWER.PROTOCOLS')}/>
                     </ListItem>
 

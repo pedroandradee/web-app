@@ -23,12 +23,13 @@ import SearchIcon from '@material-ui/icons/Search'
 import { withTranslation, WithTranslation } from 'react-i18next'
 import * as XLSX from 'xlsx'
 import { ANIMATION, TABLES } from '../../../material.theme'
-import { Archive } from '../../../store/application/models/archive/archive'
 import { IPaginator, ISearch } from '../../../store/ducks/root.types'
 import Cell from '../../table.utils/cell'
 import TableRowLoading from '../../table.utils/table.row.loading'
 import GeneralConsultationLine from './line'
 // import TableEmpty from '../table.utils/table.empty'
+
+import { ProtocolItem } from '../../../store/application/models/protocol/protocol.item'
 
 // import { ReactComponent as DocNotFound } from '../../assets/imgs/icons/custom/doc-not-found.svg'
 
@@ -45,7 +46,7 @@ const Style = (theme: Theme) => createStyles({
 })
 
 interface IProps extends WithTranslation {
-    readonly archives: Archive[]
+    readonly protocolItem: ProtocolItem[]
     readonly loading: boolean
     readonly paginator: IPaginator
 
@@ -53,9 +54,8 @@ interface IProps extends WithTranslation {
 
     changeSearchPaginator(search: ISearch): void
 
-    changeArchiveList(data: Archive[]): void
+    // changeArchiveList(data: Archive[]): void
 
-    resetList(): void
 }
 
 interface IState {
@@ -87,7 +87,7 @@ class GeneralConsultationTableComponent extends Component<IJoinProps, IState> {
         const {
             t,
             classes,
-            archives,
+            protocolItem,
             loading,
             paginator,
             changePaginator
@@ -326,9 +326,9 @@ class GeneralConsultationTableComponent extends Component<IJoinProps, IState> {
                         <TableBody>
                             {
                                 (!loading && !readLoading /*&& invalidate?.length === 0*/) &&
-                                archives
+                                protocolItem
                                     ?.slice(page * rows, page * rows + rows)
-                                    ?.map((item: Archive, index: number) => {
+                                    ?.map((item: ProtocolItem, index: number) => {
                                         return <GeneralConsultationLine
                                             key={`archive_line_${index}`}
                                             index={index}
@@ -367,7 +367,7 @@ class GeneralConsultationTableComponent extends Component<IJoinProps, IState> {
                 />
 
                 {/*
-                    (!loading && !readLoading && !archives.length) && (
+                    (!loading && !readLoading && !protocolItem.length) && (
                         <TableEmpty
                             message={t('TABLE.EMPTY')}
                             svg={DocNotFound}
@@ -375,26 +375,7 @@ class GeneralConsultationTableComponent extends Component<IJoinProps, IState> {
                             viewBox="0 0 460 430"/>
                     )
                 */}
-                {
-                    (!loading && !readLoading /*&& invalidate?.length > 0*/) &&
-                    <Box
-                        display="flex"
-                        justifyContent="flex-end"
-                        p={2}
-                        style={{
-                            cursor: "pointer"
-                        }}
-                        onClick={() => alert("oi")/*changeInvalidDialog(true)*/}>
-                        <Tooltip title={`${t('ARCHIVES.INVALID.TOOLTIP')}`}>
-                            <Button
-                                size="small"
-                                color="primary"
-                                variant="contained">
-                                {t('ARCHIVES.INVALID.SOME_ROW_WITH_EMPTY_CELL')}
-                            </Button>
-                        </Tooltip>
-                    </Box>
-                }
+              
             </Box>
         </Paper>
     }
@@ -423,10 +404,8 @@ class GeneralConsultationTableComponent extends Component<IJoinProps, IState> {
         ]
         const file = e.target.files[0]
         if (file) {
-            const { 
-                changeArchiveList, 
-                resetList } = this.props
-            resetList()
+            // const {  changeArchiveList } = this.props
+           const{ protocolItem }=this.props
             if (allowedTypes.includes(file.type)) {
                 const fileReader = new FileReader()
                 fileReader.readAsArrayBuffer(file)
@@ -443,7 +422,7 @@ class GeneralConsultationTableComponent extends Component<IJoinProps, IState> {
                     if (json.length === 0) {
                         this.setState({ empty: true })
                     } else {
-                        const data: Archive[] = []
+                        const data: ProtocolItem[] = []
                         json.forEach((value: any, index: number) => {
 
                               /*if (new Archive().invalidate(value) || new Archive().calculation_invalidation(value)) {
@@ -463,11 +442,11 @@ class GeneralConsultationTableComponent extends Component<IJoinProps, IState> {
                             else {*/
 
 
-                             data.push(new Archive().fromJSON({
+                             data.push(new ProtocolItem().fromJSON({
                                     ...value
                                 }))
                            // }
-                            return value
+                           // return value
                         }
                         )
 
@@ -475,7 +454,7 @@ class GeneralConsultationTableComponent extends Component<IJoinProps, IState> {
                         // console.log(data)
 
                         // values to be showed in this component
-                        changeArchiveList(data)
+                       // changeArchiveList(data)
                         // values to be showed in the invalid line, if exists
                         // changeInvalidateList(invalid_items)
                     }

@@ -14,7 +14,7 @@ export class ProtocolItem {
     private _ncm_produto: number | undefined
     private _num_chv_saida: string | undefined
     private _num_chv_nf_aquis: number | undefined
-    //private _num_item_nf_aquis: number | undefined
+    // private _num_item_nf_aquis: number | undefined
     private _num_item_nf_saida: string | undefined
     private _num_nf_aquis: number | undefined
     private _num_nf_saida: string | undefined
@@ -26,7 +26,7 @@ export class ProtocolItem {
     private _quantidade_entrada: number | undefined
     private _saldo_st_total: number | undefined
     private _saldo_st_unitario: number | undefined
-    //private _serie_entrada: number | undefined
+    // private _serie_entrada: number | undefined
     private _tipo_bc_icms_st_prod_nf_aquis: string | undefined
     private _unidade_venda: number | undefined
     private _vl_bc_icms_op_prop_prod_nf_aquis: number | undefined
@@ -39,7 +39,7 @@ export class ProtocolItem {
     private _vl_icms_op_prop_prod_nf_aquis: number | undefined
     private _vl_pauta_icms_st_prod: number | undefined
     private _vl_ressar_icms_st_prod: number | undefined
-    //private _vl_unit_prod_nf_aquis: string | undefined
+    private _vl_unit_prod_nf_aquis: string | undefined
     private _vl_unit_prod_nf_saida: number | undefined
     private _vl_venda_unitario_presumido: number | undefined
     private _vl_venda_unitario_presumido_x_qtd_saida: number | undefined
@@ -120,7 +120,7 @@ export class ProtocolItem {
         return this._ncm
     }
     set ncm(value: number | undefined) {
-        this._ncm
+        this._ncm= value
     }
 
     get ncm_produto(): number | undefined {
@@ -346,13 +346,13 @@ export class ProtocolItem {
         this._vl_ressar_icms_st_prod = value
     }
 
-    /* get vl_unit_prod_nf_aquis(): string | undefined {
+     get vl_unit_prod_nf_aquis(): string | undefined {
          return this._vl_unit_prod_nf_aquis
      }
  
      set vl_unit_prod_nf_aquis(value: string | undefined) {
          this._vl_unit_prod_nf_aquis = value
-     }*/
+     }
 
     get vl_unit_prod_nf_saida(): number | undefined {
         return this._vl_unit_prod_nf_saida
@@ -511,9 +511,9 @@ export class ProtocolItem {
         if (json.vl_ressar_icms_st_prod !== undefined) {
             this.vl_ressar_icms_st_prod = json.vl_ressar_icms_st_prod
         }
-        /* if (json.vl_unit_prod_nf_aquis !== undefined) {
+        if (json.vl_unit_prod_nf_aquis !== undefined) {
              this.vl_unit_prod_nf_aquis = json.vl_unit_prod_nf_aquis
-         }*/
+         }
         if (json.vl_unit_prod_nf_saida !== undefined) {
             this.vl_unit_prod_nf_saida = json.vl_unit_prod_nf_saida
         }
@@ -558,7 +558,7 @@ export class ProtocolItem {
             quantidade_entrada: this.quantidade_entrada || undefined,
             saldo_st_total: this.saldo_st_total || undefined,
             saldo_st_unitario: this.saldo_st_unitario || undefined,
-            //serie_entrada: this.serie_entrada || undefined,
+            // serie_entrada: this.serie_entrada || undefined,
             tipo_bc_icms_st_prod_nf_aquis: this.tipo_bc_icms_st_prod_nf_aquis || undefined,
             unidade_venda:this.unidade_venda||undefined,
             vl_alq_icms_st_prod_oper_saida: this.vl_alq_icms_st_prod_oper_saida || undefined,
@@ -571,7 +571,7 @@ export class ProtocolItem {
             vl_icms_op_prop_prod_nf_aquis: this.vl_icms_op_prop_prod_nf_aquis || undefined,
             vl_pauta_icms_st_prod: this.vl_pauta_icms_st_prod || undefined,
             vl_ressar_icms_st_prod: this.vl_ressar_icms_st_prod || undefined,
-            // vl_unit_prod_nf_aquis: this.vl_unit_prod_nf_aquis || undefined,
+            vl_unit_prod_nf_aquis: this.vl_unit_prod_nf_aquis || undefined,
             vl_unit_prod_nf_saida: this.vl_unit_prod_nf_saida || undefined,
             vl_venda_unitario_presumido: this.vl_venda_unitario_presumido || undefined,
             vl_venda_unitario_presumido_x_qtd_saida: this.vl_venda_unitario_presumido_x_qtd_saida || undefined,

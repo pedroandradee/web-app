@@ -96,7 +96,9 @@ export const loadFailure = () => action(ProtocolTypes.LOAD_FAILURE)
  * @subcategory Redux / Actions
  * @return Redux.Action
  */
-export const loadProtocolItemsRequest = (protocol: string, paginator?: IPaginator) => action(ProtocolTypes.LOAD_PROTOCOL_ITEMS_REQUEST, { protocol, paginator })
+export const loadProtocolItemsRequest = (protocol: string, paginator?: IPaginator) =>{
+     action(ProtocolTypes.LOAD_PROTOCOL_ITEMS_REQUEST, { protocol, paginator })
+    }
 
 /**
  * Action that receives the return request data from the protocol list when successfully performed.
