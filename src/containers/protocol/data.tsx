@@ -17,6 +17,8 @@ import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
 import clsx from 'clsx'
 
+import * as ProtocolActions from '../../store/ducks/protocol/actions'
+
 import { Archive } from '../../store/application/models/archive/archive'
 import { IPaginator, ISearch } from '../../store/ducks/root.types'
 //import GeneralConsultation from '../../components/table/general.consultation/list'
@@ -121,12 +123,11 @@ const ProtocolTableWithTranslation = withTranslation()(ProtocolTableComponent)
 const ProtocolTable = withStyles<any>(Style)(ProtocolTableWithTranslation)
 
 const mapStateToProps = (state: IApplicationState) => ({
+    archives: state.archive.list.data,
     loading: state.protocol.list.loading,
     paginator: state.protocol.list.paginator
 })
 
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
-
-}, dispatch)
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(ProtocolActions, dispatch)
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProtocolTable))

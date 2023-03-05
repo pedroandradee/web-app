@@ -425,7 +425,6 @@ class GeneralConsultationTableComponent extends Component<IJoinProps, IState> {
         if (file) {
             const { 
                 changeArchiveList, 
-                // changeInvalidateList, 
                 resetList } = this.props
             resetList()
             if (allowedTypes.includes(file.type)) {
