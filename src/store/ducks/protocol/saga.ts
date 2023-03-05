@@ -2,7 +2,9 @@ import { all, apply, put, takeLatest } from 'redux-saga/effects'
 import { IActionType } from '../root.types'
 import { 
     loadSuccess, 
-    loadFailure 
+    loadFailure,
+    loadProtocolItemsSuccess,
+    loadProtocolItemsFailure
 } from './actions'
 import { ProtocolTypes } from './types'
 import protocolService from '../../../services/protocol'
@@ -37,6 +39,20 @@ function* getProtocols(action: IActionType) {
         yield put(loadSuccess(response))
     } catch(err) {
         yield put(loadFailure())
+    }
+}
+
+function* getProtocolItems(action: IActionType) {
+    try {
+        const { protocol, paginator } = action.payload
+        const response = yield apply(
+            protocolService,
+            protocolService.getProtocolItems,
+            [protocol, paginator]
+        )
+        yield put(loadProtocolItemsSuccess(response))
+    } catch(err) {
+        yield put(loadProtocolItemsFailure())
     }
 }
 
