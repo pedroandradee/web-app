@@ -105,79 +105,9 @@ class GeneralConsultationTableComponent extends Component<IJoinProps, IState> {
 
         } = paginator
 
-        return <Paper className={classes.paper}>
-
-            <Box pt={2}>
-                <Box
-                    display="flex"
-                    justifyContent="space-between" 
-                    alignItems="flex-end">
-                    <Box p={0.5}>
-                        <Typography>
-                            <b> Contribuente: Jose da silva</b>
-                        </Typography>
-                        <Typography>
-                            <b>Pedido de inclusão</b>
-                        </Typography>
-                    </Box>
-                    <Box p={0.5}>
-                        <Typography>
-                            <b>Mes referencia</b>
-                        </Typography>
-                        <Typography>
-                            <b>Situação</b>
-                        </Typography>
-                    </Box>
-                    <Box display="flex">
-                        <TextField
-                            id="search-text"
-                            placeholder="Pesquisa"
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="start">
-                                        <SearchIcon />
-                                    </InputAdornment>
-                                ),
-                            }}
-                            onChange={(e) => {
-
-                                console.log(e)
-                            }}
-                        />
-                    </Box>
-                </Box>
-                <Box
-                    display="flex"
-                    alignItems="center"
-                    p={0.5}>
-
-                    <Box
-                        display="flex"
-                        style={{ gap: 5 }}
-                        p={0.5}>
-                        <Tooltip title={`${t('BUTTON.IMPORT.TOOLTIP')}`}>
-                            <span>
-                                <Button
-                                    size="small"
-                                    color="primary"
-                                    variant="contained"
-                                    disabled={readLoading || loading}
-                                    component="label">
-                                    {t('BUTTON.IMPORT.TITLE')}
-                                    <input
-                                        id="file-import"
-                                        name="file-import"
-                                        type="file"
-                                        hidden={true}
-                                        accept=".xlsx, .xls"
-                                        onChange={(e) => this.readFile(e)}
-                                        onClick={(e) => { e.currentTarget.value = "" }} />
-                                </Button>
-                            </span>
-                        </Tooltip>
-                    </Box>
-
-                </Box>
+        return   <Box pt={2}
+        marginRight={1}
+        marginLeft={1}>
 
                 <TableContainer style={{ maxHeight: 'calc(100vh - 130px)' }}>
                     <Table size="small" stickyHeader={true} aria-label="sticky table">
@@ -229,7 +159,7 @@ class GeneralConsultationTableComponent extends Component<IJoinProps, IState> {
                                 </Cell>
                                 <Cell className={classes.tableHeader}
                                     colSpan={1}>
-                                    <Typography>
+                                    <Typography>    
                                         <b>{t('ARCHIVES.TABLE_HEAD.AUDITORS_ANALISIS')}</b>
                                     </Typography>
                                 </Cell>
@@ -310,6 +240,13 @@ class GeneralConsultationTableComponent extends Component<IJoinProps, IState> {
                                     className={classes.tableHeader}
                                     style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
                                     <Typography>
+                                        <b></b>
+                                    </Typography>
+                                </Cell>
+                                <Cell
+                                    className={classes.tableHeader}
+                                    style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
+                                    <Typography>
                                         <b>{t('ARCHIVES.TABLE_HEAD.ALERT.DIVERGENT_NCM')}</b>
                                     </Typography>
                                 </Cell>
@@ -377,7 +314,6 @@ class GeneralConsultationTableComponent extends Component<IJoinProps, IState> {
                 */}
               
             </Box>
-        </Paper>
     }
 
     

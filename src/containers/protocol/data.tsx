@@ -3,11 +3,18 @@ import React, { Component, lazy } from 'react'
 import { 
     Box,
     createStyles,
+    InputAdornment,
     Paper,
+    TextField,
     Theme,
+    Tooltip,
+    Typography,
     withStyles,
     WithStyles
 } from '@material-ui/core'
+
+import SearchIcon from '@material-ui/icons/Search'
+
 import { withTranslation, WithTranslation } from 'react-i18next'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { ANIMATION } from '../../material.theme'
@@ -18,9 +25,10 @@ import { Helmet } from 'react-helmet'
 import clsx from 'clsx'
 
 import * as ProtocolActions from '../../store/ducks/protocol/actions'
-
+import InfoProtocols from '../../components/protocol.information/protocol.information'
 import { IPaginator, ISearch } from '../../store/ducks/root.types'
 import { ProtocolItem } from '../../store/application/models/protocol/protocol.item'
+import protocol from '../../services/protocol'
 // import GeneralConsultation from '../../components/table/general.consultation/list'
 const GeneralConsultation= lazy(() => import('../../components/table/general.consultation/list'))
 
@@ -95,9 +103,12 @@ class ProtocolTableComponent extends Component<IJoinProps> {
             </Helmet>
 
             <Paper className={clsx(classes.paper, classes.fadeIn2)}>
-                {/*
-                <FullHeaderProtocol/>
-                */}
+            
+         
+
+                 <InfoProtocols  loading={loading}/>
+            
+
                 <Box pt={1}>
                     <GeneralConsultation
                      protocolItem={protocolItem}

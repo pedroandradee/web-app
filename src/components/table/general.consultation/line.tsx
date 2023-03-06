@@ -103,16 +103,13 @@ export class GeneralConsultationLineComponent extends Component<IJoinProps> {
                 </Typography>
             </Cell>
             <Cell className={classes.tableCell} align="right">
-                
-                {/*Valores calculos l. Unit. Venda Presumida*/}
-                <Typography variant="caption">
-                    {"?"}
-                </Typography>
-            </Cell>
-            <Cell className={classes.tableCell} align="right">
                   {/*Analise do auditor*/}
                 <Typography variant="caption">
                     {/*item.analise_auditor||*/" - - "}
+                </Typography>
+            </Cell>  <Cell className={classes.tableCell} align="right">
+                  
+                <Typography variant="caption">{"  "}
                 </Typography>
             </Cell>
             <Cell className={classes.tableCell} align="right">
