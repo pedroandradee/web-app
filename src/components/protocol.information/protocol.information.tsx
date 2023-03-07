@@ -42,7 +42,7 @@ const Style = (theme: Theme) => createStyles({
 })
 
 interface IProps extends RouteComponentProps {
-    readonly protocol: Protocol
+   // readonly protocol: Protocol
     readonly loading: boolean
 
 }
@@ -78,7 +78,7 @@ class InfoProtocolComponent extends Component<IJoinProps> {
         const {
             t,
             classes,
-            protocol,
+           // protocol,
             
             loading
         } = this.props
@@ -92,7 +92,7 @@ class InfoProtocolComponent extends Component<IJoinProps> {
             
                     <Box p={1}>
                             <Typography>
-                                <b> Contribuente: {protocol}</b>
+                                <b> Contribuente:</b>
                             </Typography>
                             <Typography>
                                 <b>Pedido de inclusão :</b>

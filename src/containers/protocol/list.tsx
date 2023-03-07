@@ -56,7 +56,7 @@ class ListProtocolsComponent extends Component<IJoinProps> {
             changePaginator,
             changeSearchPaginator
         } = this.props
-
+        
         return <React.Fragment>
             <Helmet>
                 <title>[SR] - {t('PROTOCOLS.TITLE')}</title>

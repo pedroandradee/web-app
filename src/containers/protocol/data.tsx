@@ -39,12 +39,7 @@ interface IProps extends WithTranslation {
     readonly protocolItem: ProtocolItem[]
     readonly loading: boolean
     readonly paginator: IPaginator
-    readonly protocol:Protocol
-    loadRequest(paginator?: IPaginator): void
-
-    changePaginator(paginator?: IPaginator): void
-
-    changeSearchPaginator(search: ISearch): void
+    readonly protocols:Protocol[]
 }
 
 interface IDispatch extends RouteComponentProps<any> {
@@ -87,12 +82,13 @@ class ProtocolTableComponent extends Component<IJoinProps> {
             protocolItem,
             loading,
             paginator,
-            protocol,
+            protocols,
             loadRequest,
             changePaginator,
             changeSearchPaginator
         } = this.props
-
+        console.log(protocols)
+        console.log(protocolItem)
         return <React.Fragment>
             <Helmet>
                 <title>{t('NAVIGATION_TAB.PROTOCOL')}</title>
@@ -103,7 +99,7 @@ class ProtocolTableComponent extends Component<IJoinProps> {
          
 
                  <InfoProtocols
-                  protocol={protocol}  
+                  //protocol={}  
                  loading={loading}
                  />
             
@@ -137,7 +133,7 @@ const ProtocolTableWithTranslation = withTranslation()(ProtocolTableComponent)
 const ProtocolTable = withStyles<any>(Style)(ProtocolTableWithTranslation)
 
 const mapStateToProps = (state: IApplicationState) => ({
-
+    protocols:state.protocol.list.data,
     protocolItem: state.protocol.protocolItemsList.data,
     loading: state.protocol.protocolItemsList.loading,
     paginator: state.protocol.protocolItemsList.paginator
