@@ -3,10 +3,8 @@ import {
     Box,
     createStyles,
     InputAdornment,
-    Paper,
     TextField,
     Theme,
-    Tooltip,
     Typography,
     withStyles,
     WithStyles
@@ -23,7 +21,7 @@ import TableLoading from '../loading'
 import TableEmpty from '../table.utils/table.empty'
 import { ReactComponent as DocumentNotFound } from '../../assets/imgs/icons/custom/doc-not-found.svg'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
-import { Search } from '@material-ui/icons'
+import { ContactlessOutlined, Search } from '@material-ui/icons'
 
 const Style = (theme: Theme) => createStyles({
     ...ANIMATION,
@@ -44,8 +42,9 @@ const Style = (theme: Theme) => createStyles({
 })
 
 interface IProps extends RouteComponentProps {
-    //  readonly protocols: Protocol[]
+    readonly protocol: Protocol
     readonly loading: boolean
+
 }
 
 type IJoinProps = IProps & WithTranslation & WithStyles<typeof Style>
@@ -56,7 +55,7 @@ class InfoProtocolComponent extends Component<IJoinProps> {
         super(props)
 
         /* Bind Context */
-        // this.loadProtocols = this.loadProtocols.bind(this)
+       //  this.loadProtocol = this.loadProtocol.bind(this)
 
     }
 
@@ -67,17 +66,22 @@ class InfoProtocolComponent extends Component<IJoinProps> {
      * @returns {void}
      */
     public componentDidMount(): void {
-        //  this.loadProtocols()
+        const {
+            match: { params },
+            // protocol,
+            // findRequest
+        } = this.props
+     // this.loadProtocol()
     }
 
     public render() {
         const {
             t,
             classes,
-            //  protocols,
+            protocol,
+            
             loading
         } = this.props
-
         return  <Box marginX={1}>
             <Box
                     display="flex"
@@ -88,7 +92,7 @@ class InfoProtocolComponent extends Component<IJoinProps> {
             
                     <Box p={1}>
                             <Typography>
-                                <b> Contribuente: {}</b>
+                                <b> Contribuente: {protocol}</b>
                             </Typography>
                             <Typography>
                                 <b>Pedido de inclusão :</b>
@@ -121,22 +125,22 @@ class InfoProtocolComponent extends Component<IJoinProps> {
                         />
                     </Box>
                 </Box>
-    <Box
-        display="flex"
-        alignItems="center"
-        p={0.5}>
-
-      
-    </Box >
+ 
 </Box>
             
              
     }
 
-    /* private loadProtocols(): void {
-            const { paginator, loadRequest } = this.props
-            loadRequest(paginator)
-        }*/
+   /* private loadProtocol(): void {
+        const {
+            match: { params }
+            // protocol,
+            // loadProtocolItems
+        } = this.props
+        console.log(params)
+        console.log("loading protocol items")
+    
+    }*/
 }
 
 const InfoProtocolWithTranslation = withTranslation()(InfoProtocolComponent)

@@ -1,19 +1,14 @@
 import React, { Component } from 'react'
 import {
     Box,
-    Button,
     createStyles,
-    InputAdornment,
-    Paper,
     Table,
     TableBody,
     TableContainer,
     TableHead,
     TablePagination,
     TableRow,
-    TextField,
     Theme,
-    Tooltip,
     Typography,
     withStyles,
     WithStyles
@@ -240,7 +235,7 @@ class GeneralConsultationTableComponent extends Component<IJoinProps, IState> {
                                     className={classes.tableHeader}
                                     style={{ position: 'sticky', left: 0, top: `${stickyTop}px` }}>
                                     <Typography>
-                                        <b></b>
+                                        <b>{}</b>
                                     </Typography>
                                 </Cell>
                                 <Cell

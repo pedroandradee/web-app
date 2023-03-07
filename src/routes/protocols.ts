@@ -1,7 +1,7 @@
 import { lazy } from 'react'
 
 const ProtocolsList = lazy(() => import ('../containers/protocol/list'))
-const ArchivesList = lazy(() => import ('../containers/protocol/data'))
+const GeneralConsutation = lazy(() => import ('../containers/protocol/data'))
 
 export const PROTOCOLS_ROUTES = [
     {
@@ -10,8 +10,8 @@ export const PROTOCOLS_ROUTES = [
         exact: true
     },
     {
-        path: '/app/protocols/1111',
-        component:ArchivesList,
+        path: `/app/protocols/:protocol_id`,
+        component: GeneralConsutation,
         exact: true
     }
 ]

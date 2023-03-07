@@ -3,17 +3,12 @@ import React, { Component, lazy } from 'react'
 import { 
     Box,
     createStyles,
-    InputAdornment,
     Paper,
-    TextField,
     Theme,
-    Tooltip,
-    Typography,
     withStyles,
     WithStyles
 } from '@material-ui/core'
 
-import SearchIcon from '@material-ui/icons/Search'
 
 import { withTranslation, WithTranslation } from 'react-i18next'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
@@ -28,8 +23,8 @@ import * as ProtocolActions from '../../store/ducks/protocol/actions'
 import InfoProtocols from '../../components/protocol.information/protocol.information'
 import { IPaginator, ISearch } from '../../store/ducks/root.types'
 import { ProtocolItem } from '../../store/application/models/protocol/protocol.item'
-import protocol from '../../services/protocol'
-// import GeneralConsultation from '../../components/table/general.consultation/list'
+import { Protocol } from '../../store/application/models/protocol/protocol'
+
 const GeneralConsultation= lazy(() => import('../../components/table/general.consultation/list'))
 
 const Style = (theme: Theme) => createStyles({
@@ -44,7 +39,7 @@ interface IProps extends WithTranslation {
     readonly protocolItem: ProtocolItem[]
     readonly loading: boolean
     readonly paginator: IPaginator
-    
+    readonly protocol:Protocol
     loadRequest(paginator?: IPaginator): void
 
     changePaginator(paginator?: IPaginator): void
@@ -68,7 +63,7 @@ class ProtocolTableComponent extends Component<IJoinProps> {
         super(props)
 
         /* Bind Context */
-       // this.loadProtocol = this.loadProtocol.bind(this)
+        //this.loadProtocol = this.loadProtocol.bind(this)
     }
 
     public componentDidMount(): void {
@@ -82,7 +77,7 @@ class ProtocolTableComponent extends Component<IJoinProps> {
         //     findRequest(protocolId)
         // }
 
-        this.loadProtocol()
+       // this.loadProtocol()
     }
 
     public render() {
@@ -92,6 +87,7 @@ class ProtocolTableComponent extends Component<IJoinProps> {
             protocolItem,
             loading,
             paginator,
+            protocol,
             loadRequest,
             changePaginator,
             changeSearchPaginator
@@ -106,7 +102,10 @@ class ProtocolTableComponent extends Component<IJoinProps> {
             
          
 
-                 <InfoProtocols  loading={loading}/>
+                 <InfoProtocols
+                  protocol={protocol}  
+                 loading={loading}
+                 />
             
 
                 <Box pt={1}>
@@ -122,14 +121,15 @@ class ProtocolTableComponent extends Component<IJoinProps> {
         </React.Fragment>
     }
 
-    private loadProtocol(): void {
+    /*private loadProtocol(): void {
         const {
             match: { params }
             // protocol,
             // loadProtocolItems
         } = this.props
-        console.log("loading protocol items")
-    }
+      //  console.log(params)
+       // console.log("loading protocol items")
+    }*/
 }
 
 const ProtocolTableWithTranslation = withTranslation()(ProtocolTableComponent)
@@ -137,6 +137,7 @@ const ProtocolTableWithTranslation = withTranslation()(ProtocolTableComponent)
 const ProtocolTable = withStyles<any>(Style)(ProtocolTableWithTranslation)
 
 const mapStateToProps = (state: IApplicationState) => ({
+
     protocolItem: state.protocol.protocolItemsList.data,
     loading: state.protocol.protocolItemsList.loading,
     paginator: state.protocol.protocolItemsList.paginator

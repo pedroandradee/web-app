@@ -11,8 +11,6 @@ import { withTranslation, WithTranslation } from 'react-i18next'
 import { ANIMATION, TABLES } from '../../../material.theme'
 import Cell from '../../table.utils/cell'
 import FormatCurrency from '../../formatters/currency'
-import { Archive } from '../../../store/application/models/archive/archive'
-
 import { ProtocolItem } from '../../../store/application/models/protocol/protocol.item'
 
 
@@ -107,7 +105,8 @@ export class GeneralConsultationLineComponent extends Component<IJoinProps> {
                 <Typography variant="caption">
                     {/*item.analise_auditor||*/" - - "}
                 </Typography>
-            </Cell>  <Cell className={classes.tableCell} align="right">
+            </Cell>  
+            <Cell className={classes.tableCell} align="right">
                   
                 <Typography variant="caption">{"  "}
                 </Typography>

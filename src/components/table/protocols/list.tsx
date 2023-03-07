@@ -29,7 +29,6 @@ import TableLoading from '../../loading'
 import TableEmpty from '../../table.utils/table.empty'
 import { ReactComponent as DocumentNotFound } from '../../../assets/imgs/icons/custom/doc-not-found.svg'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
-import { Search } from '@material-ui/icons'
 
 const Style = (theme: Theme) => createStyles({
     ...ANIMATION,
@@ -163,7 +162,6 @@ class TableProtocolComponent extends Component<IJoinProps> {
                                                 className={classes.styleRow}
                                                 onClick={() =>
                                                      history.push(`/app/protocols/${item.protocol}`)
-                                                    //  console.log(`/app/protocols/${item.protocol}`)
                                                 }>
                                                 <Cell
                                                     className={classes.tableCell}
