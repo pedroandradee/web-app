@@ -107,6 +107,16 @@ export const TABLES = (theme: Theme) => {
             backgroundColor: theme.palette.background.paper,
             border: '1px solid #e6e6e6 none',
             padding: theme.spacing(0.5)
+        },
+        tableHeaderBordered: {
+            backgroundColor: theme.palette.backgroundTableHeader.main,
+            minWidth: COL_WIDTH * 3,
+            border: '1px solid #e6e6e6'
+        },
+        tableCellBordered: {
+            backgroundColor: theme.palette.background.paper,
+            border: '1px solid #e6e6e6',
+            padding: theme.spacing(0.5)
         }
     }
 }

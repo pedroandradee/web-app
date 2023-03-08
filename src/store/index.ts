@@ -13,13 +13,15 @@ import { ILayoutState } from './ducks/layout/types'
 import { ISnackBarState } from './ducks/snack.bar/types'
 import { IArchiveState } from './ducks/archive/types'
 import { IProtocolState } from './ducks/protocol/types'
+import { INfeState } from './ducks/nfe/types'
 
 export interface IApplicationState {
     auth: IAuthState,
     layout: ILayoutState,
     snackBar: ISnackBarState,
     archive: IArchiveState,
-    protocol: IProtocolState
+    protocol: IProtocolState,
+    nfe: INfeState
 }
 
 export const history = createBrowserHistory()

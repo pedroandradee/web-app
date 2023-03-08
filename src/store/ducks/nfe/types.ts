@@ -1,11 +1,11 @@
 import { createTypes } from 'reduxsauce'
-import { Protocol } from '../../application/models/protocol/protocol'
+import { NfeItem } from '../../application/models/protocol/nfe.item'
 import { IComponentState, IPaginator } from '../root.types'
 
 /**
  * <h5> </h5>
- * @typedef ProtocolTypes
- * @namespace ProtocolTypes
+ * @typedef NfeTypes
+ * @namespace NfeTypes
  * @category React
  * @subcategory Redux / Types
  */
@@ -19,18 +19,19 @@ import { IComponentState, IPaginator } from '../root.types'
  *         <li>@archive/RESET_LIST</li>
  *         <li>@archive/CHANGE_PAGINATOR</li>
  *         <li>@archive/CHANGE_SEARCH_PAGINATOR</li>
+ * 
  *         <li>@archive/LOAD_REQUEST</li>
  *         <li>@archive/LOAD_SUCCESS</li>
  *         <li>@archive/LOAD_FAILURE</li>
  *      </ul>
  * </pre>
- * @memberof ProtocolTypes
+ * @memberof NfeTypes
  * @function
  * @category React
  * @subcategory Redux / Types
  * @return {DefaultActionTypes}
  */
-export const ProtocolTypes = createTypes(`
+export const NfeTypes = createTypes(`
     RESET_LIST
 
     CHANGE_PAGINATOR
@@ -39,30 +40,22 @@ export const ProtocolTypes = createTypes(`
     LOAD_REQUEST
     LOAD_SUCCESS
     LOAD_FAILURE
-
-    FIND_REQUEST
-    FIND_SUCCESS
-    FIND_FAILURE
     `,
     {
-        prefix: '@protocols/'
+        prefix: '@nfes/'
     }
 )
 
-export interface IActionFind {
-    readonly protocol: string
-}
-
 interface ICreateState extends IComponentState {
-    readonly data: Protocol
+    readonly data: NfeItem
 }
 
 interface IListState extends IComponentState {
-    readonly data: Protocol[]
+    readonly data: NfeItem[]
     readonly paginator: IPaginator
 }
 
-export interface IProtocolState {
-    readonly protocol: ICreateState
+export interface INfeState {
+    readonly nfe: ICreateState
     readonly list: IListState
 }

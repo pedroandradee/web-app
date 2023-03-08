@@ -19,13 +19,13 @@ import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
 import clsx from 'clsx'
 
+import * as NfeActions from '../../store/ducks/nfe/actions'
 import * as ProtocolActions from '../../store/ducks/protocol/actions'
-import InfoProtocols from '../../components/protocol.information/protocol.information'
 import { IPaginator, ISearch } from '../../store/ducks/root.types'
-import { ProtocolItem } from '../../store/application/models/protocol/protocol.item'
 import { Protocol } from '../../store/application/models/protocol/protocol'
+import { NfeItem } from '../../store/application/models/protocol/nfe.item'
 
-const GeneralConsultation= lazy(() => import('../../components/table/general.consultation/list'))
+const NfeTable = lazy(() => import('../../components/table/nfe/nfe.table'))
 
 const Style = (theme: Theme) => createStyles({
     ...ANIMATION,
@@ -36,16 +36,22 @@ const Style = (theme: Theme) => createStyles({
 })
 
 interface IProps extends WithTranslation {
-    readonly protocolItem: ProtocolItem[]
+    readonly protocol: Protocol
     readonly loading: boolean
+
+    readonly nfeList: NfeItem[]
+    readonly nfeLoading: boolean
     readonly paginator: IPaginator
-    readonly protocols:Protocol[]
 }
 
 interface IDispatch extends RouteComponentProps<any> {
-    loadRequest(paginator?: IPaginator): void
+    resetList(): void
 
-    changePaginator(paginator?: IPaginator): void
+    findRequest(protocol: string): void
+
+    loadRequest(protocol: string, paginator?: IPaginator): void
+
+    changePaginator(protocol: string, paginator?: IPaginator): void
 
     changeSearchPaginator(search: ISearch): void
 }
@@ -54,41 +60,44 @@ type IJoinProps = IProps & IDispatch & WithStyles<typeof Style>
 
 class ProtocolTableComponent extends Component<IJoinProps> {
 
-    constructor(props: IJoinProps) {
-        super(props)
-
-        /* Bind Context */
-        //this.loadProtocol = this.loadProtocol.bind(this)
-    }
-
+    /**
+     * It is invoked immediately after a component is assembled (inserted into the tree).
+     * @see {@link https://pt-br.reactjs.org/docs/react-component.html#componentdidmount}
+     * @public
+     * @returns {void}
+     */
     public componentDidMount(): void {
         const {
             match: { params },
-            // protocol,
-            // findRequest
+            findRequest
         } = this.props
-        // const protocolId: string = params?.id
-        // if (protocol?.id !== protocolId) {
-        //     findRequest(protocolId)
-        // }
+        findRequest(params.protocol_id)
+    }
 
-       // this.loadProtocol()
+    /**
+     * Invoked immediately before a component is disassembled and destroyed.
+     * @see {@link https://pt-br.reactjs.org/docs/react-component.html#componentwillunmount}
+     * @public
+     * @returns {void}
+     */
+    public componentWillUnmount(): void {
+        this.props.resetList()
     }
 
     public render() {
         const {
             t,
             classes,
-            protocolItem,
-            loading,
+            protocol,
+            // loading,
+            nfeList,
+            nfeLoading,
             paginator,
-            protocols,
             loadRequest,
             changePaginator,
             changeSearchPaginator
         } = this.props
-        console.log(protocols)
-        console.log(protocolItem)
+        
         return <React.Fragment>
             <Helmet>
                 <title>{t('NAVIGATION_TAB.PROTOCOL')}</title>
@@ -96,22 +105,15 @@ class ProtocolTableComponent extends Component<IJoinProps> {
 
             <Paper className={clsx(classes.paper, classes.fadeIn2)}>
             
-         
-
-                 <InfoProtocols
-                  //protocol={}  
-                 loading={loading}
-                 />
-            
-
                 <Box pt={1}>
-                    <GeneralConsultation
-                     protocolItem={protocolItem}
-                     loading={loading}
-                     paginator={paginator}  
-                    // loadRequest={loadRequest}
-                     changePaginator={changePaginator}
-                     changeSearchPaginator={changeSearchPaginator} />
+                    <NfeTable
+                        protocol={`${protocol?.protocol || ''}`}
+                        list={nfeList}
+                        loading={nfeLoading}
+                        paginator={paginator}
+                        loadRequest={loadRequest}
+                        changePaginator={changePaginator}
+                        changeSearchPaginator={changeSearchPaginator}/>
                 </Box>
             </Paper>
         </React.Fragment>
@@ -133,16 +135,17 @@ const ProtocolTableWithTranslation = withTranslation()(ProtocolTableComponent)
 const ProtocolTable = withStyles<any>(Style)(ProtocolTableWithTranslation)
 
 const mapStateToProps = (state: IApplicationState) => ({
-    protocols:state.protocol.list.data,
-    protocolItem: state.protocol.protocolItemsList.data,
-    loading: state.protocol.protocolItemsList.loading,
-    paginator: state.protocol.protocolItemsList.paginator
+    protocol: state.protocol.protocol.data,
+    loading: state.protocol.protocol.loading,
+
+    nfeList: state.nfe.list.data,
+    nfeLoading: state.nfe.list.loading,
+    paginator: state.nfe.list.paginator
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
-    changePaginator: ProtocolActions.changePaginator,
-    changeSearchPaginator: ProtocolActions.changeSearchPaginator
-
+    ...NfeActions,
+    findRequest: ProtocolActions.findRequest
 }, dispatch)
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProtocolTable))

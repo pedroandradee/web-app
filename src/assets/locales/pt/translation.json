@@ -322,6 +322,30 @@
       "NAME": "Nome",
       "SEND_DATE": "Data de envio",
       "ASSESSMENT_STATUS": "Status de avaliação"
+    },
+    "DATA": {
+      "TABLE_HEAD": {
+        "PRODUCT_COD": "Código do produto",
+        "NCM": "NCM",
+        "VEHICLE_CHASSIS": "Chassi do veículo",
+        "DESCRIPTION": "Descrição",
+        "TOTAL_RESTITUTION_DECLARED": "Restituição total declarada",
+        "ACQUISITION_DATA": {
+          "TITLE": "Dados de aquisição",
+          "VL_UNIT": "Vl. unit. venda presumida",
+          "AMOUNT": "Qtd."
+        },
+        "SELL_DATA": {
+          "TITLE": "Dados de venda",
+          "VL_UNIT": "Vl. unit. venda presumida",
+          "AMOUNT": "Qtd."
+        },
+        "CALCULATED": {
+          "TITLE": "Calculado",
+          "VL_UNIT": "Vl. unit. venda presumida",
+          "TOTAL_RESTITUTION_CALCULATED": "Total à ressarcir calculado"
+        }
+      }
     }
   }
 }

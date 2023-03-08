@@ -8,6 +8,7 @@ import layout from './layout/reducer'
 import snackBar from './snack.bar/reducer'
 import archive from './archive/reducer'
 import protocol from './protocol/reducer'
+import nfe from './nfe/reducer'
 
 const createRootReducer = (history: History) => combineReducers({
     router: connectRouter(history),
@@ -15,7 +16,8 @@ const createRootReducer = (history: History) => combineReducers({
     layout,
     snackBar,
     archive,
-    protocol
+    protocol,
+    nfe
 })
 
 export default createRootReducer

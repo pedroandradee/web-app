@@ -3,10 +3,10 @@ import { IActionType } from '../root.types'
 import { 
     loadSuccess, 
     loadFailure,
-    loadProtocolItemsSuccess,
-    loadProtocolItemsFailure
+    findSuccess,
+    findFailure
 } from './actions'
-import { ProtocolTypes } from './types'
+import { IActionFind, ProtocolTypes } from './types'
 import protocolService from '../../../services/protocol'
 
 
@@ -42,22 +42,32 @@ function* getProtocols(action: IActionType) {
     }
 }
 
-function* getProtocolItems(action: IActionType) {
+/**
+ * Generator function that makes the request to return the list of protocols.
+ * @memberof ProtocolSagas
+ * @alias ProtocolSagas.getByProtocol
+ * @function
+ * @category React
+ * @subcategory Redux / Sagas
+ * @param {IActionType} action
+ */
+function* getByProtocol(action: IActionType<IActionFind>) {
     try {
-        const { protocol, paginator } = action.payload
+        const { protocol } = action.payload
         const response = yield apply(
             protocolService,
-            protocolService.getProtocolItems,
-            [protocol, paginator]
+            protocolService.getByProtocol,
+            [protocol]
         )
-        yield put(loadProtocolItemsSuccess(response))
+        yield put<any>(findSuccess(response))
     } catch(err) {
-        yield put(loadProtocolItemsFailure())
+        yield put(findFailure())
     }
 }
 
 export default function* archiveSaga() {
     return yield all([
         takeLatest(ProtocolTypes.LOAD_REQUEST, getProtocols),
+        takeLatest(ProtocolTypes.FIND_REQUEST, getByProtocol)
     ])
 }

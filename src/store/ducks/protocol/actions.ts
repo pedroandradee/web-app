@@ -1,5 +1,6 @@
 import { action } from 'typesafe-actions'
 import { Protocol } from '../../application/models/protocol/protocol'
+import { changeBreadCrumbLast } from '../layout/actions'
 import { IAxiosResponse, IPaginator, ISearch } from '../root.types'
 import { ProtocolTypes } from './types'
 
@@ -90,45 +91,6 @@ export const loadFailure = () => action(ProtocolTypes.LOAD_FAILURE)
 /**
  * Action that triggers the request to obtain the list of protocols.
  * @memberof ProtocolActions
- * @alias ProtocolActions.loadRequest
- * @function
- * @category React
- * @subcategory Redux / Actions
- * @return Redux.Action
- */
-export const loadProtocolItemsRequest = (protocol: string, paginator?: IPaginator) =>{
-     action(ProtocolTypes.LOAD_PROTOCOL_ITEMS_REQUEST, { protocol, paginator })
-    }
-
-/**
- * Action that receives the return request data from the protocol list when successfully performed.
- * @memberof ProtocolActions
- * @alias ProtocolActions.loadSuccess
- * @function
- * @param {IAxiosResponse<Array<*>>} response
- * @category React
- * @subcategory Redux / Actions
- * @return Redux.Action
- */
-export const loadProtocolItemsSuccess = (response: IAxiosResponse<any[]>) =>
-    action(ProtocolTypes.LOAD_PROTOCOL_ITEMS_SUCCESS, {
-        ...response
-    })
-
-/**
- * Action that interrupts the request for a list of protocol due to errors in the request.
- * @memberof ProtocolActions
- * @alias ProtocolActions.loadFailure
- * @function
- * @category React
- * @subcategory Redux / Actions
- * @return Redux.Action
- */
-export const loadProtocolItemsFailure = () => action(ProtocolTypes.LOAD_PROTOCOL_ITEMS_FAILURE)
-
-/**
- * Action that triggers the request to obtain the list of protocols.
- * @memberof ProtocolActions
  * @alias ProtocolActions.findRequest
  * @function
  * @category React
@@ -147,10 +109,10 @@ export const findRequest = (protocol: string) => action(ProtocolTypes.FIND_REQUE
  * @subcategory Redux / Actions
  * @return Redux.Action
  */
-export const findSuccess = (response: IAxiosResponse<Protocol>) =>
-    action(ProtocolTypes.FIND_SUCCESS, {
-        ...response
-    })
+export const findSuccess = (protocol: Protocol) => [
+    action(ProtocolTypes.FIND_SUCCESS, { protocol }),
+    changeBreadCrumbLast(protocol?.name)
+]
 
 /**
  * Action that interrupts the request for a list of protocol due to errors in the request.
