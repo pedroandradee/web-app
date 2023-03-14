@@ -81,6 +81,21 @@ class NfeLineComponent extends Component<IJoinProps> {
                     {item.vl_ressar_icms_st_prod || ' - - '}
                 </Typography>
             </Cell>
+            <Cell className={classes.tableCellBordered}>
+                <Typography>
+                    {' - - '}
+                </Typography>
+            </Cell>
+            <Cell className={classes.tableCellBordered}>
+                <Typography>
+                    {' - - '}
+                </Typography>
+            </Cell>
+            <Cell className={classes.tableCellBordered}>
+                <Typography>
+                    {' - - '}
+                </Typography>
+            </Cell>
         </TableRow>
     }
 }

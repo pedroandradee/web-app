@@ -118,37 +118,101 @@ class NfeTableComponent extends Component<IJoinProps> {
                                     <b>{t('PROTOCOLS.DATA.TABLE_HEAD.CALCULATED.TITLE')}</b>
                                 </Typography>
                             </Cell>
+                            <Cell
+                                className={classes.tableHeaderBordered}
+                                rowSpan={2}>
+                                <Typography>
+                                    <b>{t('PROTOCOLS.DATA.TABLE_HEAD.AUDITOR_ANALISIS')}</b>
+                                </Typography>
+                            </Cell>
+                            <Cell
+                                className={classes.tableHeaderBordered}
+                                colSpan={2}>
+                                <Typography>
+                                    <b>{t('PROTOCOLS.DATA.TABLE_HEAD.ALERTS.TITLE')}</b>
+                                </Typography>
+                            </Cell>
                         </TableRow>
 
                         <TableRow>
-                            <Cell className={classes.tableHeaderBordered}>
+                            <Cell 
+                                className={classes.tableHeaderBordered}
+                                style={{
+                                    position: 'sticky',
+                                    top: `${stickyTop}`
+                                }}>
                                 <Typography>
                                     <b>{t('PROTOCOLS.DATA.TABLE_HEAD.ACQUISITION_DATA.VL_UNIT')}</b>
                                 </Typography>
                             </Cell>
-                            <Cell className={classes.tableHeaderBordered}>
+                            <Cell 
+                                className={classes.tableHeaderBordered}
+                                style={{
+                                    position: 'sticky',
+                                    top: `${stickyTop}`
+                                }}>
                                 <Typography>
                                     <b>{t('PROTOCOLS.DATA.TABLE_HEAD.ACQUISITION_DATA.AMOUNT')}</b>
                                 </Typography>
                             </Cell>
-                            <Cell className={classes.tableHeaderBordered}>
+                            <Cell 
+                                className={classes.tableHeaderBordered}
+                                style={{
+                                    position: 'sticky',
+                                    top: `${stickyTop}`
+                                }}>
                                 <Typography>
                                     <b>{t('PROTOCOLS.DATA.TABLE_HEAD.SELL_DATA.VL_UNIT')}</b>
                                 </Typography>
                             </Cell>
-                            <Cell className={classes.tableHeaderBordered}>
+                            <Cell 
+                                className={classes.tableHeaderBordered}
+                                style={{
+                                    position: 'sticky',
+                                    top: `${stickyTop}`
+                                }}>
                                 <Typography>
                                     <b>{t('PROTOCOLS.DATA.TABLE_HEAD.SELL_DATA.AMOUNT')}</b>
                                 </Typography>
                             </Cell>
-                            <Cell className={classes.tableHeaderBordered}>
+                            <Cell 
+                                className={classes.tableHeaderBordered}
+                                style={{
+                                    position: 'sticky',
+                                    top: `${stickyTop}`
+                                }}>
                                 <Typography>
                                     <b>{t('PROTOCOLS.DATA.TABLE_HEAD.CALCULATED.VL_UNIT')}</b>
                                 </Typography>
                             </Cell>
-                            <Cell className={classes.tableHeaderBordered}>
+                            <Cell 
+                                className={classes.tableHeaderBordered}
+                                style={{
+                                    position: 'sticky',
+                                    top: `${stickyTop}`
+                                }}>
                                 <Typography>
                                     <b>{t('PROTOCOLS.DATA.TABLE_HEAD.CALCULATED.TOTAL_RESTITUTION_CALCULATED')}</b>
+                                </Typography>
+                            </Cell>
+                            <Cell 
+                                className={classes.tableHeaderBordered}
+                                style={{
+                                    position: 'sticky',
+                                    top: `${stickyTop}`
+                                }}>
+                                <Typography>
+                                    <b>{t('PROTOCOLS.DATA.TABLE_HEAD.ALERTS.WRONG_NCM')}</b>
+                                </Typography>
+                            </Cell>
+                            <Cell 
+                                className={classes.tableHeaderBordered}
+                                style={{
+                                    position: 'sticky',
+                                    top: `${stickyTop}`
+                                }}>
+                                <Typography>
+                                    <b>{t('PROTOCOLS.DATA.TABLE_HEAD.ALERTS.WRONG_QUANTITY')}</b>
                                 </Typography>
                             </Cell>
                         </TableRow>

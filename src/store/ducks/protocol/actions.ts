@@ -111,7 +111,7 @@ export const findRequest = (protocol: string) => action(ProtocolTypes.FIND_REQUE
  */
 export const findSuccess = (protocol: Protocol) => [
     action(ProtocolTypes.FIND_SUCCESS, { protocol }),
-    changeBreadCrumbLast(protocol?.name)
+    changeBreadCrumbLast(`${protocol?.name}(${protocol?.protocol})`)
 ]
 
 /**

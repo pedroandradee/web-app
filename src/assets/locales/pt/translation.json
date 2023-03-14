@@ -324,6 +324,12 @@
       "ASSESSMENT_STATUS": "Status de avaliação"
     },
     "DATA": {
+      "HEADER": {
+        "CONTRIBUTOR": "Contribuinte",
+        "INCLUSION_REQUEST": "Pedido de inclusão",
+        "REFERENCE_MONTH": "Mês de referência",
+        "SITUATION": "Situação"
+      },
       "TABLE_HEAD": {
         "PRODUCT_COD": "Código do produto",
         "NCM": "NCM",
@@ -344,6 +350,12 @@
           "TITLE": "Calculado",
           "VL_UNIT": "Vl. unit. venda presumida",
           "TOTAL_RESTITUTION_CALCULATED": "Total à ressarcir calculado"
+        },
+        "AUDITOR_ANALISIS": "Análise do auditor",
+        "ALERTS": {
+          "TITLE": "Alertas",
+          "WRONG_NCM": "NCM Divergente",
+          "WRONG_QUANTITY": "Qtd. diferente"
         }
       }
     }

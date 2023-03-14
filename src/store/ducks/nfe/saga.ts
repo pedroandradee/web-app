@@ -34,6 +34,8 @@ function* getNfeItems(action: IActionType) {
             nfeService.getNfeItems,
             [protocol, paginator]
         )
+        console.log(protocol)
+        console.log(response.data)
         yield put(loadSuccess(response))
     } catch(err) {
         yield put(loadFailure())

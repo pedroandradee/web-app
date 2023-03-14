@@ -24,6 +24,7 @@ import * as ProtocolActions from '../../store/ducks/protocol/actions'
 import { IPaginator, ISearch } from '../../store/ducks/root.types'
 import { Protocol } from '../../store/application/models/protocol/protocol'
 import { NfeItem } from '../../store/application/models/protocol/nfe.item'
+import FullHeaderProtocol from '../../components/protocol/full.header'
 
 const NfeTable = lazy(() => import('../../components/table/nfe/nfe.table'))
 
@@ -89,7 +90,7 @@ class ProtocolTableComponent extends Component<IJoinProps> {
             t,
             classes,
             protocol,
-            // loading,
+            loading,
             nfeList,
             nfeLoading,
             paginator,
@@ -104,8 +105,13 @@ class ProtocolTableComponent extends Component<IJoinProps> {
             </Helmet>
 
             <Paper className={clsx(classes.paper, classes.fadeIn2)}>
+
+                <FullHeaderProtocol
+                    protocol={protocol}
+                    loading={loading}
+                    nfeItemLoading={nfeLoading}/>
             
-                <Box pt={1}>
+                <Box p={1}>
                     <NfeTable
                         protocol={`${protocol?.protocol || ''}`}
                         list={nfeList}
